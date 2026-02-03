@@ -203,8 +203,9 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
    - 判断不可（参加者が少しでも不明）→ 確認してから作成
 
 3. **保存先**
-   - プロジェクト関連 → `obsidian/Ichioka Obsidian/04_Project/[プロジェクト名]/`
-   - 人物関連 → `obsidian/Ichioka Obsidian/10-私の周りの人/[人物名]/MTG_YYYY-MM-DD_タイトル.md`
+   - **プロジェクト関連**（MTG議事録など）→ `obsidian/Ichioka Obsidian/04_Project/[プロジェクト名]/`
+   - **人物の個人情報・関係性** → `obsidian/Ichioka Obsidian/10-私の周りの人/[人物名]/PROFILE.md`
+   - ※プロジェクトの話は04_Project/、どういう立場でいちさんと関わってるか等の個人情報は10-私の周りの人/
 
 4. **議事録フォーマット**（要素漏れなし）
    - 要約
