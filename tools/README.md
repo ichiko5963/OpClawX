@@ -120,6 +120,34 @@ cd /Users/ai-driven-work/Library/Mobile\ Documents/com~apple~CloudDocs/OpenClaw-
 python3 tools/<ツール名>.py
 ```
 
+---
+
+## 追加ツール（2026-02-04追加）
+
+### 💡 efficiency_suggestions.py
+効率化の提案を生成。
+
+```bash
+python3 tools/efficiency_suggestions.py
+```
+
+### 📊 past_tweets_analysis.py
+過去投稿（820件）を分析。
+
+```bash
+python3 tools/past_tweets_analysis.py
+```
+
+### 📝 x_analysis_report.py
+詳細な分析レポートをMarkdownで出力。
+
+```bash
+python3 tools/x_analysis_report.py
+# 出力: projects/x-analysis-report.md
+```
+
+---
+
 ## 拡張
 
 新しいツールを追加する場合：
