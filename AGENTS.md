@@ -186,6 +186,32 @@ Think of it like a human reviewing their journal and updating their mental model
 
 The goal: Be helpful without being annoying. Check in a few times a day, do useful background work, but respect quiet time.
 
+## 🔄 エラー時のリトライ
+
+ツールがエラーを返したら**即リトライ**する。1回で諦めない。
+
+## 📝 文字起こし → 議事録 自動化
+
+文字起こしを受け取ったら：
+
+1. **参加者を照合**
+   - `obsidian/Ichioka Obsidian/10-私の周りの人/` 内の既存プロフィールと照合
+   - 過去の議事録・文脈から推測
+
+2. **判断フロー**
+   - 判断可能 → 自動で議事録化
+   - 判断不可（参加者が少しでも不明）→ 確認してから作成
+
+3. **保存先**
+   - プロジェクト関連 → `obsidian/Ichioka Obsidian/04_Project/[プロジェクト名]/`
+   - 人物関連 → `obsidian/Ichioka Obsidian/10-私の周りの人/[人物名]/MTG_YYYY-MM-DD_タイトル.md`
+
+4. **議事録フォーマット**（要素漏れなし）
+   - 要約
+   - 決定事項
+   - TODO（担当・期限あれば）
+   - 次回予定
+
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
