@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "updated_at": "2026-02-03T16:15:00+09:00",
+  "cursors": {
+    "gmail": {
+      "last_history_id": null,
+      "last_sync_at": null
+    },
+    "gcal": {
+      "sync_token": null,
+      "last_sync_at": null
+    },
+    "gdrive": {
+      "page_token": null,
+      "last_sync_at": null
+    },
+    "slack": {
+      "channels": {},
+      "last_sync_at": null
+    }
+  }
+}

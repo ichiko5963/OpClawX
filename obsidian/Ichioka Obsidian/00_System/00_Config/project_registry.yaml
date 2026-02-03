@@ -1,0 +1,106 @@
+# project_registry.yaml - プロジェクトレジストリ（機械可読版）
+# 最終更新: 2026-02-03
+# 人間可読版: ../PROJECT_REGISTRY.md
+
+version: 1
+
+projects:
+  active:
+    - id: AirCle
+      name: AirCle
+      aliases:
+        - エアクル
+        - aircle
+        - 大学生AI団体
+      keywords:
+        - 運営
+        - 定例
+        - 部
+        - マーケティング
+      stakeholders:
+        - いち
+        - りょうせい
+        - れある
+      channels:
+        slack:
+          - general
+          - 運営
+      drive_folders: []
+      status: active
+      priority: P1
+
+    - id: ClimbBeyond
+      name: ClimbBeyond
+      aliases:
+        - クライムビヨンド
+      keywords:
+        - note
+        - X運用
+        - 就活
+      stakeholders:
+        - いち
+      channels: {}
+      drive_folders: []
+      status: active
+      priority: P2
+
+    - id: SlideBox
+      name: SlideBox
+      aliases:
+        - スライドボックス
+      keywords:
+        - LP
+        - スライド
+      stakeholders:
+        - いち
+      channels: {}
+      drive_folders: []
+      status: active
+      priority: P2
+
+    - id: ClientWork
+      name: ClientWork
+      aliases:
+        - 外部案件
+        - クライアントワーク
+        - 受託
+      keywords:
+        - 見積
+        - 請求
+        - 納品
+        - 契約
+      stakeholders:
+        - いち
+      channels: {}
+      drive_folders: []
+      status: active
+      priority: P2
+
+    - id: Genspark
+      name: Genspark
+      aliases:
+        - GenSpark
+        - ジェンスパーク
+      keywords:
+        - 協業
+        - ソーシャルメディア
+      stakeholders:
+        - いち
+      channels: {}
+      drive_folders: []
+      status: active
+      priority: P1
+
+  archived:
+    - id: VideoPocket
+      name: VideoPocket
+      archived_at: "2026-02-03"
+      reason: "Gensparkへ移行"
+
+# 新規プロジェクト候補（自動検出用）
+pending: []
+
+# 設定
+settings:
+  max_active: 20
+  auto_archive_days: 90  # 更新がない場合の自動アーカイブ提案日数

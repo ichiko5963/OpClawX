@@ -1,0 +1,78 @@
+# routing_rules.yaml - プロジェクト/人物/企業への振り分け規則
+# 最終更新: 2026-02-03
+
+version: 1
+
+# ルール評価順序: 上から順に評価、最初にマッチしたものを適用
+
+projects:
+  # AirCle
+  - id: AirCle
+    match:
+      any:
+        - subject_contains: ["AirCle", "エアクル", "aircle"]
+        - from_domain: ["aircle.jp"]  # TODO: 実際のドメイン
+        - slack_channel: ["general", "運営"]
+        - participants: ["りょうせい", "れある"]
+    priority_boost: 1  # P2 → P1 にブースト
+
+  # Genspark
+  - id: Genspark
+    match:
+      any:
+        - subject_contains: ["Genspark", "GenSpark", "ジェンスパーク"]
+        - from_domain: ["genspark.ai"]
+    priority_boost: 1
+
+  # ClimbBeyond
+  - id: ClimbBeyond
+    match:
+      any:
+        - subject_contains: ["ClimbBeyond", "クライムビヨンド"]
+
+  # SlideBox
+  - id: SlideBox
+    match:
+      any:
+        - subject_contains: ["SlideBox", "スライドボックス"]
+
+  # ClientWork（フォールバック: 外部案件っぽいもの）
+  - id: ClientWork
+    match:
+      any:
+        - subject_contains: ["見積", "請求", "契約", "発注", "納品"]
+        - has_attachment_type: ["application/pdf"]
+
+# 人物マッチング
+people:
+  - name: りょうせい
+    match:
+      any:
+        - email_contains: []  # TODO: メールアドレス
+        - slack_user_id: ""   # TODO: Slack ID
+        - name_contains: ["りょうせい", "リョウセイ"]
+
+  - name: れある
+    match:
+      any:
+        - email_contains: []
+        - slack_user_id: ""
+        - name_contains: ["れある", "レアル"]
+
+  - name: AI国王
+    match:
+      any:
+        - name_contains: ["AI国王"]
+
+# 企業マッチング
+companies:
+  - name: Genspark
+    match:
+      any:
+        - email_domain: ["genspark.ai"]
+        - subject_contains: ["Genspark"]
+
+# デフォルト（マッチしない場合）
+default:
+  project: null  # 00_Inbox へ
+  priority: P3

@@ -1,0 +1,85 @@
+# sensitivity.yaml - 機密判定・マスキング方針
+# 最終更新: 2026-02-03
+
+version: 1
+
+# 機密レベル定義
+levels:
+  public:
+    description: "公開可能"
+    vault_storage: full_text
+    retention: permanent
+
+  internal:
+    description: "社内共有可"
+    vault_storage: full_text
+    retention: permanent
+
+  confidential:
+    description: "関係者限定"
+    vault_storage: summary_only  # 要約のみ、本文はリンク参照
+    retention: 90_days
+    mask_fields:
+      - phone_number
+      - address
+
+  restricted:
+    description: "厳重管理"
+    vault_storage: metadata_only  # タイトル・日時・参加者のみ
+    retention: 30_days
+    mask_fields:
+      - all_pii
+      - financial
+      - credentials
+
+# 自動判定ルール（上から順に評価）
+detection_rules:
+  # Restricted（最高機密）
+  - level: restricted
+    match:
+      any:
+        - subject_contains: ["パスワード", "password", "秘密鍵", "API key", "token"]
+        - body_contains: ["クレジットカード", "銀行口座", "暗証番号"]
+        - has_attachment_name: ["*.pem", "*.key", "credentials*"]
+
+  # Confidential（機密）
+  - level: confidential
+    match:
+      any:
+        - subject_contains: ["契約", "見積", "請求", "給与", "報酬", "NDA"]
+        - from_domain: ["*.gov.jp"]
+        - body_contains: ["住所", "電話番号", "生年月日", "マイナンバー"]
+
+  # Internal（社内）
+  - level: internal
+    match:
+      any:
+        - slack_channel_private: true
+        - subject_contains: ["社内", "internal", "draft", "下書き"]
+
+  # Default（公開）
+  - level: public
+    match:
+      default: true
+
+# マスキングパターン
+masking:
+  phone_number:
+    pattern: '\d{2,4}-\d{2,4}-\d{4}'
+    replacement: "[電話番号]"
+  
+  email:
+    pattern: '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    replacement: "[メールアドレス]"
+  
+  credit_card:
+    pattern: '\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}'
+    replacement: "[カード番号]"
+
+# Vaultに絶対保存しないもの
+never_store:
+  - passwords
+  - api_keys
+  - tokens
+  - private_keys
+  - session_cookies

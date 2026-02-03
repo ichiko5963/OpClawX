@@ -1,0 +1,60 @@
+# n8n Docker Compose Configuration
+# 最終更新: 2026-02-03
+# 
+# 使用方法:
+#   cd ~/n8n
+#   docker compose up -d
+#
+# 停止:
+#   docker compose down
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5678:5678"  # localhost のみ（外部公開しない）
+    environment:
+      # タイムゾーン
+      - TZ=Asia/Tokyo
+      - GENERIC_TIMEZONE=Asia/Tokyo
+      
+      # Basic認証（必須：変更すること）
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=CHANGE_THIS_PASSWORD  # TODO: 強固なパスワードに変更
+      
+      # 暗号化キー（必須：変更すること）
+      # 生成方法: openssl rand -hex 32
+      - N8N_ENCRYPTION_KEY=CHANGE_THIS_KEY  # TODO: 変更必須
+      
+      # Webhook URL（ローカル用）
+      - WEBHOOK_URL=http://localhost:5678/
+      
+      # ログレベル
+      - N8N_LOG_LEVEL=info
+      
+      # 実行モード
+      - EXECUTIONS_MODE=regular
+      - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
+      - EXECUTIONS_DATA_SAVE_ON_ERROR=all
+      
+    volumes:
+      # n8n データ永続化
+      - n8n_data:/home/node/.n8n
+      
+      # Vault マウント（読み書き）
+      - /Users/ai-driven-work/Library/Mobile Documents/com~apple~CloudDocs/OpenClaw-Shared/obsidian/Ichioka Obsidian:/vault:rw
+      
+      # スクリプト配置用（オプション）
+      - ./scripts:/scripts:ro
+
+volumes:
+  n8n_data:
+    driver: local
+
+# ネットワーク設定（デフォルトで十分）
+networks:
+  default:
+    name: n8n_network
