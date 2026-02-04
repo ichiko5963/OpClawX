@@ -1,0 +1,35 @@
+{
+  "cmd_id": "cmd_email_20260203_211241_3356",
+  "type": "draft_reply_email",
+  "created_at": "2026-02-03T21:12:41.655133+09:00",
+  "status": "pending",
+  "priority": "P1",
+  "needs_approval": true,
+  "source_event_id": "gmail:19c219a0ddbdbb10",
+  "context": {
+    "from": "",
+    "subject": "",
+    "snippet": "お近くのヤマダデンキへのご来店もお待ちしております。 対象店舗はコチラ⇒ ※上記リンクからお近くの都道府県を選択してください ▼ヤマダの無料相談で特選ギフトをプレゼント▼ ■ギフトがもらえる■家計相談の流れ *⌒*⌒*⌒*⌒*⌒*⌒*⌒*⌒*⌒*⌒*⌒*⌒* ［STEP1］ アンケートに答えてお申込みページからお申込み ↓ ［STEP 2］ 担当のファイナンシャル・プランナーよりご連絡 ↓ ［",
+    "reason": "high_priority_P1",
+    "routing_reasons": [
+      "priority:P1(keywords: ['ご連絡'])"
+    ],
+    "sensitivity": "internal"
+  },
+  "proposed_action": {
+    "action": "draft_reply",
+    "to": "",
+    "subject": "Re: ",
+    "body_draft": ""
+  },
+  "approval": {
+    "approved": null,
+    "approved_by": null,
+    "approved_at": null
+  },
+  "execution": {
+    "executed": false,
+    "executed_at": null,
+    "result": null
+  }
+}

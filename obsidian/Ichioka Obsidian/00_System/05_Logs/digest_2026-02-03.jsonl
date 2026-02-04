@@ -1,0 +1,7 @@
+{"timestamp": "2026-02-03T21:11:57.280906+09:00", "level": "INFO", "logger": "digest", "message": "Daily Digest generation started"}
+{"timestamp": "2026-02-03T21:11:57.282997+09:00", "level": "INFO", "logger": "digest", "message": "load_data completed", "data": {"duration_ms": 1.69}}
+{"timestamp": "2026-02-03T21:11:57.283071+09:00", "level": "INFO", "logger": "digest", "message": "Data loaded", "data": {"events": 228, "pending_commands": 0, "tasks": 1}}
+{"timestamp": "2026-02-03T21:11:57.291892+09:00", "level": "INFO", "logger": "digest", "message": "generate_digest completed", "data": {"duration_ms": 8.76}}
+{"timestamp": "2026-02-03T21:11:57.292127+09:00", "level": "INFO", "logger": "digest", "message": "Digest saved", "data": {"file": "/Users/ai-driven-work/Library/Mobile Documents/com~apple~CloudDocs/OpenClaw-Shared/obsidian/Ichioka Obsidian/00_System/03_Digest/daily/2026-02-03.md"}}
+{"timestamp": "2026-02-03T21:11:57.292313+09:00", "level": "INFO", "logger": "digest", "message": "update_project_memories completed", "data": {"duration_ms": 0.13}}
+{"timestamp": "2026-02-03T21:11:57.292423+09:00", "level": "INFO", "logger": "digest", "message": "Daily Digest generation completed"}

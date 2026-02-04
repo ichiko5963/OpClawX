@@ -1,0 +1,35 @@
+{
+  "cmd_id": "cmd_email_20260203_211241_4018",
+  "type": "draft_reply_email",
+  "created_at": "2026-02-03T21:12:41.655959+09:00",
+  "status": "pending",
+  "priority": "P1",
+  "needs_approval": true,
+  "source_event_id": "gmail:19c1c67db0427b49",
+  "context": {
+    "from": "",
+    "subject": "",
+    "snippet": "新基盤でパフォーマンス向上、新しい検索機能リリース、AI機能でコード生成、インタビュー、他 ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ‌ ͏ ",
+    "reason": "high_priority_P1",
+    "routing_reasons": [
+      "priority:P1(keywords: ['インタビュー'])"
+    ],
+    "sensitivity": "internal"
+  },
+  "proposed_action": {
+    "action": "draft_reply",
+    "to": "",
+    "subject": "Re: ",
+    "body_draft": ""
+  },
+  "approval": {
+    "approved": null,
+    "approved_by": null,
+    "approved_at": null
+  },
+  "execution": {
+    "executed": false,
+    "executed_at": null,
+    "result": null
+  }
+}

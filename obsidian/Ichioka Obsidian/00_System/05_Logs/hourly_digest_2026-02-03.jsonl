@@ -1,0 +1,2 @@
+{"timestamp": "2026-02-03T21:32:08.354973+09:00", "level": "INFO", "logger": "hourly_digest", "message": "Hourly digest started"}
+{"timestamp": "2026-02-03T21:32:08.360269+09:00", "level": "INFO", "logger": "hourly_digest", "message": "Digest generated", "data": {"length": 852}}

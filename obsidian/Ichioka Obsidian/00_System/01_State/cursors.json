@@ -1,22 +1,20 @@
 {
-  "version": 1,
-  "updated_at": "2026-02-03T16:15:00+09:00",
-  "cursors": {
-    "gmail": {
-      "last_history_id": null,
-      "last_sync_at": null
-    },
-    "gcal": {
-      "sync_token": null,
-      "last_sync_at": null
-    },
-    "gdrive": {
-      "page_token": null,
-      "last_sync_at": null
-    },
-    "slack": {
-      "channels": {},
-      "last_sync_at": null
-    }
+  "gmail": {
+    "last_sync_at": "2026-02-03T21:46:21.179040+09:00",
+    "last_message_id": null,
+    "history_id": null
+  },
+  "slack": {
+    "last_sync_at": "2026-02-03T21:46:21.179040+09:00",
+    "oldest_ts": null
+  },
+  "gcal": {
+    "last_sync_at": "2026-02-03T21:09:30.912020+09:00",
+    "sync_token": null
+  },
+  "gdrive": {
+    "last_sync_at": null,
+    "page_token": null,
+    "last_modified_time": null
   }
 }

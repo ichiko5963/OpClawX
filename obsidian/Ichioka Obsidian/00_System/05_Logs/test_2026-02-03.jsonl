@@ -1,0 +1,4 @@
+{"timestamp": "2026-02-03T21:05:38.775650+09:00", "level": "INFO", "logger": "test", "message": "Test log", "data": {"key": "value"}}
+{"timestamp": "2026-02-03T21:05:38.776285+09:00", "level": "INFO", "logger": "test", "message": "With context", "context": {"user": "ichiko", "session": "test123"}}
+{"timestamp": "2026-02-03T21:05:39.015727+09:00", "level": "INFO", "logger": "test", "message": "test operation completed", "context": {"user": "ichiko", "session": "test123"}, "data": {"duration_ms": 239.25}}
+{"timestamp": "2026-02-03T21:05:39.016561+09:00", "level": "ERROR", "logger": "test", "message": "Error occurred", "data": {"context": "test"}, "error": {"type": "ValueError", "message": "Test error", "traceback": "Traceback (most recent call last):\n  File \"/Users/ai-driven-work/Library/Mobile Documents/com~apple~CloudDocs/OpenClaw-Shared/scripts/lib/structured_logger.py\", line 250, in <module>\n    raise ValueError(\"Test error\")\nValueError: Test error\n"}}

@@ -1,0 +1,36 @@
+{
+  "cmd_id": "cmd_email_20260203_211241_9766",
+  "type": "draft_reply_email",
+  "created_at": "2026-02-03T21:12:41.654925+09:00",
+  "status": "pending",
+  "priority": "P1",
+  "needs_approval": true,
+  "source_event_id": "gmail:19c21f946252f4cb",
+  "context": {
+    "from": "",
+    "subject": "",
+    "snippet": "お世話になっております。エン株式会社の内田です。 先日のご案内以降、多くのご反響をいただきました エン主催の特別イベント『DiscoverHR』のお誘いでご連絡いたしました。 大好評につき残枠も限られておりますので、この機会に是非お申込みください。 (既にお申込みをいただいている場合、重複してのご案内となり申し訳ございません。) 本イベントでは、キャリアデザイン研究の第一人者である石山教授（法政大",
+    "reason": "action_required",
+    "routing_reasons": [
+      "priority:P1(keywords: ['ご連絡'])",
+      "action_required(keyword: ご連絡.*ください)"
+    ],
+    "sensitivity": "internal"
+  },
+  "proposed_action": {
+    "action": "draft_reply",
+    "to": "",
+    "subject": "Re: ",
+    "body_draft": ""
+  },
+  "approval": {
+    "approved": null,
+    "approved_by": null,
+    "approved_at": null
+  },
+  "execution": {
+    "executed": false,
+    "executed_at": null,
+    "result": null
+  }
+}
