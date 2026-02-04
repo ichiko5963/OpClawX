@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X投稿ネタ - AirCle Daily</title>
+  <meta property="og:title" content="📱 X投稿ネタ - AirCle Daily">
+  <meta property="og:description" content="毎日のAI/テック系バズ投稿アーカイブ">
+  <meta property="og:type" content="website">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 { 
+      font-size: 2rem; 
+      margin-bottom: 10px;
+      color: #fff;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      color: #888;
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #60a5fa;
+    }
+    .stat-label {
+      font-size: 0.8rem;
+      color: #888;
+    }
+    .day-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .day-card:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #60a5fa;
+      transform: translateX(5px);
+    }
+    .day-info h3 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+    .day-info p {
+      color: #888;
+      font-size: 0.85rem;
+    }
+    .day-count {
+      background: #2563eb;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #666;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #555;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📱 X投稿ネタ</h1>
+    <p class="subtitle">AirCle Daily Archive</p>
+    
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number" id="totalDays">1</div>
+        <div class="stat-label">日分</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" id="totalPosts">20</div>
+        <div class="stat-label">投稿</div>
+      </div>
+    </div>
+
+    <div id="archive">
+      <!-- Daily entries will be listed here -->
+      <a href="./daily-posts/2026-02-03.html" class="day-card">
+        <div class="day-info">
+          <h3>2026年2月3日（月）</h3>
+          <p>Claude Code自己進化、Vibe Coding 1周年、Cursor 100万行...</p>
+        </div>
+        <span class="day-count">20件</span>
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>Powered by AirCle × Pi</p>
+    </div>
+  </div>
+</body>
+</html>

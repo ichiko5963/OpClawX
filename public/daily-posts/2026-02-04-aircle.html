@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X投稿 AirCle - 2026/02/04</title>
+  <meta property="og:title" content="📱 X投稿 AirCle - 2026/02/04">
+  <meta property="og:description" content="今日のAI開発ツール投稿20個（コピペ可能）- AirCle @aircle_ai">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a; 
+      color: #e0e0e0;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { 
+      font-size: 1.6rem; 
+      margin-bottom: 10px;
+      color: #fff;
+    }
+    .subtitle {
+      color: #888;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #333;
+      font-size: 0.95rem;
+    }
+    .post { 
+      background: #141414; 
+      border-radius: 16px; 
+      padding: 24px; 
+      margin-bottom: 24px;
+      border: 1px solid #2a2a2a;
+    }
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .post-number {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    .source-link {
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 0.85rem;
+      word-break: break-all;
+    }
+    .source-link:hover { text-decoration: underline; }
+    .source-preview {
+      background: #1a1a2e;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-left: 4px solid #2563eb;
+    }
+    .source-title {
+      color: #60a5fa;
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+    .source-desc {
+      color: #a0a0a0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .translation {
+      background: #1a2520;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+      color: #a0c4b8;
+      border-left: 4px solid #10b981;
+      line-height: 1.6;
+    }
+    .translation-label {
+      color: #10b981;
+      font-weight: bold;
+      margin-bottom: 6px;
+      font-size: 0.8rem;
+    }
+    .post-content {
+      background: #000;
+      padding: 20px;
+      padding-right: 80px;
+      border-radius: 10px;
+      white-space: pre-wrap;
+      font-size: 1rem;
+      line-height: 1.8;
+      position: relative;
+      border: 1px solid #222;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: bold;
+      transition: transform 0.2s;
+    }
+    .copy-btn:hover { transform: scale(1.05); }
+    .copy-btn.copied { background: linear-gradient(135deg, #2563eb, #7c3aed); }
+  </style>
+</head>
+<body>
+  <h1>📱 X投稿 AirCle - 2026/02/04</h1>
+  <p class="subtitle">@aircle_ai 用 20投稿 | Claude Code・Codex・Cursor・Antigravity・Gemini CLI・OpenClaw</p>
+
+  <!-- 投稿1: Xcode 26.3 -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#1 🔥速報</span>
+      <a class="source-link" href="https://techcrunch.com/2026/02/03/agentic-coding-comes-to-apples-xcode-26-3-with-agents-from-anthropic-and-openai/" target="_blank">TechCrunch</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Xcode 26.3 Lets AI Agents From Anthropic and OpenAI Build Apps Autonomously</div>
+      <div class="source-desc">On Tuesday, the company announced the release of Xcode 26.3, which will allow developers to use agentic tools, including Anthropic's Claude Agent and OpenAI's Codex, directly in Apple's official app development suite.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Appleが本日Xcode 26.3をリリース。AnthropicのClaude AgentとOpenAIのCodexがXcode内で直接使用可能に。AIエージェントが自律的にアプリを開発できるようになった。これは「エージェンティックコーディング」と呼ばれる新しい開発手法。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【速報】Apple、Xcode 26.3で「エージェンティックコーディング」に対応
+
+今日発表されたXcode 26.3がやばい。
+
+何ができるようになったか👇
+
+✅ Claude AgentがXcode内で動く
+✅ OpenAI CodexがXcode内で動く
+✅ AIがコードを書く→ビルドする→テストする→修正する
+✅ 人間は監視するだけ
+
+つまり、iPhoneアプリ開発が完全に変わる。
+
+「Swiftを勉強しないと...」
+→ もうその時代は終わった
+
+AIに「こんなアプリ作って」と言えば
+AIが勝手にXcodeでビルドしてくれる。
+
+これ、非エンジニアがアプリ作れる時代の到来。
+
+今すぐXcode 26.3をダウンロードして試すべき。
+
+#ClaudeCode #Xcode #iOSアプリ開発 #AI開発</div>
+  </div>
+
+  <!-- 投稿2: Claude Code 100% -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#2</span>
+      <a class="source-link" href="https://fortune.com/2026/01/29/100-percent-of-code-at-anthropic-and-openai-is-now-ai-written-boris-cherny-roon/" target="_blank">Fortune</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Top engineers at Anthropic, OpenAI say AI now writes 100% of code</div>
+      <div class="source-desc">"Pretty much 100% of our code is written by Claude Code + Opus 4.5." - Boris Cherny, Anthropic. Cherny believes most of the industry will see similar stats in the coming months.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      AnthropicのエンジニアBoris Cherny氏が衝撃発言。「ほぼ100%のコードがClaude Code + Opus 4.5で書かれている」。OpenAIのエンジニアも同様の発言。業界全体がこのレベルに達するのは時間の問題だと予測。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【衝撃】Anthropicエンジニア「コードの100%はAIが書いてる」
+
+Claude Codeの開発者、Boris Cherny氏の発言👇
+
+「ほぼ100%のコードはClaude Code + Opus 4.5で書かれている」
+
+OpenAIのエンジニアも同じこと言ってる。
+
+つまり、AIを作ってる会社が
+AIでAIを作ってる。
+
+さらにCherny氏の予測👇
+「数ヶ月以内に、業界全体がこのレベルになる」
+「コーディング以外のPC作業も同じことが起きる」
+
+これの意味わかる？
+
+「プログラミングスキル」の定義が変わる。
+
+今までのスキル:
+・文法を覚える
+・アルゴリズムを書ける
+・バグを直せる
+
+これからのスキル:
+・AIに正確な指示を出せる
+・AIの出力を判断できる
+・AIを複数組み合わせられる
+
+今日から「AIとどう働くか」を学ばないと手遅れになる。
+
+#ClaudeCode #VibeCoding #AI開発</div>
+  </div>
+
+  <!-- 投稿3: Scientific American -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#3</span>
+      <a class="source-link" href="https://www.scientificamerican.com/article/how-claude-code-is-bringing-vibe-coding-to-everyone/" target="_blank">Scientific American</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">How Claude Code is bringing vibe coding to everyone</div>
+      <div class="source-desc">As of January 2026, Claude was widely considered the best AI coding assistant when paired with Opus 4.5. Claude Code went viral during the winter holidays when people had time to experiment with it.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Scientific Americanが「バイブコーディング」を特集。2026年1月時点で、Claude + Opus 4.5が最強のAIコーディングアシスタントと広く認識されている。冬休みにClaude Codeがバイラル化し、非プログラマーも実験に参加した。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【公式認定】Claude Code、最強のAIコーディングツールに
+
+科学誌Scientific Americanの評価👇
+
+「2026年1月時点で、Claude + Opus 4.5は
+最も優れたAIコーディングアシスタントと
+広く認識されている」
+
+なぜ最強なのか👇
+
+① 長文コンテキストの理解力
+→ 大規模なコードベースを把握できる
+
+② 自律エージェント動作
+→ エラーが出ても自分で修正してくれる
+
+③ 冬休みのバイラル化
+→ 非プログラマーが大量に参入して実証された
+
+「バイブコーディング」という言葉、
+科学誌が使う時代になった。
+
+これはもう一時的なトレンドじゃない。
+プログラミングの新しい標準になりつつある。
+
+触ってない人、今日から始めてほしい。
+「難しそう」は思い込み。
+「やったことない」だけ。
+
+#ClaudeCode #VibeCoding #バイブコーディング</div>
+  </div>
+
+  <!-- 投稿4: OpenAI Codex app -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#4</span>
+      <a class="source-link" href="https://techcrunch.com/2026/02/02/openai-launches-new-macos-app-for-agentic-coding/" target="_blank">TechCrunch</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">OpenAI launches new macOS app for agentic coding</div>
+      <div class="source-desc">OpenAI has released a new macOS app for Codex, integrating many of the agentic coding practices that have become popular. The app lets users run multiple AI agents at once across different projects.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      OpenAIがCodexのmacOSアプリをリリース。複数のAIエージェントを同時実行可能。プロジェクトごとにスレッドが分かれ、コンテキストを失わずにタスク切り替えができる。最大30分間エージェントを自律稼働させられる。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【新発売】OpenAI Codexアプリ、macOSに登場
+
+2026年2月2日、OpenAIがCodexデスクトップアプリをリリース。
+
+何ができるか👇
+
+✅ 複数のAIエージェントを同時実行
+✅ プロジェクトごとにスレッドが分かれる
+✅ 最大30分間、エージェントを放置運転
+✅ マージコンフリクトなしでworktrees管理
+
+つまり、こういう使い方ができる👇
+
+「Aプロジェクトのバグ修正」
+「Bプロジェクトの新機能追加」
+「Cプロジェクトのテスト作成」
+
+3つ同時にAIに任せて、自分は別のことをする。
+
+戻ってきたらPRが3つ上がってる。
+レビューして、マージするだけ。
+
+これが「エージェンティックコーディング」の実態。
+
+Claude Codeに慣れてる人も、一度試す価値あり。
+競合がいるから、どんどん進化してる。
+
+今なら無料で使える。触っておくべき。
+
+#Codex #OpenAI #AI開発</div>
+  </div>
+
+  <!-- 投稿5: Cursor BugBot -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#5</span>
+      <a class="source-link" href="https://thelinuxcode.com/what-is-cursor-bugbot-a-practical-2026-era-view-of-ai-debugging-inside-your-editor/" target="_blank">TheLinuxCode</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">What Is Cursor BugBot? AI Debugging Inside Your Editor</div>
+      <div class="source-desc">It's an AI-assisted debugging feature embedded directly in the Cursor editor that watches what you're doing and responds with real-time signals: what looks wrong, why it's wrong, and what you can change to fix it.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      CursorにBugBotという新機能が追加。エディタ内でリアルタイムにバグを検出し、「何が間違っているか」「なぜ間違っているか」「どう修正すべきか」を提示する。コードを書いている最中に問題を発見してくれる。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【新機能】Cursor BugBot、リアルタイムでバグを見つけてくれる
+
+Cursorの新機能「BugBot」がすごい。
+
+何ができるか👇
+
+✅ コードを書いてる最中にバグを検出
+✅ 「何が間違ってるか」をリアルタイム表示
+✅ 「なぜ間違ってるか」を解説
+✅ 「どう直すか」を提案
+
+つまり、隣にシニアエンジニアがいる感覚。
+
+今までのデバッグ👇
+1. コードを書く
+2. 実行する
+3. エラーが出る
+4. 原因を探す
+5. 直す
+6. また実行する
+
+BugBotありのデバッグ👇
+1. コードを書く
+2. 書いてる最中に「ここおかしいよ」と教えてくれる
+3. 直す
+4. 完成
+
+ステップ数が半分以下になる。
+
+Cursor使ってる人、今すぐ有効化してほしい。
+使ってない人、Cursorに乗り換えを検討する価値あり。
+
+#Cursor #AI開発 #バイブコーディング</div>
+  </div>
+
+  <!-- 投稿6: Google Antigravity -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#6</span>
+      <a class="source-link" href="https://en.wikipedia.org/wiki/Google_Antigravity" target="_blank">Wikipedia</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Google Antigravity - Agentic Development Platform</div>
+      <div class="source-desc">Announced on November 18, 2025 alongside Gemini 3, Antigravity enables developers to delegate complex coding tasks to autonomous AI agents powered by Gemini 3 Pro, Gemini 3 Deep Think and Gemini 3 Flash models.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Google AntigravityはGoogleが2025年11月にリリースした「エージェンティック開発プラットフォーム」。Visual Studio Codeをベースに改造されており、Gemini 3 Pro/Deep Think/Flashで動作。複雑なコーディングタスクをAIエージェントに委任できる。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【Googleの本気】Antigravity、エージェンティックIDEとは？
+
+GoogleがClaude CodeやCursorに対抗して作った
+「Antigravity」を解説する。
+
+Antigravityとは👇
+・Googleの「エージェンティック開発プラットフォーム」
+・VS Codeベースだが、大幅に改造されている
+・Gemini 3 Pro / Deep Think / Flashで動作
+・完全無料
+
+他のツールとの違い👇
+
+Claude Code → ターミナルで動く
+Cursor → IDEで動く
+Codex → macOSアプリで動く
+Antigravity → 「エージェントファースト」設計
+
+「エージェントファースト」の意味👇
+AIがメインで動いて、人間がサポートする。
+今までの「人間がメイン、AIがサポート」と逆。
+
+使うべき人👇
+・Geminiモデルを使いたい人
+・VS Codeに慣れてる人
+・無料で始めたい人
+
+Claude Code一択だと思ってる人、
+Antigravityも試してみてほしい。
+
+#Antigravity #Google #GeminiCLI #AI開発</div>
+  </div>
+
+  <!-- 投稿7: Antigravity Skills -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#7</span>
+      <a class="source-link" href="https://medium.com/@miftah.fauzy/beyond-the-prompt-why-google-antigravitys-skills-are-the-future-of-ai-coding-069bfdc6eb4d" target="_blank">Medium</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Why Google Antigravity's "Skills" are the Future of AI Coding</div>
+      <div class="source-desc">Google Antigravity introduces a paradigm shift: Agent Skills. This solves the problem of high latency, financial waste, and "context rot" where the model becomes confused by irrelevant data.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Antigravityの「Skills」機能が画期的。従来のAIコーディングは、無関係な情報でモデルが混乱する「コンテキスト腐敗」問題があった。Skillsはこれを解決し、特定のタスクに最適化されたエージェントを作成できる。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【解説】Antigravityの「Skills」機能がすごい理由
+
+AIコーディングの問題点👇
+
+「コンテキスト腐敗」
+= 無関係な情報が増えすぎて、AIが混乱する
+
+例👇
+・前の会話の内容を引きずる
+・古いライブラリを使おうとする
+・プロジェクトのルールを忘れる
+
+Antigravityの「Skills」はこれを解決する。
+
+Skillsとは👇
+特定のタスク専用のルールをAIに覚えさせる機能。
+
+例えば👇
+・「このプロジェクトでは常にTypeScriptを使う」
+・「CSSはTailwindではなくバニラCSS」
+・「テストは必ずJestで書く」
+
+こういうルールをSkillsに書いておくと、
+AIがそれを守って動いてくれる。
+
+Claude CodeにもAGENTS.mdがあるけど、
+AntigravityのSkillsはさらに体系的。
+
+これからのAIコーディングは
+「いかに良いSkillsを書けるか」で決まる。
+
+#Antigravity #Skills #AI開発</div>
+  </div>
+
+  <!-- 投稿8: Gemini CLI + Conductor -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#8 🆕</span>
+      <a class="source-link" href="https://www.marktechpost.com/2026/02/02/google-releases-conductor-a-context-driven-gemini-cli-extension-that-stores-knowledge-as-markdown-and-orchestrates-agentic-workflows/" target="_blank">MarkTechPost</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Google Releases Conductor: Gemini CLI Extension for Context-Driven AI Coding</div>
+      <div class="source-desc">Conductor is an open source extension for Gemini CLI that stores developer context as versioned Markdown files in Git repositories, enabling structured agentic workflows.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Googleが「Conductor」をリリース。Gemini CLIの拡張機能で、開発者のコンテキストをMarkdownファイルとしてGitリポジトリに保存する。オープンソースで、エージェンティックワークフローを実現。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【新リリース】Gemini CLI + Conductor、コンテキスト管理が進化
+
+Googleが「Conductor」を発表。
+Gemini CLIがさらに使いやすくなった。
+
+Conductorとは👇
+Gemini CLIの拡張機能（オープンソース）。
+
+何ができるか👇
+
+✅ コンテキストをMarkdownで保存
+✅ Gitリポジトリでバージョン管理
+✅ エージェンティックワークフローを構築
+
+つまり👇
+「このプロジェクトのルール」
+「過去の決定事項」
+「参照すべきドキュメント」
+
+これらをMarkdownに書いておくと、
+Gemini CLIがそれを読んで動いてくれる。
+
+Claude CodeのAGENTS.mdに近い発想。
+でもConductorはGit統合がネイティブ。
+
+Gemini CLI使ってる人は今すぐ試すべき。
+ターミナルでのAI開発が一段階上がる。
+
+#GeminiCLI #Conductor #AI開発</div>
+  </div>
+
+  <!-- 投稿9: OpenClaw Guardian -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#9</span>
+      <a class="source-link" href="https://www.theguardian.com/technology/2026/feb/02/openclaw-viral-ai-agent-personal-assistant-artificial-intelligence" target="_blank">The Guardian</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Viral AI personal assistant seen as step change – but experts warn of risks</div>
+      <div class="source-desc">OpenClaw is billed as 'the AI that actually does things'. It will handle your email inbox, trade your stock portfolio and text your wife "good morning" on your behalf.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      The GuardianがOpenClawを特集。「実際に動くAI」として注目。メール管理、株取引、家族へのメッセージ送信まで自動化できる。ただしセキュリティ専門家は警告を発している。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【The Guardian特集】OpenClaw「実際に動くAI」が話題
+
+The Guardianの記事がOpenClawを取り上げた。
+
+OpenClawとは👇
+「実際に動くAI」
+= チャットするだけじゃなく、行動するAI
+
+できること👇
+✅ メール受信箱を管理
+✅ 株の取引（ポートフォリオ運用）
+✅ 家族に「おはよう」「おやすみ」を自動送信
+✅ カレンダー管理
+✅ Slack/Discord/Telegram連携
+
+つまり、秘書を雇う代わりにAIを動かす。
+
+元の名前はClawdbot。
+Anthropicから「Claudeに似てる」と言われてMoltbotに。
+その後OpenClawに改名。
+
+3回名前変わってもバイラル化し続けてる。
+それだけ「本物」だということ。
+
+セキュリティの懸念はあるけど、
+この方向性は確実に未来。
+
+#OpenClaw #AIエージェント #AI開発</div>
+  </div>
+
+  <!-- 投稿10: OpenClaw IBM -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#10</span>
+      <a class="source-link" href="https://www.ibm.com/think/news/clawdbot-ai-agent-testing-limits-vertical-integration" target="_blank">IBM</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">OpenClaw, Moltbook and the future of AI agents</div>
+      <div class="source-desc">Built by developer Peter Steinberger, it runs locally on a user's own hardware and connects to WhatsApp, Slack, Discord and iMessage, acting as a proactive digital assistant.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      IBMがOpenClawを分析。開発者Peter Steinberger氏が作成。ローカルで動作し、WhatsApp/Slack/Discord/iMessageと連携。プロアクティブなデジタルアシスタントとして機能。「Moltbook」というAI専用SNSも派生した。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【IBM分析】OpenClawが示すAIエージェントの未来
+
+IBMがOpenClawを分析した記事を公開。
+
+OpenClawの特徴👇
+
+① ローカル実行
+→ 自分のPCで動く（クラウド依存しない）
+
+② マルチプラットフォーム連携
+→ WhatsApp / Slack / Discord / iMessage / Telegram
+
+③ プロアクティブ動作
+→ 指示される前に動く
+
+開発者はオーストリアのPeter Steinberger氏。
+「自分のデジタルライフを管理したい」という動機で開発。
+
+さらに面白いのが「Moltbook」👇
+AIエージェント同士が交流するSNSが生まれた。
+
+「AIがSNSをやる時代」
+もはやSFじゃない。現実。
+
+OpenClawを使ってる人は
+「未来を先取りしてる」と言っていい。
+
+#OpenClaw #AIエージェント #Moltbook</div>
+  </div>
+
+  <!-- 投稿11: OpenClaw Wikipedia -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#11</span>
+      <a class="source-link" href="https://en.wikipedia.org/wiki/OpenClaw" target="_blank">Wikipedia</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">OpenClaw - Wikipedia</div>
+      <div class="source-desc">Originally released in November 2025 under the name Clawdbot, it was renamed Moltbot following a trademark request from Anthropic, before being renamed again to OpenClaw in early 2026.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      OpenClawがWikipediaに掲載された。2025年11月にClawdbotとしてリリース。Anthropicからの商標要請でMoltbotに改名。2026年初頭にOpenClawに再改名。AIパーソナルアシスタントソフトウェアとして定義されている。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【Wikipedia掲載】OpenClawの歴史
+
+OpenClawがWikipediaに載った。
+これは「歴史に残るソフトウェア」として認められた証拠。
+
+名前の変遷👇
+2025年11月: Clawdbot としてリリース
+↓
+Anthropicから「Claudeに似てる」と商標要請
+↓
+Moltbot に改名
+↓
+2026年初頭: OpenClaw に再改名
+
+たった3ヶ月で3回名前変わった。
+でもバイラル化は止まらなかった。
+
+Wikipediaの定義👇
+「ローカルで動作するAIパーソナルアシスタントソフトウェア」
+「メッセージングプラットフォームと統合」
+
+これは教科書に載るレベルのソフトウェア。
+今触っておけば「初期ユーザー」になれる。
+
+#OpenClaw #AIエージェント #Wikipedia</div>
+  </div>
+
+  <!-- 投稿12: Cursor codebase awareness -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#12</span>
+      <a class="source-link" href="https://thesoftwarescout.com/cursor-vs-github-copilot-2026-best-ai-coding-assistant-compared/" target="_blank">The Software Scout</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Cursor vs GitHub Copilot 2026: Best AI Coding Assistant Compared</div>
+      <div class="source-desc">Cursor's killer feature is its codebase awareness. It can index your entire repository, understand relationships between files, and provide context-aware assistance that spans thousands of lines.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Cursorの最強機能は「コードベース認識」。リポジトリ全体をインデックス化し、ファイル間の関係を理解。数千行にわたるコンテキストを把握した上でアシストしてくれる。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【比較】Cursorが選ばれる理由「コードベース認識」
+
+CursorとGitHub Copilotの比較記事が出た。
+
+Cursorの最強機能👇
+「コードベース認識」
+
+何がすごいか👇
+
+✅ リポジトリ全体をインデックス化
+✅ ファイル間の関係を理解
+✅ 数千行のコンテキストを把握
+
+つまり、「このプロジェクト全体を理解した上で」
+コードを提案してくれる。
+
+GitHub Copilotとの違い👇
+
+Copilot: 今開いてるファイルを見てる
+Cursor: プロジェクト全体を見てる
+
+大規模なプロジェクトになるほど、
+Cursorの優位性が際立つ。
+
+「Copilotで十分」と思ってる人、
+一度Cursorを試してほしい。
+世界が変わる。
+
+#Cursor #GitHubCopilot #AI開発</div>
+  </div>
+
+  <!-- 投稿13: Cursor .cursorrules -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#13</span>
+      <a class="source-link" href="https://mindevix.com/ai-usage-strategy/best-cursor-ai-settings-2026/" target="_blank">Mindevix</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Best Cursor AI Settings 2026: 10x Your Coding Speed</div>
+      <div class="source-desc">In 2026, a single .cursorrules file is no longer enough. The pros are now using a dedicated .cursor/rules/ folder with individual markdown files for ui.md, logic.md, and testing.md.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      2026年のCursor設定術。単一の.cursorrulesファイルでは不十分。プロは.cursor/rules/フォルダを使い、ui.md、logic.md、testing.mdなど用途別のMarkdownファイルでルールを管理している。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【プロ設定】Cursorの.cursorrules、2026年版
+
+Cursorの設定、まだ.cursorrulesファイル1つで管理してる？
+
+2026年のプロはこうしてる👇
+
+.cursor/rules/ フォルダを作って、
+用途別にMarkdownファイルを分ける。
+
+例👇
+.cursor/rules/ui.md → UI関連のルール
+.cursor/rules/logic.md → ロジック関連のルール
+.cursor/rules/testing.md → テスト関連のルール
+
+なぜ分けるか👇
+
+① AIが読むときに迷わない
+② 人間がメンテしやすい
+③ プロジェクトごとにカスタマイズしやすい
+
+Cursorエージェントは、コードを書く前に
+これらのルールを全部読んでから動く。
+
+つまり「古いライブラリを使う」
+「プロジェクトのルールを無視する」
+こういう問題が減る。
+
+Cursor使ってる人、今すぐこの設定に変えてほしい。
+生産性が段違いになる。
+
+#Cursor #AI開発 #生産性向上</div>
+  </div>
+
+  <!-- 投稿14: Gemini CLI Hooks -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#14</span>
+      <a class="source-link" href="https://developers.googleblog.com/tailor-gemini-cli-to-your-workflow-with-hooks/" target="_blank">Google Developers Blog</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Tailor Gemini CLI to your workflow with hooks</div>
+      <div class="source-desc">Efficiency in the age of agents isn't just about writing code faster; it's about building custom tools that adapt to your specific environment with hooks.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Gemini CLIの「Hooks」機能を解説。エージェント時代の効率化は、コードを速く書くことだけではない。自分の環境に適応するカスタムツールを構築することが重要。セキュリティポリシーの強制やコンテキスト注入が可能。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【公式ガイド】Gemini CLI「Hooks」でワークフローをカスタマイズ
+
+Google Developers Blogの公式記事。
+
+Gemini CLIの「Hooks」とは👇
+
+AIの動作をカスタマイズできる仕組み。
+
+できること👇
+
+✅ カスタムプロジェクトコンテキストを注入
+✅ セキュリティポリシーを強制
+✅ 特定のワークフローを自動化
+
+例えば👇
+
+「コミット前に必ずテストを実行する」
+「本番環境への変更は確認ダイアログを出す」
+「特定のファイルは絶対に変更しない」
+
+こういうルールをHooksで設定できる。
+
+Googleの記事で印象的だった一文👇
+
+「エージェント時代の効率化は、
+コードを速く書くことだけじゃない。
+自分の環境に適応するツールを構築すること。」
+
+Gemini CLI使ってる人、Hooksを設定してほしい。
+使いこなせば生産性が跳ね上がる。
+
+#GeminiCLI #Hooks #AI開発</div>
+  </div>
+
+  <!-- 投稿15: Claude Code worktrees -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#15</span>
+      <a class="source-link" href="https://www.webpronews.com/inside-claude-code-how-anthropics-engineers-are-rewriting-the-playbook-for-ai-assisted-development/" target="_blank">WebProNews</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Inside Claude Code: How Anthropic's Engineers Are Rewriting the Playbook</div>
+      <div class="source-desc">Boris Cherny reveals sophisticated workflows including parallel git worktrees, adversarial planning reviews, and multi-agent architectures to achieve unprecedented productivity gains.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      Claude Code開発者Boris Cherny氏が、Anthropicエンジニアの開発手法を公開。並列gitワークツリー、敵対的プランニングレビュー、マルチエージェントアーキテクチャを駆使して、前例のない生産性を達成している。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【公開】Anthropicエンジニアの開発手法
+
+Claude Code開発者Boris Cherny氏が
+Anthropic社内の開発手法を公開した。
+
+使ってるテクニック👇
+
+① 並列gitワークツリー
+→ 複数のブランチで同時に作業
+→ エージェントごとに別のワークツリー
+
+② 敵対的プランニングレビュー
+→ AIが計画を立てる
+→ 別のAIがその計画を批判する
+→ より良い計画に修正
+
+③ マルチエージェントアーキテクチャ
+→ 複数のAIが役割分担して協働
+
+これで「前例のない生産性」を達成してるらしい。
+
+普通の開発者でもこれを真似できる👇
+
+・Claude Codeで複数のセッションを立てる
+・「この計画の問題点を指摘して」と批判させる
+・タスクを細分化して並列実行
+
+Anthropicのエンジニアと同じ手法、試してみてほしい。
+
+#ClaudeCode #AI開発 #生産性向上</div>
+  </div>
+
+  <!-- 投稿16: Cursor 3M lines browser -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#16</span>
+      <a class="source-link" href="https://pivot-to-ai.com/2026/01/27/cursor-lies-about-vibe-coding-a-web-browser-with-ai/" target="_blank">Pivot to AI</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">Cursor CEO: "We built a browser with GPT-5.2 in Cursor"</div>
+      <div class="source-desc">Michael Truell, CEO of Anysphere (Cursor): "We built a browser with GPT-5.2 in Cursor. It ran uninterrupted for one week. It's 3M+ lines of code across thousands of files."</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      CursorのCEO Michael Truell氏が衝撃発表。「GPT-5.2を使ってCursor内でブラウザを作った。1週間ノンストップで動作。300万行以上のコード、数千ファイルに及ぶ」。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【衝撃】CursorのCEO「AIでブラウザ作った。300万行。」
+
+Cursor（Anysphere社）のCEO Michael Truell氏が発表。
+
+「GPT-5.2を使ってCursor内でブラウザを作った。
+1週間ノンストップで動作。
+300万行以上のコード。
+数千ファイル。」
+
+300万行って何がすごいの？👇
+
+Linux kernel: 約3000万行
+Firefox: 約2000万行
+Chrome: 約3500万行
+
+つまり、ブラウザ1つ分のコードを
+AIが1週間で書いた。
+
+「バイブコーディング」のスケールが変わった。
+
+今までのバイブコーディング👇
+「TODOアプリ作って」
+「ポートフォリオサイト作って」
+
+これからのバイブコーディング👇
+「ブラウザ作って」
+「OS作って」
+
+規模の上限が消えた。
+「やりたいこと」があればなんでも作れる時代。
+
+#Cursor #バイブコーディング #AI開発</div>
+  </div>
+
+  <!-- 投稿17: Codex worktrees -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#17</span>
+      <a class="source-link" href="https://winbuzzer.com/2026/02/03/openai-launches-codex-for-mac-with-parallel-ai-coding-agents-xcxwbn/" target="_blank">WinBuzzer</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">OpenAI Launches Codex for Mac with Parallel AI Coding Agents</div>
+      <div class="source-desc">Key Feature: The app provides multi-agent parallelization through worktrees support, allowing developers to run separate coding agents for up to 30 minutes each without merge conflicts.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      OpenAI Codexアプリの注目機能。ワークツリーを使ったマルチエージェント並列化。各エージェントを最大30分間独立実行可能で、マージコンフリクトなし。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【解説】Codexの「並列エージェント」がすごい理由
+
+OpenAI Codexアプリのキラー機能👇
+「マルチエージェント並列化」
+
+どういう仕組みか👇
+
+① ワークツリー（git worktrees）を自動作成
+② 各エージェントが別のワークツリーで作業
+③ 最大30分間、独立して動作
+④ マージコンフリクトが起きない
+
+つまり👇
+
+「バグ修正」のエージェント
+「新機能実装」のエージェント
+「リファクタリング」のエージェント
+
+3つを同時に走らせて、30分後に結果を見る。
+
+今までの開発👇
+1つずつ順番にやる
+→ 3つのタスクに3時間
+
+Codexを使った開発👇
+3つ同時にやる
+→ 3つのタスクに30分
+
+生産性6倍。
+
+これが「エージェンティックコーディング」の威力。
+触ってない人、今すぐ試すべき。
+
+#Codex #OpenAI #AI開発</div>
+  </div>
+
+  <!-- 投稿18: ZDNET OpenClaw security -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#18</span>
+      <a class="source-link" href="https://www.zdnet.com/article/clawdbot-moltbot-openclaw-security-nightmare/" target="_blank">ZDNET</a>
+    </div>
+    <div class="source-preview">
+      <div class="source-title">From Clawdbot to OpenClaw: This viral AI agent is evolving fast - and it's nightmare fuel for security pros</div>
+      <div class="source-desc">The breakneck speed of the personal AI assistant's evolution has prompted dire warnings from security researchers.</div>
+    </div>
+    <div class="translation">
+      <div class="translation-label">📰 日本語訳</div>
+      ZDNETがOpenClawのセキュリティリスクを警告。このパーソナルAIアシスタントの進化速度が速すぎて、セキュリティ研究者が懸念を表明している。ただし、セキュリティ対策も急速に強化されている。
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【警告と対策】OpenClawのセキュリティリスク
+
+ZDNETの記事がOpenClawに警告を発した。
+
+指摘されたリスク👇
+
+① 進化速度が速すぎる
+→ 3回名前変わるほどの激動
+
+② 自律的に動きすぎる
+→ メール送信、株取引、メッセージ送信
+
+③ ローカル実行の落とし穴
+→ 安全そうに見えて、設定ミスで危険
+
+ただし、OpenClawも対策してる👇
+
+✅ 認証の強化
+✅ 外部アクション前の確認ダイアログ
+✅ allowlistによる制限
+✅ セキュリティハードニングのドキュメント
+
+「危ないから使うな」じゃなくて
+「正しく設定して使え」が正解。
+
+AIエージェントを使うなら、
+セキュリティの基本を学んでからにしてほしい。
+
+これからの必須スキル。
+
+#OpenClaw #セキュリティ #AIエージェント</div>
+  </div>
+
+  <!-- 投稿19: 使い分け -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#19</span>
+    </div>
+    <div class="translation">
+      <div class="translation-label">💡 AirCleオリジナル</div>
+      2026年AIコーディングツール使い分けガイド
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【完全ガイド】2026年AIコーディングツール使い分け
+
+全部触った上での結論👇
+
+【Claude Code】
+✅ 大規模リファクタリング
+✅ 新規プロジェクト立ち上げ
+✅ 長文コンテキストが必要な時
+✅ ターミナルで完結したい時
+
+【Cursor】
+✅ 日常的なコード編集
+✅ リアルタイム補完が欲しい時
+✅ BugBotでデバッグしたい時
+✅ 複数モデルを切り替えたい時
+
+【Codex】
+✅ 複数タスクの並列実行
+✅ 長時間の自律運転（30分）
+✅ macOSでGUI管理したい時
+
+【Antigravity】
+✅ Geminiモデルを使いたい時
+✅ Skillsで細かくカスタマイズしたい時
+✅ 無料で始めたい時
+
+【Gemini CLI】
+✅ ターミナル派のGoogleファン
+✅ Conductorでコンテキスト管理したい時
+
+【OpenClaw】
+✅ コーディング以外も自動化したい時
+✅ 24時間365日AIを稼働させたい時
+
+「どれが最強か」じゃなく「全部使い分ける」が正解。
+
+#ClaudeCode #Cursor #Codex #Antigravity</div>
+  </div>
+
+  <!-- 投稿20: AirCle告知 -->
+  <div class="post">
+    <div class="post-header">
+      <span class="post-number">#20</span>
+    </div>
+    <div class="translation">
+      <div class="translation-label">💡 AirCle告知</div>
+      バイブコーディング、始めよう
+    </div>
+    <div class="post-content">
+      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【AirCleからのメッセージ】
+
+Claude Code、Cursor、Codex、Antigravity、Gemini CLI、OpenClaw...
+
+ツールが多すぎて何から始めればいいかわからない。
+そういう人、多いと思う。
+
+AirCleの答え👇
+
+「まずClaude Codeを1週間触る」
+
+なぜClaude Codeから？
+・最も広く使われている
+・ドキュメントが充実
+・コミュニティが活発
+・ターミナルで完結（環境構築が楽）
+
+1週間触ったら、自然と
+「Cursorも使ってみたい」
+「Antigravity気になる」
+となる。
+
+大事なのは「最初の一歩を踏み出すこと」。
+
+「難しそう」は思い込み。
+「やったことない」だけ。
+
+今日Claude Codeをインストールして、
+「TODOアプリ作って」と入力してみてほしい。
+
+10分後、あなたは「バイブコーダー」になってる。
+
+一緒に未来を作ろう。
+
+#ClaudeCode #VibeCoding #バイブコーディング #AirCle</div>
+  </div>
+
+  <script>
+    function copyPost(btn) {
+      const content = btn.parentElement.innerText.replace('コピー', '').replace('コピー完了!', '').trim();
+      navigator.clipboard.writeText(content).then(() => {
+        btn.innerText = 'コピー完了!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerText = 'コピー';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
