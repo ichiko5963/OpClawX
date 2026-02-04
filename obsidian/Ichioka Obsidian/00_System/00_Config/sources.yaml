@@ -64,6 +64,7 @@ slack:
   enabled: true
   frequency: hourly
   workspace: "AirCle｜大学生AI団体"
+  owner_user_id: "U09B8K99MLK"  # いちさん
   scope:
     - channels:read
     - channels:history

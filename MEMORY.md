@@ -76,6 +76,33 @@ Pythonワークフローツール `tools/`:
 - x_analysis_report.py - 詳細レポート生成
 - morning_brief.py - モーニングブリーフィング
 
+## X投稿 毎朝自律送信ルール (2026-02-04 更新)
+**毎朝6:00ジャストにTelegramへ自分から送信する（聞かれる前に）**
+
+1. 深夜セッションで最新ニュースを検索
+2. HTMLページ生成 → Vercelデプロイ
+3. **6:00ジャスト**にTelegramでリンク送信（遅れ厳禁）
+
+### HTMLフォーマット要件
+- 参考URLのプレビュー（タイトル + 説明）
+- 日本語訳（ソース概要）
+- 投稿文（**長め**に書く）
+- コピーボタン付き
+- ダークUI
+
+### 投稿数
+- AirCle用 (@aircle_ai): 20投稿
+- いち@AIxマーケ用 (@ichiaimarketer): 20投稿
+
+### URL
+- https://public-kappa-weld.vercel.app/daily-posts/2026-02-04-aircle.html
+- https://public-kappa-weld.vercel.app/daily-posts/2026-02-04-ichiaimarketer.html
+
+### 重要な注意点
+- Markdownファイルで送らない（HTML必須）
+- 自分から送る（聞かれてからでは遅い）
+- 最新ニュースを必ず検索してから作成
+
 ## X投稿分析結果 (2026-02-04)
 820件の過去投稿を分析:
 - 結論型: 平均306.7いいね（最強）
