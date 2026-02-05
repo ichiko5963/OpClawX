@@ -146,9 +146,46 @@ def get_task_lists() -> list:
         return json.loads(response.read()).get('items', [])
 
 
-def add_task(title: str, notes: str = "", list_id: str = None) -> dict:
+def get_list_id_for_task(title: str, context: str = "") -> str:
+    """タスクのタイトルと文脈からルーティング先のリストIDを決定"""
+    routing_config_path = Path(__file__).parent / "task_routing.json"
+    
+    if not routing_config_path.exists():
+        return None
+    
+    with open(routing_config_path) as f:
+        config = json.load(f)
+    
+    search_text = f"{title} {context}".lower()
+    
+    # ルーティングルールをチェック
+    for rule in config.get('routing_rules', []):
+        pattern = rule['pattern'].lower()
+        if pattern in search_text:
+            list_name = rule['list']
+            return config['task_lists'].get(list_name, {}).get('id')
+    
+    # キーワードマッチをチェック
+    for list_name, list_config in config['task_lists'].items():
+        for keyword in list_config.get('keywords', []):
+            if keyword.lower() in search_text:
+                return list_config['id']
+    
+    # デフォルトリストを返す
+    for list_name, list_config in config['task_lists'].items():
+        if list_config.get('default'):
+            return list_config['id']
+    
+    return None
+
+
+def add_task(title: str, notes: str = "", list_id: str = None, context: str = "") -> dict:
     """タスクを追加"""
     access_token = get_access_token()
+    
+    if not list_id:
+        # ルーティングを試みる
+        list_id = get_list_id_for_task(title, context)
     
     if not list_id:
         lists = get_task_lists()
