@@ -67,6 +67,18 @@
 - Google: Gmail/Calendar/Drive (未接続)
 - 接続方法: MCP or n8n or Zapier で検討中
 
+## 経費管理システム (2026-02-05 追加)
+- **経費スプレッドシート**: https://docs.google.com/spreadsheets/d/1NLiR89wGRWoFDppU1PpYzdk4YMIrMsjIfLbsdhKMe2s/edit
+- **収入スプレッドシート**: https://docs.google.com/spreadsheets/d/1R6dEPRTHfjnCXu1VWMh0lwfea0OqMTYjhzIVL_NA990/edit
+- **Driveフォルダ**: https://drive.google.com/drive/folders/1oLO6kGT31AV780TzymtC6puZ9vM8xqMH
+- 毎日23:00に `expense_append.py` で自動追記
+- 収入判定: 「お支払いがありました」= Stripe入金、案件受注
+
+## Pi Voice (2026-02-05 追加)
+- URL: https://pi-voice.vercel.app
+- 音声対話アシスタント（ブラウザTTS）
+- 12時の自動化提案はTelegramに変更
+
 ## Tools (2026-02-04 追加)
 Pythonワークフローツール `tools/`:
 - x_scheduler.py - X投稿スケジューラー
