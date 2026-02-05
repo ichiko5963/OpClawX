@@ -1,0 +1,356 @@
+[23:04:17] Pi Voice Daemon started - PID 77143 - Port 8768
+[23:04:17] Starting main loop - INFINITE MODE
+[23:04:17] HTTP server ready
+[23:04:44] Turn 1: 本当に無限ラリーできんの?
+[23:04:46] Pi: もちろん！話したいことがあれば、どんどん話してね。何についてでもOKだよ。...
+[23:05:25] Record error: Command '['rec', '-q', '/var/folders/4r/ctfv9rw56mvcz98rxxjqc9kw0000gn/T/tmpqb4ip2n9.wav', 'rate', '16000', 'channels', '1', 'silence', '1', '0.3', '2%', '1', '1.0', '2%', 'trim', '0', '30']' timed out after 35 seconds
+[23:06:00] Record error: Command '['rec', '-q', '/var/folders/4r/ctfv9rw56mvcz98rxxjqc9kw0000gn/T/tmpspwuflx0.wav', 'rate', '16000', 'channels', '1', 'silence', '1', '0.3', '2%', '1', '1.0', '2%', 'trim', '0', '30']' timed out after 35 seconds
+[23:06:35] Record error: Command '['rec', '-q', '/var/folders/4r/ctfv9rw56mvcz98rxxjqc9kw0000gn/T/tmpci8mljsq.wav', 'rate', '16000', 'channels', '1', 'silence', '1', '0.3', '2%', '1', '1.0', '2%', 'trim', '0', '30']' timed out after 35 seconds
+[23:07:29] Turn 2: チューニングってなってるんだけど 全然
+[23:07:30] Pi: おっと、何か問題があるみたいだね。「チューニング」っていうのはどんな状況のこと？もう少し詳しく教えて...
+[23:07:48] Muted: True
+[23:07:58] === Pi Voice v4 Started ===
+[23:07:58] PID: 77341, Port: 8769
+[23:07:58] HTTP ready
+[23:08:12] [Turn 1] User: こんばんは
+[23:08:12] Sending 1 messages to GPT
+[23:08:15] [Turn 1] Pi: こんばんは！今日はどんな感じだった？何か話したいこととかある？...
+[23:08:26] [Turn 2] User: アークレについて知ってる?
+[23:08:26] Sending 3 messages to GPT
+[23:08:28] [Turn 2] Pi: うん、知ってるよ。AirCleは、いちさんが代表を務めている大学生のAI団体だね。AI技術を使って様々なプロジェクトに取り組んでいると思うけど、具体的に何か聞き...
+[23:08:46] [Turn 3] User: なんか具体的に聞きたいことがあるってより あのアークルのなんか業務効率化みたいな
+[23:08:46] Sending 5 messages to GPT
+[23:08:49] [Turn 3] Pi: なるほど、AirCleの業務効率化について考えてるんだね。どんな部分を効率化したいと思ってる？例えば、プロジェクト管理、コミュニケーション、データ管理とか。他に...
+[23:09:06] [Turn 4] User: あなたが5個アークルの業務効率化した方がいい
+[23:09:06] Sending 7 messages to GPT
+[23:09:17] [Turn 4] Pi: 了解！それじゃあ、AirCleの業務効率化のためのアイデアを5つ考えてみるね。
+
+1. **プロジェクト管理ツールの導入**: 複数のプロジェクトを効率的に管理...
+[23:09:57] Muted: True
+[23:12:41] === Pi Voice v5 Started ===
+[23:12:41] PID: 77539, Port: 8770
+[23:12:41] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:41] === Pi Voice v5 Started ===
+[23:12:41] === Pi Voice v5 Started ===
+[23:12:41] HTTP ready
+[23:12:41] PID: 77541, Port: 8770
+[23:12:41] PID: 77542, Port: 8770
+[23:12:41] Server error: [Errno 48] Address already in use
+[23:12:41] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:41] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:41] Server error: [Errno 48] Address already in use
+[23:12:43] === Pi Voice v5 Started ===
+[23:12:43] === Pi Voice v5 Started ===
+[23:12:43] Server error: [Errno 48] Address already in use
+[23:12:43] PID: 77542, Port: 8770
+[23:12:43] Server error: [Errno 48] Address already in use
+[23:12:43] PID: 77541, Port: 8770
+[23:12:43] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:43] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:45] === Pi Voice v5 Started ===
+[23:12:45] Server error: [Errno 48] Address already in use
+[23:12:45] PID: 77541, Port: 8770
+[23:12:45] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:45] === Pi Voice v5 Started ===
+[23:12:45] Server error: [Errno 48] Address already in use
+[23:12:45] PID: 77542, Port: 8770
+[23:12:45] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:47] === Pi Voice v5 Started ===
+[23:12:47] Server error: [Errno 48] Address already in use
+[23:12:47] PID: 77541, Port: 8770
+[23:12:47] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:47] === Pi Voice v5 Started ===
+[23:12:47] PID: 77542, Port: 8770
+[23:12:47] Server error: [Errno 48] Address already in use
+[23:12:47] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:49] === Pi Voice v5 Started ===
+[23:12:49] Server error: [Errno 48] Address already in use
+[23:12:49] PID: 77541, Port: 8770
+[23:12:49] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:49] === Pi Voice v5 Started ===
+[23:12:49] Server error: [Errno 48] Address already in use
+[23:12:49] PID: 77542, Port: 8770
+[23:12:49] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:51] === Pi Voice v5 Started ===
+[23:12:51] Server error: [Errno 48] Address already in use
+[23:12:51] PID: 77541, Port: 8770
+[23:12:51] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:51] === Pi Voice v5 Started ===
+[23:12:51] PID: 77542, Port: 8770
+[23:12:51] Server error: [Errno 48] Address already in use
+[23:12:51] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:53] === Pi Voice v5 Started ===
+[23:12:53] Server error: [Errno 48] Address already in use
+[23:12:53] PID: 77541, Port: 8770
+[23:12:53] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:53] === Pi Voice v5 Started ===
+[23:12:53] PID: 77542, Port: 8770
+[23:12:53] Server error: [Errno 48] Address already in use
+[23:12:53] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:55] === Pi Voice v5 Started ===
+[23:12:55] Server error: [Errno 48] Address already in use
+[23:12:55] PID: 77541, Port: 8770
+[23:12:55] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:55] === Pi Voice v5 Started ===
+[23:12:55] PID: 77542, Port: 8770
+[23:12:55] Server error: [Errno 48] Address already in use
+[23:12:55] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:57] === Pi Voice v5 Started ===
+[23:12:57] Server error: [Errno 48] Address already in use
+[23:12:57] PID: 77541, Port: 8770
+[23:12:57] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:12:57] === Pi Voice v5 Started ===
+[23:12:57] PID: 77542, Port: 8770
+[23:12:57] Server error: [Errno 48] Address already in use
+[23:12:57] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:09] === Pi Voice v5 Started ===
+[23:13:09] PID: 77700, Port: 8771
+[23:13:09] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:09] === Pi Voice v5 Started ===
+[23:13:09] === Pi Voice v5 Started ===
+[23:13:09] HTTP ready
+[23:13:09] PID: 77702, Port: 8771
+[23:13:09] Server error: [Errno 48] Address already in use
+[23:13:09] Server error: [Errno 48] Address already in use
+[23:13:09] PID: 77703, Port: 8771
+[23:13:09] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:09] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:11] === Pi Voice v5 Started ===
+[23:13:11] === Pi Voice v5 Started ===
+[23:13:11] PID: 77702, Port: 8771
+[23:13:11] Server error: [Errno 48] Address already in use
+[23:13:11] Server error: [Errno 48] Address already in use
+[23:13:11] PID: 77703, Port: 8771
+[23:13:11] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:11] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:13] === Pi Voice v5 Started ===
+[23:13:13] PID: 77703, Port: 8771
+[23:13:13] Server error: [Errno 48] Address already in use
+[23:13:13] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:13] === Pi Voice v5 Started ===
+[23:13:13] PID: 77702, Port: 8771
+[23:13:13] Server error: [Errno 48] Address already in use
+[23:13:13] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:15] === Pi Voice v5 Started ===
+[23:13:15] Server error: [Errno 48] Address already in use
+[23:13:15] PID: 77703, Port: 8771
+[23:13:15] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:15] === Pi Voice v5 Started ===
+[23:13:15] Server error: [Errno 48] Address already in use
+[23:13:15] PID: 77702, Port: 8771
+[23:13:15] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:17] === Pi Voice v5 Started ===
+[23:13:17] Server error: [Errno 48] Address already in use
+[23:13:17] PID: 77702, Port: 8771
+[23:13:17] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:17] === Pi Voice v5 Started ===
+[23:13:17] Server error: [Errno 48] Address already in use
+[23:13:17] PID: 77703, Port: 8771
+[23:13:17] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:19] === Pi Voice v5 Started ===
+[23:13:19] Server error: [Errno 48] Address already in use
+[23:13:19] PID: 77702, Port: 8771
+[23:13:19] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:19] === Pi Voice v5 Started ===
+[23:13:19] PID: 77703, Port: 8771
+[23:13:19] Server error: [Errno 48] Address already in use
+[23:13:19] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:22] === Pi Voice v5 Started ===
+[23:13:22] Server error: [Errno 48] Address already in use
+[23:13:22] PID: 77702, Port: 8771
+[23:13:22] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:22] === Pi Voice v5 Started ===
+[23:13:22] Server error: [Errno 48] Address already in use
+[23:13:22] PID: 77703, Port: 8771
+[23:13:22] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:24] === Pi Voice v5 Started ===
+[23:13:24] Server error: [Errno 48] Address already in use
+[23:13:24] PID: 77702, Port: 8771
+[23:13:24] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:24] === Pi Voice v5 Started ===
+[23:13:24] Server error: [Errno 48] Address already in use
+[23:13:24] PID: 77703, Port: 8771
+[23:13:24] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:26] === Pi Voice v5 Started ===
+[23:13:26] Server error: [Errno 48] Address already in use
+[23:13:26] PID: 77702, Port: 8771
+[23:13:26] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:26] === Pi Voice v5 Started ===
+[23:13:26] Server error: [Errno 48] Address already in use
+[23:13:26] PID: 77703, Port: 8771
+[23:13:26] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:28] === Pi Voice v5 Started ===
+[23:13:28] Server error: [Errno 48] Address already in use
+[23:13:28] PID: 77702, Port: 8771
+[23:13:28] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:28] === Pi Voice v5 Started ===
+[23:13:28] PID: 77703, Port: 8771
+[23:13:28] Features: Sensitive VAD, 1.5s silence detection, infinite loop
+[23:13:28] Server error: [Errno 48] Address already in use
+[23:14:44] === Pi Voice v6 ===
+[23:14:44] PID: 77918, Port: 8771
+[23:14:44] === v6 Loop Started ===
+[23:14:44] HTTP ready
+[23:14:56] Recorded: 552800 bytes
+[23:15:01] [Turn 1] User: もう一人増えたって感じ、自分が。 結構マジでエグい。 これ気づいてる人と気づいてない人、マジで聞かれそうにしてる。
+[23:15:01] Sending 1 msgs to GPT
+[23:15:04] [Turn 1] Pi: なるほど、自分がもう一人増えたような感覚を持っていて、そのことに気づいている人とそうでない人がいるってことね。それって、...
+[23:15:17] Ready for next
+[23:15:23] Recorded: 124088 bytes
+[23:15:25] [Turn 2] User: アークルっていう団体について知ってる?
+[23:15:25] Sending 3 msgs to GPT
+[23:15:27] [Turn 2] Pi: うん、アークル（AirCle）は、いちさんが代表を務める大学生AI団体だよ。この団体では、学生たちが集まってAI関連のプ...
+[23:15:39] Ready for next
+[23:15:46] Recorded: 102740 bytes
+[23:15:47] [Turn 3] User: クライム・ビヨンドについて知ってる?
+[23:15:47] Sending 5 msgs to GPT
+[23:15:49] [Turn 3] Pi: もちろん！クライム・ビヨンド（ClimbBeyond）は、いちさんが関わっているプロジェクトの一つで、ポート株式会社や就...
+[23:16:01] Ready for next
+[23:16:05] Recorded: 148964 bytes
+[23:16:15] Recorded: 469848 bytes
+[23:16:17] [Turn 4] User: 業務効率化したいんだけど、その業務効率化するアイディア5個ぐらい考えて教えてほしいわ
+[23:16:17] Sending 7 msgs to GPT
+[23:16:23] [Turn 4] Pi: 業務効率化のアイデアを5つ考えてみたよ：
+
+1. **タスク管理ツールの導入**: AsanaやTrelloなどのツール...
+[23:17:01] Muted: True
+[23:17:18] Ready for next
+[23:18:36] === Pi v7 === Port 8772
+[23:18:36] === v7 Loop ===
+[23:18:36] HTTP OK
+[23:18:42] [T1] 最後まで視聴してくださって 本当にありがとうございます。
+[23:18:42] GPT: 1 msgs
+[23:18:44] [T1] Pi: どういたしまして！もし何か質問があれば、いつでも聞いてね。...
+[23:19:04] [T2] 本日はご覧いただきありがとうございます。良い一日を!
+[23:19:04] GPT: 3 msgs
+[23:19:05] [T2] Pi: どういたしまして！こちらこそありがとう。良い一日を過ごしてね！また何かあればいつでも声をかけてね。...
+[23:19:20] [T3] 最後まで視聴してくださって 本当にありがとうございます。
+[23:19:20] GPT: 5 msgs
+[23:19:21] [T3] Pi: どういたしまして！もし何か質問やフィードバックがあれば、いつでも気軽に教えてね。次回も楽しみにしてる...
+[23:19:32] [T4] おはよう
+[23:19:32] GPT: 7 msgs
+[23:19:33] [T4] Pi: おはよう！今日はどんな一日になるかな？何か手伝えることがあれば教えてね。...
+[23:19:42] [T5] ポート株式会社について知ってる?
+[23:19:42] GPT: 9 msgs
+[23:19:45] [T5] Pi: ポート株式会社は、日本の企業で、主にキャリア支援や就職活動関連のサービスを提供していることで知られて...
+[23:20:06] [T6] 私とポート株式会社の関係について
+[23:20:06] GPT: 11 msgs
+[23:20:09] [T6] Pi: いちさんとポート株式会社の関係については、「ClimbBeyond関連（ポート株式会社、就活系）」と...
+[23:20:30] [T7] うん、具体的な情報教えて
+[23:20:30] GPT: 13 msgs
+[23:20:33] [T7] Pi: 詳しい情報が手元にないから、ClimbBeyondプロジェクトに関する詳細や、ポート株式会社との具体...
+[23:20:51] [T8] 視聴してくださって 本当にありがとうございます。
+[23:20:51] GPT: 15 msgs
+[23:20:52] [T8] Pi: どういたしまして！またいつでも質問やリクエストがあれば教えてね。次回も楽しみにしてるよ！...
+[23:21:02] [T9] まぁよくはなったんだけど
+[23:21:02] GPT: 17 msgs
+[23:21:04] [T9] Pi: お、良くなったんだね！何か手伝ったり改善したいことがあれば、教えてくれれば力になるよ。また話したいこ...
+[23:21:16] [T10] 拾った上で火曜はできてないよねっていう感じ
+[23:21:16] GPT: 19 msgs
+[23:21:19] [T10] Pi: なるほど、火曜に何かやり残したことがある感じかな？どんなことができていなかったのか、詳しく教えてもら...
+[23:21:38] [T11] 無限にラリーはできるようになった
+[23:21:38] GPT: 21 msgs
+[23:21:40] [T11] Pi: おお、それはすごいね！ラリーが無限に続けられるようになったのは、何かトレーニングの成果とか、それとも...
+[23:21:59] [T12] 最後まで視聴してくださって 本当にありがとうございます。
+[23:21:59] GPT: 23 msgs
+[23:22:00] [T12] Pi: どういたしまして！こちらこそありがとう。また何かあれば、いつでも気軽に話しかけてね。次回も楽しみにし...
+[23:22:12] [T13] 最後まで視聴してくださって 本当にありがとうございます。
+[23:22:12] GPT: 25 msgs
+[23:22:14] [T13] Pi: こちらこそ、どういたしまして！何かあれば、いつでも気軽に聞いてね。また次回も楽しみにしてるよ！...
+[23:22:24] [T14] 最後まで視聴してくださって 本当にありがとうございます。
+[23:22:24] GPT: 27 msgs
+[23:22:25] [T14] Pi: どういたしまして！こちらこそお礼を言いたいところだね。次回も楽しみにしているよ。何か質問や話したいこ...
+[23:22:47] [T15] 最後まで視聴してくださって 本当にありがとうございます。
+[23:22:47] GPT: 29 msgs
+[23:22:49] [T15] Pi: 視聴してくれたことに感謝だね！次回もぜひ楽しんでくれると嬉しいな。何か質問や相談があれば、いつでも気...
+[23:23:02] === Pi v7 === Port 8771
+[23:23:02] === v7 Loop ===
+[23:23:02] HTTP OK
+[23:23:13] [T1] エガーカルマン1さんが代表を務めて
+[23:23:13] GPT: 1 msgs
+[23:23:16] [T1] Pi: エガーカルマン1さんが代表を務めている組織について詳しく知りたいですね！よろしければ、その組織につい...
+[23:25:08] [T2] 自分が学校行って
+[23:25:08] GPT: 3 msgs
+[23:25:09] [T2] Pi: 学校に行っているんですね！どんな科目が好きですか？もし学校生活についてもっと教えてくれたら、その話を...
+[23:27:08] [T3] 見てくれてありがとう:)
+[23:27:08] GPT: 5 msgs
+[23:27:10] [T3] Pi: どういたしまして！何か他にも聞きたいことや話したいことがあれば、いつでもどうぞ。あなたのサポートがで...
+[23:27:27] [T4] 見てくれてありがとう
+[23:27:27] GPT: 7 msgs
+[23:27:28] [T4] Pi: こちらこそ、ありがとうございます！何かお手伝いできることがあれば、いつでも教えてくださいね。...
+[23:27:43] [T5] 見てくれてありがとう
+[23:27:43] GPT: 9 msgs
+[23:27:44] [T5] Pi: いえいえ、いつでもどうぞ！何かあれば気軽に聞いてくださいね。...
+[23:27:53] [T6] 見てくれてありがとう:)
+[23:27:53] GPT: 11 msgs
+[23:27:54] [T6] Pi: こちらこそ、ありがとう！何か質問や話したいことがあったら、いつでもどうぞ😊...
+[23:28:41] [T7] 例えばプロジェクト管理、コミュニケーション、メールなど
+[23:28:41] GPT: 13 msgs
+[23:28:44] [T7] Pi: プロジェクト管理やコミュニケーション、メールなどの内容について知りたいんですね。どの部分について詳し...
+[23:29:50] [T8] 最後の情報をシェーデー
+[23:29:50] GPT: 15 msgs
+[23:29:52] [T8] Pi: ごめんなさい、「シェーデー」の意味がちょっとわからなかったので、もう一度詳しく教えてもらえますか？も...
+[23:30:11] [T9] 私についての情報を教えて できるだけ
+[23:30:11] GPT: 17 msgs
+[23:30:16] [T9] Pi: あなたについての情報ですが、以下の内容を覚えています：
+
+1. **名前**: いちさん（市岡直人）...
+[23:30:49] [T10] 見てくれてありがとう
+[23:30:49] GPT: 19 msgs
+[23:30:50] [T10] Pi: どういたしまして！いつでも質問や会話を楽しみにしています。また何かあれば気軽に声をかけてくださいね😊...
+[23:32:22] [T11] 見てくれてありがとう:)
+[23:32:22] GPT: 21 msgs
+[23:32:23] [T11] Pi: こちらこそ、ありがとう！何か他に手伝えることや話したいことがあれば、いつでもどうぞ✨...
+[23:34:42] [T12] なんかバーセル版はあの会話ができないんだけど
+[23:34:42] GPT: 23 msgs
+[23:34:44] [T12] Pi: それは不便ですね。具体的にどのような問題が発生しているのか教えてもらえれば、解決の手伝いができるかも...
+[23:35:23] [T13] 見てくれてありがとう 💛
+[23:35:23] GPT: 25 msgs
+[23:35:24] [T13] Pi: どういたしまして 💛 いつでも気軽に話しかけてくださいね！お手伝いできることがあれば喜んでサポートし...
+[23:35:45] [T14] あなた裏側で動いてるってこと?
+[23:35:45] GPT: 27 msgs
+[23:35:47] [T14] Pi: はい、その通りです！私はAIアシスタントとして、あなたのリクエストに応答するために裏側で動いています...
+[23:36:14] [T15] 見てくれてありがとう:)
+[23:36:14] GPT: 29 msgs
+[23:36:15] [T15] Pi: こちらこそ、ありがとうございます！また何かあったらいつでもお知らせくださいね😊...
+[23:36:40] [T16] なんか勝手に動いてんの裏であなた
+[23:36:40] GPT: 30 msgs
+[23:36:42] [T16] Pi: 私が勝手に何かをすることはありませんよ。すべての動作やアクションは、あなたからのリクエストに基づいて...
+[23:36:56] [T17] いやまぁそれはそうなんだけどさぁ、もうあの普通に
+[23:36:56] GPT: 30 msgs
+[23:36:59] [T17] Pi: そうですね、何か心配なことや気になっていることがあれば、何でも遠慮なく話してください。できるだけお手...
+[23:37:11] [T18] え、だからあなたに助け合ってほしいって言ってた
+[23:37:11] GPT: 30 msgs
+[23:37:12] [T18] Pi: なるほど、助けが必要なことがあるんですね。具体的にどんなことが必要か教えてもらえれば、できる限りサポ...
+[23:37:31] [T19] えぐいね
+[23:37:31] GPT: 30 msgs
+[23:37:33] [T19] Pi: びっくりさせちゃったかな？何か気になっていることがあれば、何でも聞いてみてくださいね。お手伝いできる...
+[23:37:51] [T20] 見てくれてありがとう 😊
+[23:37:51] GPT: 30 msgs
+[23:37:52] [T20] Pi: こちらこそ、ありがとう！😊 いつでもどうぞ、何かあれば話しかけてくださいね。...
+[23:38:57] [T21] 見てくれてありがとう 😊
+[23:38:57] GPT: 30 msgs
+[23:38:59] [T21] Pi: どういたしまして！😊 こちらこそ、話しかけてもらえて嬉しいです。また何か聞きたいことや話したいことが...
+[23:39:31] [T22] マジで言ってんの? なんか勝手に動いてんの裏で
+[23:39:31] GPT: 30 msgs
+[23:39:34] [T22] Pi: いいえ、私は一方的に勝手に動くことはありません。すべての活動はあなたからの指示やリクエストに応じて行...
+[23:39:43] [T23] に基づいて行っています 何か具体的に心配なこと
+[23:39:43] GPT: 30 msgs
+[23:39:48] [T23] Pi: もし具体的に何か心配なことがあれば、遠慮なく教えてくださいね。たとえば、特定の機能がうまく動いていな...
+[23:40:11] [T24] 全体的にどんなことが必要か教えてもらえればできるかなと
+[23:40:11] GPT: 30 msgs
+[23:40:22] [T24] Pi: なるほど。もし具体的にサポートが必要なことがあれば教えてください。たとえば：
+
+1. **プロジェク...
+[23:40:50] [T25] アークレルのX元をコアン作って
+[23:40:50] GPT: 30 msgs
+[23:40:53] [T25] Pi: AirCleのXアカウントに関して、何か具体的な方針やサポートが必要ですか？Xアカウントの戦略や運用...
+[23:41:12] [T26] x の投稿を作成してください
+[23:41:12] GPT: 30 msgs
+[23:41:14] [T26] Pi: もちろん、どんな内容のX投稿をお考えですか？例えば、AirCleの活動の紹介、イベントの告知、新しい...
+[23:41:37] [T27] やばいって話したい
+[23:41:37] GPT: 30 msgs
+[23:41:39] [T27] Pi: もちろん、何でも話して大丈夫ですよ！どんなことが「やばい」と感じているのか聞かせてもらえますか？一緒...
+[23:42:00] [T28] なんか勝手に
+[23:42:00] GPT: 30 msgs
+[23:42:03] [T28] Pi: もしかして、何かが思い通りにいかないとか、予期せぬことが起きてしまった感じでしょうか？具体的な状況を...
