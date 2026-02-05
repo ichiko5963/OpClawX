@@ -4,565 +4,1042 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>X投稿 2026-02-06 - AirCle (@aircle_ai)</title>
+    <meta property="og:title" content="📝 X投稿 2026-02-06 - AirCle (@aircle_ai)">
+    <meta property="og:description" content="今日のAIコーディング系投稿20個 - Claude Opus 4.6 vs GPT-5.3-Codex対決、Agentic Engineering時代到来">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0f;
-            color: #e0e0e0;
-            padding: 2rem;
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --accent: #1da1f2;
+            --accent-secondary: #7b2cbf;
+            --accent-glow: rgba(29, 161, 242, 0.3);
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --success: #10b981;
+            --border: rgba(255,255,255,0.08);
+            --gradient: linear-gradient(135deg, #1da1f2, #7b2cbf);
         }
-        .container { max-width: 800px; margin: 0 auto; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .header-badge {
+            display: inline-block;
+            background: var(--gradient);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #1da1f2, #7b2cbf);
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
         }
-        .meta { color: #666; margin-bottom: 2rem; }
-        .post {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .breaking {
+            background: linear-gradient(135deg, #ff4757, #ff6b81);
+            color: white;
+            padding: 12px 20px;
             border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .post {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-glow);
         }
         .post-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
+            gap: 12px;
+            margin-bottom: 16px;
         }
         .post-number {
-            background: #1da1f2;
+            background: var(--gradient);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
             font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+        .post-title {
             font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+        .source-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            border-left: 3px solid var(--accent);
+        }
+        .source-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        .source-link:hover { text-decoration: underline; }
+        .source-link::before {
+            content: "🔗";
+            font-size: 0.9rem;
+        }
+        .translation {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .post-content {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 12px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            position: relative;
+            border: 1px solid var(--border);
         }
         .copy-btn {
-            background: #333;
-            color: #fff;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--accent);
+            color: white;
             border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .copy-btn:hover { 
+            background: #0d8bd9;
+            transform: scale(1.02);
+        }
+        .copy-btn.copied { 
+            background: var(--success);
+        }
+        .copy-btn::before { content: "📋"; }
+        .copy-btn.copied::before { content: "✓"; }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-secondary);
             font-size: 0.85rem;
         }
-        .copy-btn:hover { background: #444; }
-        .copy-btn.copied { background: #00c853; }
-        .post-content {
-            white-space: pre-wrap;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+        .footer a { color: var(--accent); text-decoration: none; }
+        @media (max-width: 600px) {
+            .container { padding: 24px 16px; }
+            h1 { font-size: 1.5rem; }
+            .post { padding: 18px; }
         }
-        .source {
-            font-size: 0.8rem;
-            color: #888;
-        }
-        .source a { color: #1da1f2; text-decoration: none; }
-        .source a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📝 X投稿 - AirCle (@aircle_ai)</h1>
-        <p class="meta">2026-02-06 | 20投稿</p>
+        <header class="header">
+            <div class="header-badge">@aircle_ai</div>
+            <h1>📝 X投稿 2026/02/06</h1>
+            <p class="subtitle">Claude Opus 4.6 vs GPT-5.3-Codex激突！Agentic Engineering時代到来 | 20投稿</p>
+        </header>
+
+        <div class="breaking">🚨 速報: Claude Opus 4.6 と GPT-5.3-Codex が同時リリース！AI開発ツール戦争が激化</div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#1</span>
-                <button class="copy-btn" onclick="copyPost(this, 1)">📋 コピー</button>
+                <span class="post-number">1</span>
+                <span class="post-title">【速報】Claude Opus 4.6 vs GPT-5.3-Codex、20分差で同時発表</span>
             </div>
-            <div class="post-content" id="post-1">【速報】OpenAI、ついにClaude Code対抗馬を投入
+            <div class="source-section">
+                <a class="source-link" href="https://venturebeat.com/technology/openais-gpt-5-3-codex-drops-as-anthropic-upgrades-claude-ai-coding-wars-heat" target="_blank">VentureBeat - AI coding wars heat up</a>
+                <div class="translation">AnthropicがClaude Opus 4.6を発表した20分後にOpenAIがGPT-5.3-Codexを発表。Super Bowl広告も重なり、AIコーディング戦争が激化。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【速報】AIコーディング戦争、激化🔥
 
-2月2日、OpenAI CodexがmacOSアプリとしてリリース。
+Claude Opus 4.6が発表された...
+その20分後にOpenAIがGPT-5.3-Codexを発表。
 
-Claude Codeが$1B ARR達成、Cursorが36万人有料ユーザー。
-そこにOpenAIが殴り込み。
+偶然？いや、明らかに意図的。
 
-Codexの強み👇
-・マルチエージェント並列処理
-・worktreeで衝突回避
-・30分の長時間タスク対応
-・2ヶ月間無料
+Super Bowlの広告枠で両社が激突する中、
+開発者向けツールでも真っ向勝負が始まった。
 
-@gdb「ターミナルに戻るのは過去に戻るようなもの」
-@sama「想像以上に気に入ってる」
+これ、どっちを選ぶかで
+開発効率が大きく変わる時代になりそう。
 
-AI Codingの三つ巴戦争、激化中。</div>
-            <div class="source"><a href="https://www.nxcode.io/resources/news/openai-codex-app-review-2026" target="_blank">🔗 参考記事</a></div>
+両方試して、使い分けるのが正解かも。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#2</span>
-                <button class="copy-btn" onclick="copyPost(this, 2)">📋 コピー</button>
+                <span class="post-number">2</span>
+                <span class="post-title">Claude Opus 4.6の新機能：100万トークン + エージェントチーム</span>
             </div>
-            <div class="post-content" id="post-2">【Apple参戦】Xcode 26.3、Claude Agent & OpenAI Codex統合
+            <div class="source-section">
+                <a class="source-link" href="https://venturebeat.com/technology/anthropics-claude-opus-4-6-brings-1m-token-context-and-agent-teams-to-take" target="_blank">VentureBeat - Claude Opus 4.6 features</a>
+                <div class="translation">Claude Opus 4.6は100万トークンのコンテキストウィンドウ、Claude Codeでの「エージェントチーム」機能、新しいAPIコントロールを搭載。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Claude Opus 4.6、ヤバすぎる🚀
 
-「Xcodeとコーディングエージェントが複雑なマルチステップタスクを代行」
+新機能まとめ：
 
-これ、ヤバくない？
+① 100万トークンのコンテキスト
+・本1冊丸ごと入る
+・大規模コードベース全体を理解
+・「前に言ったこと覚えてない」がなくなる
 
-・ビルド＆テスト自動化
-・Apple公式ドキュメント検索
-・エラー自動修正
+② エージェントチーム機能
+・複数のClaudeが協力して作業
+・1人は設計、1人は実装、1人はレビュー
+・人間のチーム開発を模倣
 
-iOSアプリ開発の民主化が一気に進む。
+③ 新しいAPIコントロール
+・より細かい制御が可能
+・エンタープライズ向け機能強化
 
-「Vibe Coding」で説明文だけ書いて、
-あとはAIに丸投げ。
+Cursorの共同創業者も
+「最も難しい問題でも諦めない」と絶賛。
 
-SwiftUI知らなくてもアプリ作れる時代、来た。</div>
-            <div class="source"><a href="https://www.cnbc.com/2026/02/03/apple-adds-agentic-coding-from-anthropic-and-openai-to-xcode.html" target="_blank">🔗 参考記事</a></div>
+これは試すしかない。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#3</span>
-                <button class="copy-btn" onclick="copyPost(this, 3)">📋 コピー</button>
+                <span class="post-number">3</span>
+                <span class="post-title">GPT-5.3-Codex：25%高速化 + 自己開発に成功</span>
             </div>
-            <div class="post-content" id="post-3">【2026年2月】AIコーディングアシスタント市場の現実
+            <div class="source-section">
+                <a class="source-link" href="https://www.zdnet.com/article/openai-gpt-5-3-codex-faster-goes-beyond-coding/" target="_blank">ZDNet - GPT-5.3-Codex features</a>
+                <div class="translation">OpenAIのGPT-5.3-Codexは25%の高速化を実現。さらに「自分自身の開発を加速させた」とOpenAIが発表。コーディングだけでなく幅広いタスクに対応。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+OpenAIも反撃🔥
 
-GitHub Copilot：2000万ユーザー、Fortune 100の90%が導入
-Cursor：36万人有料ユーザー、プロジェクト全体の文脈理解
-Claude Code：$1B ARR、コード品質No.1
+GPT-5.3-Codexの注目ポイント：
 
-どれが最強か？
+① 25%の高速化
+・レスポンスが体感でわかるレベルで速い
+・開発フローが途切れない
 
-答え：用途次第。
+② 「自分自身を開発した」
+・CodexがCodexの開発を加速
+・自己改善ループの始まり
+・これ、ちょっと怖いけど凄い
 
-・複雑なリファクタリング → Codex
-・コード品質重視 → Claude Code  
-・毎日のコーディング → Cursor
+③ コーディング以外にも対応
+・ドキュメント作成
+・データ分析
+・一般的なタスク
 
-3ツール併用が最適解かも。</div>
-            <div class="source"><a href="https://ucstrategies.com/news/copilot-vs-cursor-vs-codeium-which-ai-coding-assistant-actually-wins-in-2026/" target="_blank">🔗 参考記事</a></div>
+Anthropicとの違いは
+「速さ」vs「深さ」かな。
+
+用途で使い分けよう。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#4</span>
-                <button class="copy-btn" onclick="copyPost(this, 4)">📋 コピー</button>
+                <span class="post-number">4</span>
+                <span class="post-title">【The Verge特集】Claude Codeの「モメント」が来ている</span>
             </div>
-            <div class="post-content" id="post-4">【注目】オープンソースのAI Coding Agent「OpenCode」
+            <div class="source-section">
+                <a class="source-link" href="https://www.theverge.com/report/874308/anthropic-claude-code-opus-hype-moment" target="_blank">The Verge - Claude's moment</a>
+                <div class="translation">Anthropicのエンジニアがハウスボートから5つのClaudeエージェントを動かし、12月に300以上のPRを出荷。これは同社での1年半で最も生産的な月だった。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+これ、ヤバいエピソード🛥️
 
-Claude Code、Cursorに対抗するOSSツールが登場。
+AnthropicのエンジニアがやったこPt：
 
-特徴👇
-・75以上のモデル対応（Claude, GPT, Gemini, ローカルLLM）
-・ChatGPT Plus/Copilotのサブスク流用可能
-・LSP統合でコードベース理解力UP
-・プライバシーファースト設計
+・コペンハーゲンのハウスボートにいながら
+・5つのClaudeエージェントをクラウドで稼働
+・12月だけで300以上のPRを出荷
+・入社1年半で最も生産的な月
 
-Reddit民の声：
-「安いモデルで会話、高いモデルで実行という使い分けができる」
+つまり...
 
-ベンダーロックイン回避したい人、これ一択。</div>
-            <div class="source"><a href="https://www.infoq.com/news/2026/02/opencode-coding-agent/" target="_blank">🔗 参考記事</a></div>
+「リゾートで遊びながら」
+「過去最高の成果を出した」
+
+これがAIコーディングの未来。
+
+人間がやることは：
+・方向性を決める
+・品質をチェックする
+・最終判断をする
+
+実装はAIがやる。
+
+ワークスタイルが根本から変わる。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#5</span>
-                <button class="copy-btn" onclick="copyPost(this, 5)">📋 コピー</button>
+                <span class="post-number">5</span>
+                <span class="post-title">SemiAnalysis分析：「Claude Codeは変曲点」</span>
             </div>
-            <div class="post-content" id="post-5">【統計】2026年、開発者の常識が変わった
-
-・開発者の44%がAIコーディングツール採用
-・米国開発者の92%が毎日AI使用
-・Y Combinator W25バッチの25%がコードの95%をAI生成
-
-「コードを書く人」から「AIに指示を出す人」へ。
-
-1行ずつ書く時代 → 日本語で要件説明する時代
-
-この転換点、まさに今。
-乗り遅れたら、追いつけない。</div>
-            <div class="source"><a href="https://learn.ryzlabs.com/ai-coding-assistants/cursor-vs-github-copilot-vs-claude-code-which-coding-assistant-reigns-supreme" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#6</span>
-                <button class="copy-btn" onclick="copyPost(this, 6)">📋 コピー</button>
+            <div class="source-section">
+                <a class="source-link" href="https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point" target="_blank">SemiAnalysis - Claude Code is the Inflection Point</a>
+                <div class="translation">Claude CodeはCursorのようなIDE統合やサイドバーチャットではなく、ターミナルネイティブなAIエージェント。コードベースを読み、複数ステップのタスクを計画し、実行する。</div>
             </div>
-            <div class="post-content" id="post-6">【7日間で爆発】OpenClawの異常な成長速度
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+なぜClaude Codeが「変曲点」なのか？
 
-1月末、1000ユーザー → 7日後、爆発的増加
+SemiAnalysisの分析が鋭い👇
 
-何が起きた？
-
-・セキュリティ修正（v2026.2.2）
-・オンチェーン統合追加
-・Solana/Base開発者が殺到
-
-CNET：「2週間で3回名前が変わったプロジェクト」
-Bloomberg：「セキュリティはまだ課題」
-
-でも勢いは止まらない。
-個人がAIエージェントを所有する時代、始まった。</div>
-            <div class="source"><a href="https://www.cnet.com/tech/services-and-software/from-clawdbot-to-moltbot-to-openclaw/" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#7</span>
-                <button class="copy-btn" onclick="copyPost(this, 7)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-7">【比較】2026年2月、どれを選ぶべきか
-
-■ GitHub Copilot
-・2000万ユーザー
-・130万有料ユーザー
-・企業導入75%成長/四半期
-
-■ Cursor
-・AI-native IDE（VS Code fork）
-・プロジェクト全体の文脈理解
-・Composerモードで複数ファイル同時編集
-
-■ Codeium
-・プライバシー重視
-・ローカルLLM対応
-・軽量設計
-
-結論：
-「一番」は存在しない。用途で選べ。</div>
-            <div class="source"><a href="https://ucstrategies.com/news/copilot-vs-cursor-vs-codeium-which-ai-coding-assistant-actually-wins-in-2026/" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#8</span>
-                <button class="copy-btn" onclick="copyPost(this, 8)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-8">【調査結果】AIコーディングアシスタントの効果
-
-開発者調査によると：
-AIコーディングツール使用者は40%の効率向上を報告
-
-40%って何？
-
-・8時間かかる作業 → 4.8時間
-・週40時間 → 24時間で同等成果
-・残りの16時間で新機能開発
-
-使わない理由がもうない。
-
-「まだ試してない」は
-「まだスマホ使ってない」と同じ。</div>
-            <div class="source"><a href="https://learn.ryzlabs.com/ai-coding-assistants/cursor-vs-github-copilot-vs-claude-code-which-coding-assistant-reigns-supreme" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#9</span>
-                <button class="copy-btn" onclick="copyPost(this, 9)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-9">【解説】Vibe Codingとは何か
-
-2026年のトレンドワード「Vibe Coding」
-
-定義：
-AIに「こんなの作って」と伝えて、
-生成されたコードをレビューする開発スタイル
-
-従来：1行ずつ正確に書く
-Vibe Coding：日本語で要件を委ねる
-
-必要なスキル：
-・問題の言語化能力
-・AIへの的確な指示
-・生成コードの品質判断
-
-コードを「書く」から「監督する」へ。</div>
-            <div class="source"></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#10</span>
-                <button class="copy-btn" onclick="copyPost(this, 10)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-10">【マイルストーン】Claude Code、$1B ARR到達
-
-Anthropicのコーディングツールが驚異的成長。
-
-なぜ？
-
-・コード品質が業界最高水準
-・ターミナルベースで軽量
-・推論能力が段違い
-
-開発者コミュニティの声：
-「Cursorより遅いけど、出力の質が違う」
-「リファクタリングはClaude一択」
-
-$20/月で年間$1B売上。
-5000万人が課金してる計算。
-
-AI Codingはもう「ニッチ」じゃない。</div>
-            <div class="source"><a href="https://www.nxcode.io/resources/news/openai-codex-app-review-2026" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#11</span>
-                <button class="copy-btn" onclick="copyPost(this, 11)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-11">【革命】Codexのマルチエージェントアーキテクチャ
-
-従来のAI Coding（Claude Code, Cursor）：
-・シングルエージェント
-・1つのタスクを順番に処理
-
-Codexの新アプローチ：
-・エージェントA：認証システムリファクタリング
-・エージェントB：新API追加
-・エージェントC：テスト更新
-→ 全部同時並行
-
-各エージェントがworktreeで作業。
-衝突なし、レビューも楽。
-
-これ、チーム開発の概念を変える。</div>
-            <div class="source"><a href="https://www.nxcode.io/resources/news/openai-codex-app-review-2026" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#12</span>
-                <button class="copy-btn" onclick="copyPost(this, 12)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-12">【新標準】ACPでエディタ × エージェント連携
-
-Agent Client Protocol（ACP）とは？
-
-コードエディタとAIエージェント間の通信を標準化する規格。
-
-対応エディタ：
-・JetBrains IDE
-・Zed
-・Neovim
-・Emacs
-・（Eclipse開発中）
-
-OpenCodeがACP対応したことで、
-好きなエディタで好きなエージェントを使える。
-
-ベンダーロックイン、終了のお知らせ。</div>
-            <div class="source"><a href="https://www.infoq.com/news/2026/02/opencode-coding-agent/" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#13</span>
-                <button class="copy-btn" onclick="copyPost(this, 13)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-13">【データ】AI-native企業 vs 従来SaaS
-
-2026年のベンチマーク調査結果：
-
-AI-native企業は従来SaaSの2倍の成長速度
-
-全収益帯で同じ傾向。
-
-つまり：
-・AI組み込みで成長が加速
-・AIなしでは競争力維持困難
-・市場の期待値が変化
-
-「AI機能があるか」ではなく
-「AIファーストか」が問われる時代。</div>
-            <div class="source"><a href="https://www.gsquaredcfo.com/blog/saas-benchmarks-2026" target="_blank">🔗 参考記事</a></div>
-        </div>
-
-        <div class="post">
-            <div class="post-header">
-                <span class="post-number">#14</span>
-                <button class="copy-btn" onclick="copyPost(this, 14)">📋 コピー</button>
-            </div>
-            <div class="post-content" id="post-14">【実践】Claude Code vs Codexの使い分け
-
-両方使った開発者の声：
+従来のAIコーディングツール：
+・IDE統合（Cursor、Copilot）
+・チャットサイドバー
+・「聞いたら答える」モデル
 
 Claude Code：
-・コード品質最優先
-・じっくり考えて高品質出力
-・ターミナル派に最適
+・ターミナルネイティブ
+・コードベース全体を理解
+・複数ステップを自動実行
 
-Codex：
-・スピード重視
-・並列タスクに強い
-・GUI派に最適
+これの意味するところ：
 
-結論：
-「品質」ならClaude Code
-「速度」ならCodex
+① 「補助」から「実行」へ
+・人間が書く → AIが補助
+・AIが書く → 人間がレビュー
 
-両方入れて使い分けるのがベスト。</div>
-            <div class="source"><a href="https://www.latent.space/p/ainews-openai-codex-app-death-of" target="_blank">🔗 参考記事</a></div>
+② IDE依存からの脱却
+・どんな環境でも使える
+・CLIさえあればOK
+
+③ 自律性の向上
+・「次何する？」と聞かない
+・自分で計画して実行する
+
+これがAIコーディングの「変曲点」。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#15</span>
-                <button class="copy-btn" onclick="copyPost(this, 15)">📋 コピー</button>
+                <span class="post-number">6</span>
+                <span class="post-title">Karpathy宣言：「Vibe Codingは終わり、Agentic Engineeringの時代」</span>
             </div>
-            <div class="post-content" id="post-15">【考察】Apple × AI Codingが示すもの
+            <div class="source-section">
+                <a class="source-link" href="https://www.thehansindia.com/technology/tech-news/karpathy-says-vibe-coding-is-fading-as-agentic-engineering-becomes-the-new-ai-coding-era-1045758" target="_blank">The Hans India - Agentic Engineering era</a>
+                <div class="translation">Andrej Karpathyが「Vibe Coding」から「Agentic Engineering」への移行を宣言。2025年2月時点ではLLMの能力が低く遊びのプロジェクト向けだったが、今は本格的なエンジニアリングに使えるレベルに。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Karpathyが新概念を提唱🎯
 
-Apple Xcodeへのエージェント統合。
+「Vibe Coding」を提唱した本人が言う：
+
+「Vibe Codingは終わり。
+　Agentic Engineeringの時代だ」
+
+なぜ変わったのか？
+
+【2025年2月（1年前）】
+・LLMの能力が低かった
+・楽しいけど実用性は低い
+・デモ・遊びプロジェクト向け
+
+【2026年2月（今）】
+・LLMが本格的なエンジニアリングに使えるレベル
+・実際のプロダクション環境で使用可能
+・「遊び」から「仕事」へ
+
+Agentic Engineeringとは：
+
+・AIエージェントが自律的にコードを書く
+・人間は設計と判断に集中
+・複数のエージェントが協調作業
+
+たった1年でここまで変わった。
+
+来年はどうなってるんだ...？</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">7</span>
+                <span class="post-title">Vibe Coding進化論：App BuilderとAI-native Editorの分岐</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://www.creolestudios.com/vibe-coding-comparison-for-decision-makers/" target="_blank">Creole Studios - 2026 Vibe Coding Landscape</a>
+                <div class="translation">2026年のVibe Codingは「AI App Builders（プロンプトからMVPをデプロイ）」と「AI-native Editors/Agents（IDE + コードベース加速）」に分岐。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+2026年のVibe Coding、2つに分かれた🔀
+
+【AI App Builders】
+・プロンプト → デプロイまで完結
+・技術知識なしでMVP作成
+・Bolt、Lovable、Replit Agent など
+
+向いている人：
+・非エンジニア
+・アイデアを素早く検証したい
+・技術的な深さは不要
+
+【AI-native Editors/Agents】
+・既存IDEに統合
+・コードベース全体を理解
+・Cursor、Claude Code など
+
+向いている人：
+・プロのエンジニア
+・既存プロジェクトの開発
+・品質・保守性が重要
+
+結論：
+
+「何を作りたいか」で選ぶ。
+
+・検証したい → App Builder
+・本番運用したい → AI-native Editor
+
+使い分けが正解。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">8</span>
+                <span class="post-title">GitHub Agent HQ発表：Claude, Codex, Geminiが統合</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://github.blog/news-insights/company-news/pick-your-agent-use-claude-and-codex-on-agent-hq/" target="_blank">GitHub Blog - Agent HQ</a>
+                <div class="translation">GitHubがAgent HQを発表。Claude、Codexを統合し、Google、Cognition、xAIとも連携予定。開発者が好きなAIエージェントを選んで使える時代に。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+GitHubが神アップデート🎉
+
+「Agent HQ」発表：
+
+使えるAIエージェント：
+・Claude（Anthropic）
+・Codex（OpenAI）
+・Gemini（Google）← 近日対応
+・Devin（Cognition）← 近日対応
+・Grok（xAI）← 近日対応
+
+つまり...
+
+GitHub上で好きなAIを選べる。
+
+これ、何が凄いか？
+
+① 比較が簡単
+・同じタスクを複数のAIに投げて比較
+・自分に合ったものを見つけやすい
+
+② コンテキスト切り替え不要
+・GitHubにいるまま全部できる
+・別ツールに移動する手間なし
+
+③ エンタープライズ対応
+・「新しいツール導入」の稟議不要
+・「GitHubに機能追加」で通る
+
+開発者の生産性、さらに上がりそう。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">9</span>
+                <span class="post-title">Apple Xcode 26.3：MCPでオープン戦略に転換</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://rudrank.com/exploring-xcode-using-mcp-tools-cursor-external-clients" target="_blank">Rudrank - Xcode 26.3 MCP tools</a>
+                <div class="translation">Xcode 26.3には20のMCPネイティブツールが搭載。Cursor、Claude CLI、任意のMCPクライアントからXcodeのDocumentationSearch、BuildProject、RenderPreviewなどを使用可能に。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Appleが珍しくオープン化🍎
+
+Xcode 26.3の新機能：
+
+・20のMCPネイティブツール搭載
+・Cursor, Claude CLIから操作可能
+・任意のMCPクライアントと接続
+
+使えるツール例：
+・DocumentationSearch
+・BuildProject
+・RenderPreview
+
+なぜこれが凄いか？
+
+従来のApple：
+・独自規格
+・クローズドエコシステム
+・「Apple Wayでやれ」
+
+今回のApple：
+・オープンスタンダード（MCP）採用
+・サードパーティツール歓迎
+・選択肢を提供
+
+iOSアプリ開発者にとって：
+
+・好きなAIツールでXcodeを操作できる
+・Claude CodeでSwift開発が可能に
+・開発効率が大幅に向上
+
+Apple、変わってきたな。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">10</span>
+                <span class="post-title">Cursor vs Copilot vs Codeium：2026年比較</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://ucstrategies.com/news/copilot-vs-cursor-vs-codeium-which-ai-coding-assistant-actually-wins-in-2026/" target="_blank">UCStrategies - AI Coding Assistants Comparison 2026</a>
+                <div class="translation">Cursor Pro: $20/月（年払いで$16/月）。GitHub Copilot Business: $19/月。Codeium: 無料枠あり。各ツールの特徴と使い分けを解説。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+2026年AIコーディングツール比較💰
+
+【Cursor Pro】$20/月（年払い$16/月）
+・Claude Opus 4.6対応
+・最も難しい問題に強い
+・長時間タスクで諦めない
+
+【GitHub Copilot Business】$19/月
+・VS Code統合が最強
+・GPT-5.3-Codex対応
+・エンタープライズ向け機能充実
+
+【Codeium】無料枠あり
+・コスト重視なら最適
+・機能は必要十分
+・スタートアップ向け
+
+どれを選ぶべきか？
+
+・難しい問題 → Cursor + Claude
+・VS Code愛用 → Copilot
+・コスト重視 → Codeium
+・全部使う → これが正解かも
+
+1つに縛られず、
+タスクで使い分けるのがベスト。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">11</span>
+                <span class="post-title">セキュリティ警告：Vibe Codingの隠れたリスク</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://aijourn.com/new-research-from-upguard-1-in-5-developers-grant-ai-vibe-coding-tools-unrestricted-workstation-access/" target="_blank">AI Journal - Vibe Coding Security Risks</a>
+                <div class="translation">UpGuardの調査で、5人に1人の開発者がAI Vibe Codingツールに無制限のワークステーションアクセスを許可。セキュリティチームはAIエージェントが何に触れているか把握できていない。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+⚠️ Vibe Codingのセキュリティ警告
+
+UpGuardの調査結果：
+
+・5人に1人の開発者が
+・AIツールに無制限アクセスを許可
+・セキュリティチームは把握できていない
+
+何が問題か？
+
+① 意図しないデータ露出
+・APIキーがAIに渡る
+・顧客データが学習に使われる可能性
+・コンプライアンス違反リスク
+
+② サプライチェーン攻撃
+・AIが悪意あるコードを提案
+・気づかず本番環境に導入
+・後から発覚して大惨事
+
+③ 監査証跡の欠如
+・「誰がこのコード書いた？」
+・「AIです」では済まない
+・責任の所在が不明確
+
+対策：
+
+・AIへのアクセス権限を最小限に
+・生成コードは必ずレビュー
+・セキュリティポリシーを更新
+
+便利だけど、リスク管理も忘れずに。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">12</span>
+                <span class="post-title">SiteGround「Coderick AI」発表：ホスティング統合型Vibe Coding</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://www.financialcontent.com/article/newsfile-2026-2-5-siteground-launches-coderick-ai-a-vibe-coding-tool-with-integrated-hosting-and-security" target="_blank">SiteGround - Coderick AI launch</a>
+                <div class="translation">SiteGroundがCoderick AIを発表。自然言語プロンプトから本番環境対応のWebサイト・アプリを生成し、ホスティングとセキュリティも統合。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+新ツール登場：Coderick AI 🆕
+
+SiteGroundが発表した新サービス：
+
+特徴：
+・自然言語 → 本番対応サイト生成
+・ホスティング統合（デプロイ不要）
+・セキュリティ組み込み
+
+他のVibe Codingツールとの違い：
+
+【従来】
+プロンプト → コード生成 → デプロイ先を探す → 設定 → 公開
+
+【Coderick AI】
+プロンプト → 公開
+
+デプロイの手間がゼロ。
+
+向いている人：
+・非エンジニアでサイトを作りたい
+・とにかく速く公開したい
+・インフラは考えたくない
+
+注意点：
+・ベンダーロックインのリスク
+・カスタマイズの自由度は不明
+・価格は要確認
+
+選択肢が増えるのは良いこと。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">13</span>
+                <span class="post-title">Firebase Studio：フルスタックアプリを1プロンプトで</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://gadgetsnow.indiatimes.com/apps/what-is-vibe-coding-and-why-is-everyone-talking-about-it/articleshow/127913010.cms" target="_blank">Gadgets Now - Vibe Coding tools</a>
+                <div class="translation">Firebase Studioは1つのプロンプトからフルスタックアプリを生成可能。OpenAIのCodexアプリは複数のAIエージェントを同時にオーケストレーション。ソフトウェア構築の壁が崩壊しつつある。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+「ソフトウェア構築の壁が崩壊している」
+
+この言葉、大袈裟じゃない。
+
+今できること：
+
+【Firebase Studio】
+・1プロンプトでフルスタックアプリ生成
+・フロントエンド + バックエンド + DB
+・デプロイまで自動
+
+【OpenAI Codex App】
+・複数のAIエージェントを同時稼働
+・並列でタスクを実行
+・人間は監督するだけ
+
+これの意味：
+
+① プログラミングスキルの民主化
+・「作れる人」と「作れない人」の壁がなくなる
+・アイデアがあれば誰でも形にできる
+
+② エンジニアの役割変化
+・「書く」から「設計する」「レビューする」へ
+・より高度な判断に集中
+
+③ スピードの革命
+・昔：構想 → 開発 → テスト → 公開（数ヶ月）
+・今：構想 → 公開（数時間）
+
+この変化、止まらない。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">14</span>
+                <span class="post-title">Agentic Engineeringの具体像：オーケストレーションが鍵</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://dev.to/guypowell/beyond-the-vibes-vibe-coding-changed-who-can-build-not-how-software-should-be-built-1n0e" target="_blank">DEV Community - Beyond the Vibes</a>
+                <div class="translation">AIエージェントのオーケストレーション（計画→コーディング→レビュー→テスト）、ツール間の統合ワークフロー、並列実行、モジュラー更新による保守性、フォールバック機構。「Vibe」を「システム」に変える。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Agentic Engineeringを具体的に解説🔧
+
+「Vibe」を「System」に変えるには：
+
+① エージェントのオーケストレーション
+・Planner Agent：設計を担当
+・Coder Agent：実装を担当
+・Reviewer Agent：レビューを担当
+・Tester Agent：テストを担当
+
+これが自動で連携する。
+
+② 統合ワークフロー
+・ツール間の連携が自動
+・GitHub、Jira、Slack が繋がる
+・人間の手作業を最小化
+
+③ 並列実行
+・複数エージェントが同時稼働
+・待ち時間を削減
+・開発速度が飛躍的に向上
+
+④ モジュラー更新
+・エージェントを個別にアップデート
+・システム全体を壊さない
+・保守性の確保
+
+⑤ フォールバック機構
+・失敗したらリトライ
+・別エージェントに切り替え
+・自動で回復
+
+これがプロの開発現場の未来。</div>
+        </div>
+
+        <div class="post">
+            <div class="post-header">
+                <span class="post-number">15</span>
+                <span class="post-title">AIが自分自身を開発する時代：NBCが報道</span>
+            </div>
+            <div class="source-section">
+                <a class="source-link" href="https://www.nbcnews.com/tech/innovation/openai-says-new-codex-coding-model-helped-build-rcna257521" target="_blank">NBC News - AI self-improvement</a>
+                <div class="translation">OpenAIはGPT-5.3-Codexが自身の開発を加速したと発表。Anthropic CEOもClaudeが次のClaudeを設計していると言及。AIの自己改善現象が両社で発生。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+これ、SF映画の話じゃない...
+
+【OpenAI】
+「GPT-5.3-Codexは自身の開発を加速した」
+
+【Anthropic CEO】
+「Claudeが次のClaudeを設計している」
+
+つまり...
+
+AIが自分自身を開発している。
+
+完全じゃない。全てじゃない。
+でも「一部」はAIが作っている。
 
 これが意味すること：
 
-1. iOS開発の民主化
-→ Swift知らなくてもアプリ作れる
+① 開発速度の加速
+・人間だけで作るより速い
+・次のバージョンがすぐ出る
 
-2. Appleの姿勢変化
-→ AI機能を他社に委ねる柔軟性
+② 能力の指数関数的向上
+・良いAI → もっと良いAI → さらに良いAI
+・改善ループが自動で回る
 
-3. 開発者体験の変化
-→ コード書く < 指示を出す
+③ 予測困難な未来
+・「次に何ができるか」が読めない
+・半年後の能力が想像できない
 
-「プログラマー」の定義が変わる瞬間、
-Apple自身が証明した。</div>
-            <div class="source"><a href="https://www.cnbc.com/2026/02/03/apple-adds-agentic-coding-from-anthropic-and-openai-to-xcode.html" target="_blank">🔗 参考記事</a></div>
+開発者として、
+この変化についていく以外ない。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#16</span>
-                <button class="copy-btn" onclick="copyPost(this, 16)">📋 コピー</button>
+                <span class="post-number">16</span>
+                <span class="post-title">Claude Code活用のベストプラクティス2026版</span>
             </div>
-            <div class="post-content" id="post-16">【技術解説】なぜLSP統合が重要なのか
+            <div class="source-section">
+                <a class="source-link" href="https://www.theverge.com/report/874308/anthropic-claude-code-opus-hype-moment" target="_blank">The Verge - Claude Code best practices</a>
+                <div class="translation">Claude Codeを使いこなしている開発者の特徴：複数エージェントの同時稼働、明確なタスク分割、定期的なコードレビュー、長時間タスクへの信頼。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Claude Codeを使いこなすコツ💡
 
-LSP（Language Server Protocol）とは？
-エディタとプログラミング言語の間で情報をやり取りする規格。
+成功している開発者がやっていること：
 
-OpenCodeがLSP統合したことで：
-・型情報を理解
-・エラーをリアルタイム検知
-・コードベース全体を把握
+① 複数エージェントの同時稼働
+・1つに頼らない
+・3-5個を並行で動かす
+・待ち時間を有効活用
 
-結果：
-AIの「的外れな提案」が激減。
+② 明確なタスク分割
+・「このファイルを直して」より
+・「このバグを修正して、テストも書いて」
+・具体的であるほど精度UP
 
-AIにコードを書かせるなら、
-LSP対応ツールを選べ。</div>
-            <div class="source"><a href="https://www.infoq.com/news/2026/02/opencode-coding-agent/" target="_blank">🔗 参考記事</a></div>
+③ 定期的なコードレビュー
+・AIが書いたからOKではない
+・必ず人間がチェック
+・特にセキュリティ関連
+
+④ 長時間タスクへの信頼
+・途中で止めない
+・Claudeは諦めない性格
+・最後まで任せる
+
+⑤ コンテキストを与える
+・プロジェクトの背景を説明
+・技術スタックを明示
+・制約条件を伝える
+
+これで生産性が3-5倍変わる。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#17</span>
-                <button class="copy-btn" onclick="copyPost(this, 17)">📋 コピー</button>
+                <span class="post-number">17</span>
+                <span class="post-title">Cursorの評価：「最も難しい問題で諦めない」</span>
             </div>
-            <div class="post-content" id="post-17">【Git活用】worktreeとは何か
+            <div class="source-section">
+                <a class="source-link" href="https://ucstrategies.com/news/claude-opus-4-6-just-did-what-no-ai-model-has-ever-done-before/" target="_blank">UCStrategies - Cursor on Claude Opus 4.6</a>
+                <div class="translation">Cursor共同創業者Michael Truell氏「Claude Opus 4.6は最も難しい問題で優れている。粘り強さ、コードレビュー能力、他のモデルが諦める長時間タスクで継続する能力」と評価。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Cursorの共同創業者が絶賛 👀
 
-Codexが使う「worktree」技術を解説。
+Michael Truell氏のコメント：
 
-通常：
-1つのリポジトリに1つの作業ディレクトリ
+「Claude Opus 4.6は最も難しい問題で優れている」
 
-worktree：
-1つのリポジトリに複数の作業ディレクトリ
+具体的に何が違うのか：
 
-メリット：
-・並列でブランチ作業可能
-・コンテキストスイッチ不要
-・AIエージェントが同時に複数タスク実行
+① 粘り強さ
+・エラーが出ても諦めない
+・別のアプローチを試す
+・最終的に解決まで持っていく
 
-Codexはこれを自動管理。
-衝突なしで並列開発。</div>
-            <div class="source"></div>
+② コードレビュー能力
+・バグを見つける精度が高い
+・改善提案が的確
+・人間のレビュアーに近い
+
+③ 長時間タスク
+・他のモデルは途中で「できません」
+・Opus 4.6は続ける
+・複雑な問題に向いている
+
+これ、実際に使うとわかる。
+
+GPT系は「速い」
+Claude系は「諦めない」
+
+使い分けが重要。
+
+難しいバグ → Claude
+単純なタスク → GPT
+
+この判断ができると効率UP。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#18</span>
-                <button class="copy-btn" onclick="copyPost(this, 18)">📋 コピー</button>
+                <span class="post-number">18</span>
+                <span class="post-title">Product Hunt：2026年のVibe Codingツールトップ10</span>
             </div>
-            <div class="post-content" id="post-18">【セキュリティ】コードをクラウドに送る不安
+            <div class="source-section">
+                <a class="source-link" href="https://www.producthunt.com/categories/vibe-coding" target="_blank">Product Hunt - Vibe Coding Tools</a>
+                <div class="translation">Vibe Codingツールは「AI-first editors、app builders、proxies、Python/webスタック」を統合し、ビルド・スクレイピング・デプロイを加速。開発者、メイカー、チーム向け。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+Product Huntで人気のVibe Codingツール🏆
 
-AI Codingツール、コードはどこへ？
+2026年2月時点のトレンド：
 
-GitHub Copilot：Microsoftクラウド
-Claude Code：Anthropicクラウド  
-Cursor：独自インフラ
+【AI-first Editors】
+・Cursor：圧倒的人気
+・Windsurf：新興勢力
+・Void：オープンソース派
 
-不安なら：
-・Codeium（プライバシー重視）
-・OpenCode（ローカルLLM対応）
-・オンプレLLM運用
+【App Builders】
+・Bolt：プロンプト→アプリ
+・Lovable：UI特化
+・Replit Agent：初心者向け
 
-企業の機密コードを外部に送れない場合、
-選択肢は限られる。
+【特化型】
+・Pythagora：Python特化
+・Screenshot to Code：デザイン→コード
+・tldraw：ホワイトボード→コード
 
-事前に確認しよう。</div>
-            <div class="source"></div>
+選び方のポイント：
+
+① プロなら → Cursor + Claude Code
+② 非エンジニアなら → App Builder系
+③ 特定用途なら → 特化型
+
+全部試す必要はない。
+自分のユースケースに合ったものを選ぼう。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#19</span>
-                <button class="copy-btn" onclick="copyPost(this, 19)">📋 コピー</button>
+                <span class="post-number">19</span>
+                <span class="post-title">エンジニアの未来：何が変わり、何が変わらないか</span>
             </div>
-            <div class="post-content" id="post-19">【お得情報】OpenAI Codex、2ヶ月無料
+            <div class="source-section">
+                <a class="source-link" href="https://cio-sa.co.za/articles/securing-vibe-coding-the-hidden-risks-behind-ai-generated-code/" target="_blank">CIO South Africa - Future of Engineering</a>
+                <div class="translation">AIがコードを書く時代でも、設計思考、セキュリティ判断、ビジネス理解は人間の仕事として残る。AIを「信頼できるアシスタント」として使いこなす能力が差別化に。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+エンジニアの仕事、どう変わる？
 
-現在Codexは2ヶ月間無料で使える。
+【変わること】
+・コードを「書く」時間が激減
+・ルーティンタスクはAIに
+・生産性の基準が上がる
 
-試すなら今。
+【変わらないこと】
+・設計思考（何を作るか）
+・セキュリティ判断（何が危険か）
+・ビジネス理解（なぜ作るか）
 
-特に試すべき機能：
-・マルチエージェント並列処理
-・30分の長時間タスク
-・worktreeによる衝突回避
+これからのエンジニアに必要なスキル：
 
-Claude Code派も、Cursor派も、
-一度触ってみる価値あり。
+① AIを使いこなす能力
+・適切なプロンプトを書ける
+・出力を評価できる
+・使い分けができる
 
-無料期間が終わる前に、
-自分に合うか判断しよう。</div>
-            <div class="source"><a href="https://www.nxcode.io/resources/news/openai-codex-app-review-2026" target="_blank">🔗 参考記事</a></div>
+② 判断力
+・AIの提案を採用するか決める
+・リスクを見積もる
+・トレードオフを考える
+
+③ コミュニケーション
+・技術を非エンジニアに説明
+・要件をAIに翻訳
+・チームをまとめる
+
+「AIに仕事を奪われる」より
+「AIを使いこなす側に回る」
+
+この意識が大事。</div>
         </div>
 
         <div class="post">
             <div class="post-header">
-                <span class="post-number">#20</span>
-                <button class="copy-btn" onclick="copyPost(this, 20)">📋 コピー</button>
+                <span class="post-number">20</span>
+                <span class="post-title">【まとめ】今日から始める3つのアクション</span>
             </div>
-            <div class="post-content" id="post-20">【予測】2026年末までに起きること
+            <div class="source-section">
+                <a class="source-link" href="https://twitter.com/aircle_ai" target="_blank">@aircle_aiをフォロー</a>
+                <div class="translation">今日の投稿から実践すべき3つのアクション。情報を知っているだけでは差がつかない、行動が全て。</div>
+            </div>
+            <div class="post-content">
+                <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【まとめ】今日から始める3つのアクション
 
-現在の流れから予測：
+今日の投稿、読んでくれてありがとう。
 
-1. 「コードを書かない開発者」が多数派に
-2. エージェント間の通信プロトコル標準化
-3. ローカルLLMの性能がクラウドに追いつく
-4. 非エンジニアのプロダクト開発が当たり前に
+情報を知っているだけでは差がつかない。
+行動した人だけが差をつけられる。
 
-5年後を想像してほしい。
+今日からやる3つのこと👇
 
-「昔は1行ずつコード書いてたんだよ」
-「え、手で？」
+① Claude Opus 4.6を試す
+・Cursorを使っているなら設定変更
+・Claude Code CLIを試す
+・「諦めない」性能を体感
 
-この会話が成立する世界、もうすぐ。</div>
-            <div class="source"></div>
+② GitHub Agent HQをチェック
+・複数のAIを比較できる
+・自分に合ったものを見つける
+・エコシステムの変化を理解
+
+③ セキュリティ設定を見直す
+・AIへのアクセス権限を確認
+・無制限アクセスを許可していないか
+・チームのポリシーを更新
+
+全部やらなくていい。
+1つでいいから、今日始める。
+
+1ヶ月後に差がつく。
+
+質問あればリプで👋</div>
         </div>
 
+        <footer class="footer">
+            Generated by <a href="https://github.com/openclaw/openclaw">OpenClaw</a> 🦞<br>
+            AirCle @aircle_ai | 2026/02/06
+        </footer>
     </div>
 
     <script>
-        function copyPost(btn, num) {
-            const text = document.getElementById('post-' + num).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                btn.textContent = '✅ コピー完了';
+        function copyPost(btn) {
+            const content = btn.parentElement.innerText.replace('コピー', '').replace('コピー完了!', '').trim();
+            navigator.clipboard.writeText(content).then(() => {
+                btn.textContent = 'コピー完了!';
                 btn.classList.add('copied');
                 setTimeout(() => {
-                    btn.textContent = '📋 コピー';
+                    btn.textContent = 'コピー';
                     btn.classList.remove('copied');
                 }, 2000);
             });
