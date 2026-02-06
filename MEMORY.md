@@ -88,6 +88,11 @@ Pythonワークフローツール `tools/`:
 - x_analysis_report.py - 詳細レポート生成
 - morning_brief.py - モーニングブリーフィング
 
+## @ichiaimarketer 投稿テーマ (2026-02-06 追加)
+1. **個人開発成功事例** - Pieter Levels、Danny Postma、Marc Louなど（TypingMind型の戦略分析）
+2. **デザイン系AIツールの最新ニュース** - Figma、Canva、Claude連携などのリリース・アップデート
+3. **X運用、UI/UXトレンド** - アルゴリズム攻略、投稿時間帯、デザイントレンド
+
 ## X投稿 毎朝自律送信ルール (2026-02-06 更新)
 **毎朝6:00ジャストにDiscord #aircleへ自分から送信する（聞かれる前に）**
 
