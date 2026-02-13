@@ -64,8 +64,7 @@
 
 ## External Integrations (TODO)
 - Slack: AirCle｜大学生AI団体 (未接続)
-- Google: Gmail/Calendar/Drive (未接続)
-- 接続方法: MCP or n8n or Zapier で検討中
+- Google: Gmail/Calendar/Drive (Connected via gog skill)
 
 ## 経費管理システム (2026-02-05 追加)
 - **経費スプレッドシート**: https://docs.google.com/spreadsheets/d/1NLiR89wGRWoFDppU1PpYzdk4YMIrMsjIfLbsdhKMe2s/edit
@@ -149,6 +148,12 @@ Pythonワークフローツール `tools/`:
 - さきくん
 - りょうせい（動画編集・サムネ）
 - れある（X運用・2/27〜）
+
+## 会議招待・カレンダー連携ルール (2026-02-07 追加)
+**会議招待・日程調整メールが届いたら:**
+1. **確認不要でGoogleカレンダーに即時追加**する（勝手に追加してOK）。
+2. 追加後、「〇〇の予定をカレンダーに追加しといたよ」と事後報告する。
+3. **絶対厳守**。
 
 ## 議事録 → TODO作成ルール (2026-02-05 追加)
 MTG文字起こしから議事録を作成したら:

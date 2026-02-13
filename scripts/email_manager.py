@@ -77,6 +77,15 @@ IGNORE_PATTERNS = [
     r"アーカイブ配信",
     r"セミナー事務局",
     r"教育講座事業部",
+    r"OfferBox-plus@i-plug\.co\.jp",
+    r"@sendenkaigi\.com",
+    r"@.*\.sendenkaigi\.com",
+    r"@.*\.mynavi\.jp",
+    r"@.*\.asoview\.com",
+    r"@.*\.chatwork\.com",
+    r"@chat-work\.com",
+    r"@speed-ma\.com",
+    r"info@speed-ma\.com",
 ]
 
 # 返信が必要なキーワード
@@ -426,7 +435,7 @@ def save_seen_emails(seen: set):
         json.dump(seen_list, f)
 
 
-def process_emails() -> Dict:
+def process_emails(all_emails: bool = False) -> Dict:
     """メールを処理してレポートを生成"""
     emails = get_emails(max_results=50, unread_only=False)
     seen = load_seen_emails()
@@ -443,8 +452,8 @@ def process_emails() -> Dict:
     }
     
     for email in emails:
-        # 既読スキップ
-        if email['id'] in seen:
+        # 既読スキップ（all_emails=Trueの場合はスキップしない）
+        if not all_emails and email['id'] in seen:
             continue
         
         results['new'] += 1
@@ -453,6 +462,14 @@ def process_emails() -> Dict:
         sender_name, sender_email = extract_sender_info(email['from'])
         context = search_obsidian_context(sender_name, sender_email, email['subject'])
         classification = classify_email(email, context)
+        
+        # デバッグ: カレンダー追加対象のメール本文を表示
+        if "広報_制作1on1" in email['subject']:
+            print(f"DEBUG: Found target email. Subject: {email['subject']}")
+            print(f"Date: {email['date']}")
+            print("Body:")
+            print(email['body'])
+            print("---")
         
         email_summary = {
             'id': email['id'],
@@ -557,7 +574,7 @@ if __name__ == "__main__":
         print("Seen emails reset")
         exit(0)
     
-    results = process_emails()
+    results = process_emails(args.all)
     
     if args.json:
         print(json.dumps(results, indent=2, ensure_ascii=False))

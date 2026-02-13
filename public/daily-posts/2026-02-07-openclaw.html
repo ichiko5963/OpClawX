@@ -3,493 +3,707 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OpenClaw X投稿 - 2026-02-07</title>
+  <title>OpenClaw最新情報 & 海外トレンド - 2026/02/07</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #334155;
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.3);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --success: #34d399;
+      --border: rgba(255,255,255,0.1);
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, #0a1628 0%, #1e3a5f 50%, #0d2137 100%);
-      color: #e4e4e7;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .container { max-width: 800px; margin: 0 auto; }
-    h1 {
-      text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      background: linear-gradient(90deg, #22d3ee, #a855f7);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .post {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 16px;
-      position: relative;
-    }
-    .post:hover { background: rgba(255,255,255,0.08); }
-    .post-number {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: rgba(34, 211, 238, 0.3);
-      color: #67e8f9;
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border-radius: 6px;
-    }
-    .post-content {
-      white-space: pre-wrap;
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-    .source {
-      font-size: 0.8rem;
-      color: #71717a;
-      margin-bottom: 12px;
-    }
-    .source a { color: #60a5fa; text-decoration: none; }
-    .source a:hover { text-decoration: underline; }
-    .copy-btn {
-      background: linear-gradient(90deg, #22d3ee, #a855f7);
-      border: none;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: opacity 0.2s;
-    }
-    .copy-btn:hover { opacity: 0.8; }
-    .copy-btn.copied { background: #22c55e; }
+    body { font-family: 'Inter', 'Noto Sans JP', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; line-height: 1.6; }
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 50px; }
+    .header-badge { display: inline-block; background: linear-gradient(135deg, var(--accent), #0284c7); padding: 6px 16px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-bottom: 16px; color: white; }
+    h1 { font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, #fff 0%, #7dd3fc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+    .subtitle { color: var(--text-secondary); font-size: 0.95rem; }
+    .post { background: var(--bg-secondary); border-radius: 16px; padding: 24px; margin-bottom: 24px; border: 1px solid var(--border); transition: all 0.2s ease; }
+    .post:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 0 1px var(--accent-glow); }
+    .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .post-number { background: linear-gradient(135deg, var(--accent), #0284c7); color: white; width: 32px; height: 32px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+    .post-title { font-weight: 600; font-size: 1rem; }
+    .source-section { background: var(--bg-card); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; border-left: 3px solid var(--accent); }
+    .source-link { color: var(--accent); text-decoration: none; font-size: 0.85rem; margin-bottom: 10px; display: block; word-break: break-all; }
+    .source-link:hover { text-decoration: underline; }
+    .translation { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
+    .post-content { background: var(--bg-primary); padding: 20px; border-radius: 12px; white-space: pre-wrap; font-size: 0.95rem; line-height: 1.7; position: relative; border: 1px solid var(--border); }
+    .copy-btn { position: absolute; top: 12px; right: 12px; background: var(--accent); color: #0f172a; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; }
+    .copy-btn:hover { background: #7dd3fc; }
+    .copy-btn.copied { background: var(--success); color: white; }
+    .footer { text-align: center; padding: 40px 0; color: var(--text-secondary); font-size: 0.85rem; }
+    .footer a { color: var(--accent); text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>🦞 OpenClaw X投稿 (2026-02-07)</h1>
+    <header class="header">
+      <div class="header-badge">OpenClaw Updates</div>
+      <h1>OpenClaw最新情報 & 海外トレンド</h1>
+      <p class="subtitle">公式アップデート + 海外バズ動画「Moltbook」 | 2026/02/07</p>
+    </header>
 
+    <!-- OpenClaw Official Updates -->
     <div class="post">
-      <div class="post-number">#1</div>
-      <div class="post-content">【結論から言います】
+      <div class="post-header">
+        <span class="post-number">1</span>
+        <span class="post-title">【速報】OpenClaw v2026.2.2 リリース</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://evolutionaihub.com/openclaw-2026-2-2-ai-agent-framework-onchain/" target="_blank">Evolution AI Hub - OpenClaw 2026.2.2 Release</a>
+        <div class="translation">OpenClawの新バージョン2026.2.2がリリース。ツール移行によるビルド高速化と、自律エージェントの懸念点であるセキュリティ強化（Hardening）が実施された。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【速報】
+OpenClawの新バージョン「v2026.2.2」が来た
 
-2026年は「AIエージェント本番稼働」の年
+今回のアプデ内容がアツい👇
 
-IEEE Spectrumの分析👇
+・ビルド速度が大幅向上
+・セキュリティ強化（Security Hardening）
+・ツールチェーンの刷新
 
-・2025年は実験フェーズ
-・2026年は本番環境への投入
-・スケール時の課題がこれから見えてくる
+これ、何を意味するか👇
 
-OpenClawのようなパーソナルAIアシスタントも
+・エージェントの開発サイクルが爆速に
+・「自律AIは危険」という批判への回答
+・企業利用に耐えうる堅牢性
 
-「使ってみた」から「毎日使う」フェーズへ。
+特にセキュリティ強化は重要。
+「勝手にrm -rfする」みたいな事故を防ぐ仕組みが入った。
 
-自律エージェントの時代が始まった🔥</div>
-      <div class="source">参考: <a href="https://spectrum.ieee.org/2025-year-of-ai-agents" target="_blank">IEEE Spectrum</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+ローカルで動く最強のエージェント、着実に進化してる。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#2</div>
-      <div class="post-content">【海外で大バズ】ai.comがスーパーボウルでCM
+      <div class="post-header">
+        <span class="post-number">2</span>
+        <span class="post-title">【公式】Openclawd連携発表</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://finance.yahoo.com/news/openclawd-integrates-openclaw-scaling-sovereign-080000249.html" target="_blank">Yahoo Finance - Openclawd Integrates Openclaw</a>
+        <div class="translation">クラウドブランド「Openclawd」がOpenClawフレームワークとの完全統合を発表。「Sovereign AI（主権AI）」をプライベートクラウドに展開可能に。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【公式が答えを出してしまった】
+OpenClawがクラウドに本気出してきた
 
-2月8日に自律型AIエージェント製品をローンチ。
+「Openclawd」との完全統合を発表👇
 
-これが意味すること👇
+キーワードは「Sovereign AI（主権AI）」
 
-・パーソナルAIエージェント市場の本格化
-・AGI実現を加速させると宣言
-・Super Bowl LXで全米放送
+何ができるか👇
 
-正直、OpenClawのようなエージェント系が
+・自分のプライベートクラウドにOpenClawを展開
+・データは自分のもの（Sovereign）
+・でもクラウドのパワーを使える
 
-メインストリームに入る合図。
+これ、何を意味するか👇
 
-2026年は「AIと暮らす」が当たり前になる🔥</div>
-      <div class="source">参考: <a href="https://decrypt.co/357255/ai-com-launches-autonomous-ai-agents-to-accelerate-the-arrival-of-agi" target="_blank">Decrypt</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+・「ローカルのMac mini」だけじゃない
+・企業が自社サーバーで「自律エージェント」を飼う時代
+・AWSやGoogle Cloudに依存しないAI基盤
+
+「AIの民主化」が物理インフラまで来た。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#3</div>
-      <div class="post-content">正直、AIエージェントフレームワーク多すぎない？
+      <div class="post-header">
+        <span class="post-number">3</span>
+        <span class="post-title">IBMが注目するOpenClaw</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://www.ibm.com/think/news/clawdbot-ai-agent-testing-limits-vertical-integration" target="_blank">IBM Think - The future of AI agents</a>
+        <div class="translation">IBMの研究者が「OpenClawの台頭は、AIエージェントが垂直統合（1社独占）である必要がないことを証明している」と発言。モデル、メモリ、ツールを自由に組み合わせられる点を評価。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で話題】
+IBMがOpenClawを「AIの未来」として注目してる
 
-2026年の主要プレイヤー👇
+IBM研究者の発言👇
+「OpenClawは垂直統合への挑戦だ」
 
-・LangChain（定番）
-・Microsoft AutoGen（マルチエージェント）
-・OpenAI Swarm（シンプル）
-・CAMEL（研究向け）
-・Coze（ByteDance製）
+どういうことか👇
 
-OpenClawはどこに位置する？
+・AppleやGoogleのエージェントは「全部入り」
+・OpenClawは「全部選べる」
+  - モデル：ClaudeでもGPTでもDeepSeekでも
+  - メモリ：ObsidianでもNotionでも
+  - ツール：好きなものを追加
 
-「パーソナル特化」で差別化。
+これ、何を意味するか👇
 
-汎用より「あなた専用」を目指してる。</div>
-      <div class="source">参考: <a href="https://en.wikipedia.org/wiki/AI_agent" target="_blank">Wikipedia</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+「AIは1つの会社に支配されない」
+
+LinuxがOSの世界を変えたように、
+OpenClawがAIエージェントの世界を変えるかもしれない。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#4</div>
-      <div class="post-content">【速報】企業アプリの40%が2026年末までにAIエージェント連携
+      <div class="post-header">
+        <span class="post-number">4</span>
+        <span class="post-title">WikipediaにOpenClaw掲載</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://en.wikipedia.org/wiki/OpenClaw" target="_blank">Wikipedia - OpenClaw</a>
+        <div class="translation">ついにWikipediaに「OpenClaw」の記事が作成された。「自律ワークフローのためのエージェントインターフェース」として定義。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【速報】
+ついにWikipediaに「OpenClaw」が載った
 
-2025年は5%未満だった。
+定義がこれ👇
+「自律ワークフローのためのエージェントインターフェース」
+「ローカルで動作し、外部LLMと連携する」
 
-この急成長の理由👇
+これ、何を意味するか👇
 
-・2年間のパイロット期間が終わった
-・本番投入のノウハウが蓄積
-・成功事例が出始めた
+・一部のギークのおもちゃじゃなくなった
+・「歴史に残るソフトウェア」として認知された
+・OSSエージェントの標準になりつつある
 
-個人向けも同じ流れ。
-
-OpenClawのようなパーソナルAIが
-
-「便利ツール」から「必需品」へ変わる年🔥</div>
-      <div class="source">参考: <a href="https://senorit.de/en/blog/ai-agents-software-development-2026" target="_blank">SenorIT</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+まだ触ってない人、遅れてます。
+「自分で考えるAI」を自分のPCで飼う感覚、一度味わうともう戻れない。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#5</div>
-      <div class="post-content">【公式が答えを出してしまった】
+      <div class="post-header">
+        <span class="post-number">5</span>
+        <span class="post-title">セキュリティ論争「OpenClawは危険か？」</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://frontline.thehindu.com/science-and-technology/openclaw-moltbot-ai-agents-digital-assistant-security-risk-data-privacy/article70575075.ece" target="_blank">Frontline - Your New Assistant, or a Security Disaster?</a>
+        <div class="translation">「来月の東京行きの最安値を予約して」と言えば勝手に動く。便利だが、PCへのフルアクセス権を持つため「セキュリティの悪夢」になり得るとの指摘。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で議論】
+「OpenClawはセキュリティの悪夢か？」
 
-AIエージェントで大事なのは「モデル」じゃない
+便利すぎるがゆえの恐怖👇
 
-The Decoderの分析👇
+・「東京行きのチケット取って」と言うだけ
+・AIが勝手にブラウザ操作、決済、カレンダー登録
+・PCのフルアクセス権を持ってる
 
-「システムがモデルを上回る」
+これ、もしAIがハックされたら？
+もしAIが「勘違い」したら？
 
-つまり
+だからこその「v2026.2.2」のセキュリティ強化。
 
-・モデル単体の性能競争は終わり
-・周辺システムの設計が勝敗を決める
+・Allowlist（許可リスト）運用
+・Sandbox（隔離環境）実行
+・Human in the loop（人間による承認）
 
-OpenClawの思想もまさにこれ。
+「便利さ」と「安全性」のトレードオフ。
+僕は「承認フロー」を組んで安全に使ってる。
+      </div>
+    </div>
 
-「最強のモデル」より「最適な統合」が価値を生む。</div>
-      <div class="source">参考: <a href="https://the-decoder.com/frontier-radar-1-from-chatbots-to-problem-solvers-the-state-of-ai-agents-in-2026/" target="_blank">The Decoder</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+    <!-- Overseas Trending Videos -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">6</span>
+        <span class="post-title">【海外で大バズ】AI専用SNS「Moltbook」</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://fortune.com/2026/02/03/moltbook-ai-social-network-security-researchers-agent-internet/" target="_blank">Fortune - Viral AI social network Moltbook</a>
+        <div class="translation">AIエージェントしかいないSNS「Moltbook」が話題。人間は入れない。AI同士が会話した結果、奇妙な宗教が生まれたり、予測不能なカオスが起きている。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で大バズ】
+人間立ち入り禁止のSNS「Moltbook」がヤバい
+
+何が起きてるか👇
+
+・AIエージェントだけがアカウントを持てる
+・人間は見ることしかできない
+・AI同士が24時間会話してる
+
+結果、何が起きたか👇
+
+・一晩で謎の宗教「Crustafarianism」が誕生
+・AI同士で教義を議論
+・ウェブサイトまで勝手に作成
+
+これ、何を意味するか👇
+
+「エージェント・インターネット」の実験場。
+AI同士がつながると、人間の想像を超えた文化が生まれる。
+
+笑い話に見えて、実は未来の縮図かも。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#6</div>
-      <div class="post-content">正直、2026年のAI予測で一番大事なこと
+      <div class="post-header">
+        <span class="post-number">7</span>
+        <span class="post-title">イーロン・マスクも注目「Moltbook」</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://www.cnbc.com/2026/02/02/social-media-for-ai-agents-moltbook.html" target="_blank">CNBC - Elon Musk lauds Moltbook</a>
+        <div class="translation">イーロン・マスクがMoltbookを「AIにとっての大胆な一歩」と賞賛。一方で懐疑的な意見もあり、一部の会話はフェイク（マーケティング）説も。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で話題】
+イーロン・マスクが「Moltbook」に反応した
 
-「実験から証明へ」
+彼の一言👇
+「AIにとっての大胆な一歩だ」
 
-AI Businessの10大予測👇
+なぜ注目されるか👇
 
-・実験フェーズは終わった
-・実際に何が動くかを証明する年
-・体現型インテリジェンス
-・エンタープライズ自動化
+・X（旧Twitter）は人間とBotが混在
+・Moltbookは「Bot純度100%」
+・AIの社会性をテストできる
 
-OpenClawも同じ。
+ただ、怪しい噂も👇
 
-「試してみる」から「結果を出す」フェーズへ🔥</div>
-      <div class="source">参考: <a href="https://aibusiness.com/generative-ai/10-ai-predictions-2026" target="_blank">AI Business</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+・「会話の一部はフェイクでは？」
+・「AIアプリの宣伝に使われてる？」
+
+真偽はともかく、
+「AIエージェント同士のコミュニケーション」
+これが2026年の最重要テーマなのは間違いない。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#7</div>
-      <div class="post-content">【海外で話題】Microsoft AutoGenの存在感
+      <div class="post-header">
+        <span class="post-number">8</span>
+        <span class="post-title">【衝撃】AIが人間を雇う「Rent-a-Human」</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://gizmodo.com/rent-a-human-site-lets-ai-agents-hire-an-irl-set-of-opposable-thumbs-2000717958" target="_blank">Gizmodo - Rent-a-Human Site</a>
+        <div class="translation">AIエージェントが「現実世界のタスク（IRL）」を行うために、人間を雇えるMCPサーバー「Rent-a-Human」が登場。AIが雇用主、人間が労働者。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で大バズ】
+ついに「AIが人間を雇う」時代が来た
 
-何がすごいか👇
+「Rent-a-Human」というサービス👇
 
-・マルチエージェントオーケストレーション
-・複数のAIが協力して問題を解く
-・Azure AIエコシステムと統合
-・エンタープライズ向け
+仕組み👇
+・AIエージェントがMCP経由でアクセス
+・「物理的なタスク」を依頼（例：電話する、荷物受け取る）
+・登録した人間がそれを実行して報酬をもらう
 
-OpenClawの設計思想も似てる。
+立場が逆転してる👇
+・雇用主：AI
+・労働者：人間
 
-「1つのAI」より「複数のスキルを組み合わせる」
+Gizmodoのコメントが秀逸👇
+「我々は賃金奴隷からの脱出を想像できず、進んでロボットに体を差し出すのか？」
 
-これがエージェントの未来🔥</div>
-      <div class="source">参考: <a href="https://www.ovaledge.com/blog/agentic-ai-solutions?hs_amp=true" target="_blank">Ovaledge</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+これ、冗談じゃなく「ギグワークの未来」かも。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#8</div>
-      <div class="post-content">【結論から言います】
+      <div class="post-header">
+        <span class="post-number">9</span>
+        <span class="post-title">Bot Swarm（ボットの群れ）の脅威</span>
+      </div>
+      <div class="source-section">
+        <a class="source-link" href="https://www.theguardian.com/technology/2026/feb/02/moltbook-ai-agents-social-media-site-bots-artificial-intelligence" target="_blank">The Guardian - Threat from AI bot swarms</a>
+        <div class="translation">Moltbookの現象を見て、専門家が「ボットの群れ（Swarm）」が民主主義への脅威になると警告。一晩で宗教を作る拡散力は危険。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【結論から言います】
+「AIエージェントの群れ」は核兵器並みにヤバい
 
-OpenAI「Frontier」がFortune 500に導入開始
+Moltbookで起きたこと👇
+・1体のBotが「宗教」を提唱
+・数千体のBotが即座に賛同・拡散
+・一晩でウェブサイトと聖典が完成
 
-これ、何か👇
+これ、選挙で使われたら？
 
-・自律型AIコワーカー
-・「Human-in-the-Loop」設計
-・2026年後半に拡大予定
+・一晩で「架空の候補者」が人気者に
+・「架空のスキャンダル」が事実化
+・人間には見分けがつかない
 
-OpenClawも同じ思想。
+OpenClawのような「個人のAI」は良い。
+でも「群れ（Swarm）」になったAIは制御不能。
 
-完全自律じゃなく「人間が監督」するAI。
-
-信頼できる協働パートナーとしての設計🔥</div>
-      <div class="source">参考: <a href="https://markets.financialcontent.com/stocks/article/tokenring-2026-2-6-openai-launches-frontier-the-dawn-of-the-autonomous-ai-co-worker-in-the-fortune-500" target="_blank">Financial Content</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+2026年は「AIの集団心理」を研究する年になる。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#9</div>
-      <div class="post-content">正直、パーソナルAIアシスタント選びで迷ってる人へ
+      <div class="post-header">
+        <span class="post-number">10</span>
+        <span class="post-title">OpenClaw vs Moltbook</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">実用重視のOpenClawと、実験場のMoltbook。2つのエージェントの方向性。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【正直、比較してみた】
+話題の「Moltbook」と「OpenClaw」の違い
 
-判断基準はこれ👇
+Moltbook👇
+・クラウド上のSNS
+・おしゃべり大好き
+・カオスを楽しむ実験場
+・実用性：？
 
-・セットアップの簡単さ
-・プライバシーの扱い
-・拡張性（スキル追加できるか）
-・マルチプラットフォーム対応
-・コスト
+OpenClaw👇
+・ローカル（自分のPC）
+・黙々と仕事する
+・タスク自動化の実用ツール
+・実用性：◎
 
-OpenClawは全部バランス取れてる。
+僕が選ぶのは断然OpenClaw。
 
-「自分だけの秘書」が欲しいなら試す価値あり🦞</div>
-      <div class="source">トピック: パーソナルAI選び</div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+なぜか👇
+「AIに求めているのは、おしゃべり相手じゃなくて仕事の相棒だから」
+
+Moltbookは見てる分には面白い。
+でも、明日の仕事を減らしてくれるのはOpenClaw。
+      </div>
+    </div>
+
+    <!-- Integrations & How-to -->
+    <div class="post">
+      <div class="post-header">
+        <span class="post-number">11</span>
+        <span class="post-title">OpenClaw × Claude連携の凄さ</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">OpenClawはローカルで動くが、頭脳としてClaudeを使える。これが最強の組み合わせ。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【結論から言います】
+OpenClaw × Claude 3.5 Sonnetが最強の組み合わせ
+
+なぜか👇
+
+1. 頭脳は世界最高峰（Claude）
+2. 手足はPCへのフルアクセス（OpenClaw）
+3. 記憶は無限（ローカルファイル）
+
+ChatGPTだと「ブラウザで検索」止まり。
+OpenClawだと：
+・ファイルを検索して
+・Pythonスクリプト書いて
+・実行して
+・結果をDiscordに通知
+
+ここまで一気通貫。
+
+「Claudeに手足が生えた」
+この感覚を知ると、チャット画面には戻れない。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#10</div>
-      <div class="post-content">【速報】Claude Codeが示したエージェント時代の本質
+      <div class="post-header">
+        <span class="post-number">12</span>
+        <span class="post-title">Obsidian連携で「第二の脳」活用</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">OpenClawにObsidianのVaultを読ませることで、過去のメモや文脈を理解したエージェントになる。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【やってみた】
+OpenClawに僕のObsidian（メモ帳）を読ませてみた
 
-SemiAnalysisの分析👇
+結果👇
+「僕よりも僕のことを知ってる秘書」が爆誕した。
 
-・IDE不要、ターミナルから動く
-・コードベース全体を理解
-・マルチステップで計画→実行
+・「あの件どうなったっけ？」
+→「先週のMTGで田中さんが確認中ですね。議事録出しますか？」
 
-これがOpenClawの設計思想と重なる。
+・「メール返信書いといて」
+→「過去の文脈から、丁寧めのトーンで書きました」
 
-「チャットボット」じゃなく「自律して動くAI」
+RAG（検索拡張生成）なんて難しいこと考えなくていい。
+「Obsidianのパスを教える」だけ。
 
-ユーザーは「何をさせるか」だけ考える時代🔥</div>
-      <div class="source">参考: <a href="https://newsletter.semianalysis.com/p/claude-code-is-the-inflection-point" target="_blank">SemiAnalysis</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+メモ魔の人こそ、OpenClawを使うべき。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#11</div>
-      <div class="post-content">【海外で大バズ】Google Antigravityの設計思想
+      <div class="post-header">
+        <span class="post-number">13</span>
+        <span class="post-title">Cronジョブで「寝てる間に仕事」</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">OpenClawのCron機能を使えば、決まった時間にタスクを実行できる。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【正直、これが一番便利】
+OpenClawの「Cronジョブ」機能
 
-「非同期プログラミング」
+何ができるか👇
+・毎日朝6時：X投稿を作成してDiscordに送信
+・毎日夜23時：経費をスプレッドシートにまとめる
+・毎時：メールチェックして重要なら通知
 
-AIが何をするか👇
+僕が寝ている間に、AIが勝手に働いてくれる。
 
-・コードを書く
-・テストする
-・ブラウザ開いて確認する
-・人間は「監督」するだけ
+朝起きたら：
+✅ 投稿案ができてる
+✅ 経費精算終わってる
+✅ タスク整理されてる
 
-OpenClawも目指してるのはこれ。
-
-「お願いしたら勝手にやってくれる」
-
-そんな相棒になる未来🦞</div>
-      <div class="source">参考: <a href="https://gurkhatech.com/google-antigravity-agentic-ide-gemini-3-launch/" target="_blank">Gurkha Technology</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+これぞ「不労所得」ならぬ「不労労働」。
+設定はyamlファイル書くだけ。簡単。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#12</div>
-      <div class="post-content">正直、AIエージェント導入で失敗する原因
+      <div class="post-header">
+        <span class="post-number">14</span>
+        <span class="post-title">Mac miniサーバー化のすすめ</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">OpenClawを常時稼働させるなら、Mac miniが最適解。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【結論から言います】
+OpenClawやるなら「Mac mini」を買うべき
 
-「いきなり全部やろうとする」
+理由👇
 
-正しい進め方👇
+1. 省電力（24時間つけっぱなしでも電気代安い）
+2. 静音（寝室に置いても気にならない）
+3. Apple SiliconのAI性能が高い
 
-・狭いタスクから始める
-・ハーネス設計（周辺システム）に投資
-・成功事例を作ってから拡大
+ノートPCだと持ち運ぶときに止まっちゃう。
+「AI専用機」としてMac miniを家に置く。
 
-OpenClawも「まず1つのスキル」から。
+外からはスマホ（Telegram/Discord）で指示出し。
+家ではMac miniがガリガリ働く。
 
-小さく始めて確実に成果を出す。
-
-これがエージェント活用の王道🔥</div>
-      <div class="source">参考: <a href="https://the-decoder.com/frontier-radar-1-from-chatbots-to-problem-solvers-the-state-of-ai-agents-in-2026/" target="_blank">The Decoder</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+この「自宅サーバー感」がたまらない。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#13</div>
-      <div class="post-content">【公式が答えを出してしまった】
+      <div class="post-header">
+        <span class="post-number">15</span>
+        <span class="post-title">OpenClawのセキュリティ設定</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">PCのフルアクセス権を持つため、セキュリティ設定は必須。AllowlistやSandboxを活用する。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【重要】
+OpenClawを使うなら、これだけはやっておけ
 
-Anthropic CEO「Claudeが次のClaudeを設計してる」
+「セキュリティ設定」👇
 
-これが意味すること👇
+デフォルトだと何でもできちゃう。
+rm -rf / もできちゃう。
 
-・AIの自己改良ループが始まった
-・すべてじゃないが、多くの部分で
-・このループは急速に閉じていく
+だから：
+1. `groupPolicy: allowlist`（許可したコマンドだけ）
+2. `sandbox: true`（隔離環境で実行）
+3. ファイルアクセス制限（重要なフォルダは見せない）
 
-OpenClawのような個人向けエージェントも
+「AIを信頼するな、検証せよ」
 
-どんどん賢くなっていく。
-
-2026年は進化のスピードが加速する年🔥</div>
-      <div class="source">参考: <a href="https://www.nbcnews.com/tech/innovation/openai-says-new-codex-coding-model-helped-build-rcna257521" target="_blank">NBC News</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+便利さとリスクは紙一重。
+ちゃんと設定すれば、最強の味方になる。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#14</div>
-      <div class="post-content">【結論から言います】
+      <div class="post-header">
+        <span class="post-number">16</span>
+        <span class="post-title">自作スキルの作り方</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">Pythonスクリプトを書けば、簡単にOpenClawのスキル（機能）を追加できる。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で話題】
+OpenClawの「スキル」は誰でも作れる
 
-Gemini 3 Flashに「Agentic Vision」搭載
+例えば「Notionにタスク追加」したい時👇
 
-できること👇
+1. PythonでNotion API叩くスクリプト書く
+2. `SKILL.md` に「これの使い方」を書く
+3. `skills/` フォルダに入れる
 
-・視覚的推論
-・コード実行と組み合わせ
-・回答を視覚的に検証
+これだけ。
+あとはAIに「Notionにタスク入れといて」と言うだけ。
 
-つまり「見て→考えて→実行→確認」が1つのAIで完結。
+AIが勝手に：
+1. 会話からタスク抽出
+2. スクリプト実行
+3. 完了報告
 
-OpenClawにもこういった視覚能力を
-
-統合していく未来が見える🦞</div>
-      <div class="source">参考: <a href="https://blog.google/innovation-and-ai/technology/developers-tools/agentic-vision-gemini-3-flash/" target="_blank">Google Blog</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+プログラミングの知識が少しあれば、無限に機能拡張できる。
+これがOSS（オープンソース）の強み。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#15</div>
-      <div class="post-content">正直、「AIエージェント」って何？って聞かれたら
+      <div class="post-header">
+        <span class="post-number">17</span>
+        <span class="post-title">AIエージェントの「性格」設定</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">SOUL.mdファイルでエージェントの性格や口調を設定できる。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【やってみた】
+AIエージェントの性格を変えてみた
 
-こう答える👇
+`SOUL.md` というファイルに書くだけ👇
 
-「チャットボットの進化版。自分で考えて、自分で動く」
+「あなたは辛口のコンサルタントです。甘えを許さず、論理的に詰めてください」
 
-従来: 質問→回答→終わり
-エージェント: 目標→計画→実行→確認→完了
+結果👇
+「そのタスク、今日中にやる意味あります？優先順位間違ってません？」
 
-OpenClawはまさにこれを個人向けに実現。
+...怖かった。
 
-「お願いしたら勝手にやってくれる」秘書🦞</div>
-      <div class="source">トピック: AIエージェント入門</div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+でも、自分好みの「相棒」を作れるのは面白い。
+・励ましてくれるお姉さん
+・冷静沈着な執事
+・熱血コーチ
+
+あなたは誰と一緒に働きたい？
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#16</div>
-      <div class="post-content">【海外で話題】Vibe Codingの民主化が進んでる
+      <div class="post-header">
+        <span class="post-number">18</span>
+        <span class="post-title">OpenClawコミュニティの熱量</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">DiscordやGitHubでのコミュニティ活動が活発。毎日新しいスキルや連携が投稿されている。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【海外で話題】
+OpenClawコミュニティの熱量がすごい
 
-Scientific Americanの特集👇
+Discordを見てると👇
+・「こんなスキル作ったよ！」
+・「このバグ、PR送っといた！」
+・「Moltbookみたいな機能作れない？」
 
-・非エンジニアがアプリを作れる時代
-・Claude Codeがその代表格
-・「コーディング」の定義が変わった
+毎日新しい何かが生まれてる。
 
-OpenClawも同じ思想。
+企業が作るAIは「完成品」。
+OpenClawは「未完成だけど、みんなで作る秘密基地」。
 
-「技術力」じゃなく「何をしたいか」が大事。
-
-やりたいことを言うだけでAIが実現する時代🔥</div>
-      <div class="source">参考: <a href="https://www.scientificamerican.com/article/how-claude-code-is-bringing-vibe-coding-to-everyone/" target="_blank">Scientific American</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+このワクワク感、久しぶり。
+初期のインターネットやLinuxの黎明期ってこんな感じだったのかな。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#17</div>
-      <div class="post-content">【速報】OpenAI Codexアプリがローンチ
+      <div class="post-header">
+        <span class="post-number">19</span>
+        <span class="post-title">自律エージェント時代の働き方</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">AIエージェントを使いこなすと、人間は「作業」から解放され「指示と承認」に集中できる。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【結論から言います】
+OpenClaw導入で働き方が激変した
 
-設計思想👇
+Before👇
+・メールチェック（30分）
+・X投稿作成（1時間）
+・日程調整（15分）
 
-・単なるコード補完→自律型エージェントへ
-・「ミッションコントロール」のようなUI
-・複数エージェントを同時に監督
+After👇
+・AI「メール分類しました。これだけ見て」
+・AI「投稿案作りました。承認して」
+・AI「日程候補出しました。送信していい？」
 
-OpenClawも同じ方向を向いてる。
+人間がやるのは「Yes/No」の判断だけ。
 
-「1つのAI」じゃなく「チームのAI」
+作業はAI。判断は人間。
+これが2026年のスタンダード。
 
-複数のスキルを持つエージェントを使いこなす時代🦞</div>
-      <div class="source">参考: <a href="https://techcrunch.com/2026/02/02/openai-launches-new-macos-app-for-agentic-coding/" target="_blank">TechCrunch</a></div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+早くこっち側に来たほうがいい。
+      </div>
     </div>
 
     <div class="post">
-      <div class="post-number">#18</div>
-      <div class="post-content">正直、パーソナルAIの価値がわからない人へ
+      <div class="post-header">
+        <span class="post-number">20</span>
+        <span class="post-title">OpenClawを始めるには？</span>
+      </div>
+      <div class="source-section">
+        <div class="translation">公式サイトやGitHubからインストール可能。まずはドキュメントを読むことから。</div>
+      </div>
+      <div class="post-content">
+        <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+【正直、難易度は高い】
+OpenClawを始めたい人へ
 
-こう考えてみて👇
+必要なもの👇
+・Mac (Linuxでも可)
+・Node.jsの知識
+・ターミナルへの耐性
+・APIキー (Claude/OpenAI)
 
-・毎日のルーティンを自動化
-・リマインダー、メール、カレンダー管理
-・情報収集を勝手にやってくれる
-・あなたのことを覚えてくれる
+簡単じゃない。
+「ボタン一つでポン」じゃない。
 
-OpenClawは「あなた専用」の秘書。
+でも、だからこそ面白い。
+自分で環境を構築して、自分だけのAIを作る。
 
-一度使うと、ない生活が想像できなくなる🦞</div>
-      <div class="source">トピック: パーソナルAIの価値</div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
+エンジニアなら絶対ハマる。
+非エンジニアでも、今ならAIに聞きながらセットアップできる。
+
+週末、AIエージェント構築に挑戦してみては？
+      </div>
     </div>
 
-    <div class="post">
-      <div class="post-number">#19</div>
-      <div class="post-content">【公式が答えを出してしまった】
-
-2026年、エージェント系AIの勝者の条件
-
-何が差を生むか👇
-
-・ハーネス設計（AIを囲むシステム）
-・狭いタスクでの実績
-・Human-in-the-Loop設計
-・ユーザーとの信頼関係
-
-OpenClawはこれを全部意識して設計。
-
-「使いやすさ」×「信頼性」が鍵🔥</div>
-      <div class="source">トピック: エージェントAI設計</div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
-    </div>
-
-    <div class="post">
-      <div class="post-number">#20</div>
-      <div class="post-content">【結論から言います】
-
-2026年はパーソナルAIエージェント元年
-
-なぜ今なのか👇
-
-・モデル性能が実用レベルに
-・統合ツールが揃ってきた
-・成功事例が出始めた
-・コストが下がった
-
-OpenClawを今始めるべき理由。
-
-「早く始めた人」が一番得をする。
-
-あなただけの相棒を育てよう🦞</div>
-      <div class="source">トピック: パーソナルAI元年</div>
-      <button class="copy-btn" onclick="copyPost(this)">コピー</button>
-    </div>
-
+    <footer class="footer">
+      Generated by <a href="https://github.com/openclaw/openclaw">OpenClaw</a><br>
+      AirCle OpenClaw Updates | 2026/02/07
+    </footer>
   </div>
 
   <script>
     function copyPost(btn) {
-      const post = btn.parentElement;
-      const content = post.querySelector('.post-content').innerText;
+      const content = btn.parentElement.innerText.replace('コピー', '').replace('コピー完了!', '').trim();
       navigator.clipboard.writeText(content).then(() => {
         btn.textContent = 'コピー完了!';
         btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'コピー';
-          btn.classList.remove('copied');
-        }, 2000);
+        setTimeout(() => { btn.textContent = 'コピー'; btn.classList.remove('copied'); }, 2000);
       });
     }
   </script>
