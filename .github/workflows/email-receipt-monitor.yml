@@ -1,0 +1,41 @@
+name: Email Receipt Monitor
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 毎時0分
+  workflow_dispatch:  # 手動実行も可能
+
+jobs:
+  check-receipts:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib requests
+      
+      - name: Check for receipt emails
+        env:
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          SHEET_ID: 1FH_CZkEkn621MNvFioUHgT3_4UU_TL1POu-Bhpz7KCc
+          DRIVE_FOLDER_ID: 1pzI8BkAGrio16HTGpVOyvB25rV8IOO_g
+        run: |
+          python scripts/check_receipt_emails.py
+      
+      - name: Commit processed receipts log
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git diff --quiet && git diff --staged --quiet || git commit -m "📧 領収書メール処理: $(date +'%Y-%m-%d %H:%M')"
+          git push || true
