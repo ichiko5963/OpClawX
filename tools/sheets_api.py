@@ -51,11 +51,12 @@ class SheetsAPI:
         self.access_token = response.json()['access_token']
         print("✓ Access token取得成功")
     
-    def append_rows(self, sheet_id, values):
+    def append_rows(self, sheet_id, values, sheet_name=None):
         """行を追加"""
-        url = f"https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}/values/A:G:append"
+        range_spec = f"{sheet_name}!A:G" if sheet_name else "A:G"
+        url = f"https://sheets.googleapis.com/v4/spreadsheets/{sheet_id}/values/{range_spec}:append"
         params = {
-            'valueInputOption': 'USER_ENTERED',
+            'valueInputOption': 'RAW',  # RAWで送信（日付の自動変換を防ぐ）
             'insertDataOption': 'INSERT_ROWS'
         }
         headers = {
