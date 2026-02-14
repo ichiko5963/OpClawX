@@ -16,3 +16,4 @@ obsidian/*/.trash/
 # SQLiteデータベース（iCloudロック問題）
 *.sqlite
 *.sqlite-*
+obsidian/Ichioka Obsidian/01_Daily/2025-09-24.md
