@@ -1,22 +1,32 @@
 #!/bin/bash
-# Auto-sync script for OpenClaw-Workspace
+# Auto-sync script for OpenClaw-Workspace (conflict resolution: remote wins)
 
 WORKSPACE="/Users/ai-driven-work/Documents/OpenClaw-Workspace"
 cd "$WORKSPACE" || exit 1
 
-# Pull latest from GitHub
-git pull origin main --rebase
+# Fetch latest from GitHub
+git fetch origin main
 
-# Add any local changes
+# Add any local changes first
 git add -A
 
-# Check if there are changes to commit
+# Commit local changes if any
 if ! git diff-index --quiet HEAD --; then
-    # Commit with timestamp
     git commit -m "Auto-sync: $(date '+%Y-%m-%d %H:%M')"
-    
-    # Push to GitHub
-    git push origin main
 fi
+
+# Pull with automatic conflict resolution (remote wins)
+git pull origin main --rebase -X theirs || {
+    # If rebase fails, abort and force remote version
+    git rebase --abort
+    git reset --hard origin/main
+    echo "Conflict resolved: remote version applied"
+}
+
+# Push to GitHub
+git push origin main || {
+    # If push fails (e.g., force-push needed), force it
+    git push origin main --force-with-lease
+}
 
 echo "Sync completed at $(date)"
