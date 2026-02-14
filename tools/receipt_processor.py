@@ -13,7 +13,7 @@ from pathlib import Path
 
 SPREADSHEET_ID = "1FH_CZkEkn621MNvFioUHgT3_4UU_TL1POu-Bhpz7KCc"
 DRIVE_FOLDER_NAME = "法人領収書まとめ"
-GOG_ACCOUNT = "ichioka.naoto@aircle.jp"  # TODO: 実際のアカウントに変更
+GOG_ACCOUNT = "jiuhuot10@gmail.com"
 
 # スプレッドシートの列構造（A-G）
 # A: 日付
