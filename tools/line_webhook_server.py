@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """
-LINE Webhook サーバー（完全版）
-領収書画像を受信 → Claude分析 → Drive保存 → Sheet追記
+LINE Webhook サーバー（キュー方式）
+画像受信 → Drive保存 → キューに追加
 """
 
 import os
 import sys
 import json
 from pathlib import Path
+from datetime import datetime
 from flask import Flask, request, abort
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
@@ -27,38 +28,15 @@ else:
     handler = None
     print("⚠️  LINE credentials not set")
 
-# Claude分析関数（OpenClaw経由）
-def analyze_receipt_with_claude(image_path):
-    """画像を分析して領収書データを抽出"""
-    # TODO: 実際にはOpenClawのimageツールを使う
-    # 今は固定データを返す（テスト用）
-    from datetime import datetime
-    
-    # 仮のデータ（実際はClaudeが分析）
-    return {
-        "date": datetime.now().strftime("%Y/%m/%d"),
-        "recipient": "領収書テスト",
-        "address": "",
-        "doc_type": "領収書",
-        "issuer": "LINE経由",
-        "content": "自動処理テスト",
-        "amount": "1000",
-        "currency": "円"
-    }
+QUEUE_DIR = Path.home() / "Documents/OpenClaw-Workspace/data/line_queue"
+DRIVE_FOLDER_ID = "1pzI8BkAGrio16HTGpVOyvB25rV8IOO_g"
 
-# Drive保存 + Sheet追記
-def process_receipt(image_path, expense_data):
-    """領収書処理（expense_auto_v2.py相当）"""
-    sys.path.insert(0, str(Path(__file__).parent.parent / 'tools'))
-    
+def upload_to_drive(image_path):
+    """Driveにアップロード"""
     import json
     import requests
-    from datetime import datetime
     
     TOKEN_FILE = Path("/tmp/google_oauth_tokens.json")
-    SHEET_ID = "1FH_CZkEkn621MNvFioUHgT3_4UU_TL1POu-Bhpz7KCc"
-    EXPENSE_SHEET_NAME = "2026年経費領収書"
-    DRIVE_FOLDER_ID = "1pzI8BkAGrio16HTGpVOyvB25rV8IOO_g"
     
     # OAuth token取得
     data = json.loads(TOKEN_FILE.read_text())
@@ -90,56 +68,7 @@ def process_receipt(image_path, expense_data):
     file_id = response.json()['id']
     drive_url = f"https://drive.google.com/file/d/{file_id}/view"
     
-    print(f"✓ Drive保存: {drive_url}")
-    
-    # メモ詳細化
-    parts = []
-    doc_type = expense_data.get('doc_type', '領収書')
-    parts.append(doc_type)
-    
-    issuer = expense_data.get('issuer', '')
-    if issuer:
-        parts.append(f"発行: {issuer}")
-    
-    content = expense_data.get('content', '')
-    if content:
-        parts.append(content)
-    
-    memo = ' - '.join(parts) if parts else '領収書'
-    
-    # 空白行検索
-    url = f"https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{EXPENSE_SHEET_NAME}!A:A"
-    headers = {'Authorization': f'Bearer {access_token}'}
-    
-    response = requests.get(url, headers=headers)
-    values = response.json().get('values', [])
-    
-    row_num = 2  # デフォルトA2
-    for i in range(1, len(values) + 1):
-        if i >= len(values) or not values[i] or values[i][0] == '':
-            row_num = i + 1
-            break
-    
-    # Sheet追記
-    row = [[
-        expense_data.get('date', ''),
-        expense_data.get('recipient', ''),
-        expense_data.get('address', ''),
-        memo,
-        expense_data.get('amount', ''),
-        expense_data.get('currency', '円'),
-        drive_url
-    ]]
-    
-    range_name = f"{EXPENSE_SHEET_NAME}!A{row_num}:G{row_num}"
-    url = f"https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{range_name}"
-    headers = {'Authorization': f'Bearer {access_token}', 'Content-Type': 'application/json'}
-    
-    requests.put(url, params={'valueInputOption': 'RAW'}, headers=headers, json={'values': row})
-    
-    print(f"✓ Sheet追記: A{row_num}")
-    
-    return drive_url
+    return file_id, drive_url
 
 @app.route("/webhook/line", methods=['POST'])
 def webhook():
@@ -177,20 +106,35 @@ def handle_image_message(event):
         
         print(f"✓ 画像保存: {image_path}")
         
-        # Claude分析
-        expense_data = analyze_receipt_with_claude(image_path)
-        print(f"✓ Claude分析完了")
+        # Driveアップロード
+        file_id, drive_url = upload_to_drive(image_path)
+        print(f"✓ Drive保存: {drive_url}")
         
-        # Drive保存 + Sheet追記
-        drive_url = process_receipt(image_path, expense_data)
+        # キューに保存
+        QUEUE_DIR.mkdir(parents=True, exist_ok=True)
+        queue_file = QUEUE_DIR / f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{event.message.id}.json"
         
-        # 完了通知
+        queue_data = {
+            'message_id': event.message.id,
+            'user_id': event.source.user_id,
+            'reply_token': event.reply_token,
+            'image_path': str(image_path),
+            'drive_file_id': file_id,
+            'drive_url': drive_url,
+            'received_at': datetime.now().isoformat(),
+            'status': 'pending'
+        }
+        
+        queue_file.write_text(json.dumps(queue_data, ensure_ascii=False, indent=2))
+        print(f"✓ キュー保存: {queue_file}")
+        
+        # 即座に返信
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=f'✅ 処理完了しました！\n\n日付: {expense_data["date"]}\n金額: {expense_data["amount"]}{expense_data["currency"]}\n\nDrive: {drive_url}')
+            TextSendMessage(text='✅ 領収書を受け付けました！\n\nGoogle Driveに保存しました。\n画像を分析中です...\n\n処理完了したら通知します（10分以内）')
         )
         
-        print("✓ 処理完了")
+        print("✓ 返信送信完了")
         
     except Exception as e:
         print(f"❌ エラー: {e}")
