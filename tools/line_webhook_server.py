@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-LINE Webhook サーバー（Anthropic Claude Vision）
-画像受信 → Claude分析 → Drive保存 → Sheet追記 → 完了通知
+LINE Webhook サーバー（OpenAI GPT-4 Vision）
+画像受信 → GPT-4V分析 → Drive保存 → Sheet追記 → 完了通知
 """
 
 import os
@@ -19,7 +19,7 @@ import requests
 # 環境変数
 CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN', '')
 CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET', '')
-ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY', '')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
 
 app = Flask(__name__)
 
@@ -35,23 +35,22 @@ DRIVE_FOLDER_ID = "1pzI8BkAGrio16HTGpVOyvB25rV8IOO_g"
 SHEET_ID = "1FH_CZkEkn621MNvFioUHgT3_4UU_TL1POu-Bhpz7KCc"
 EXPENSE_SHEET_NAME = "2026年経費領収書"
 
-def analyze_receipt_with_claude(image_path):
-    """Claude Vision APIで領収書分析"""
-    if not ANTHROPIC_API_KEY:
-        raise Exception("ANTHROPIC_API_KEY not set")
+def analyze_receipt_with_gpt4v(image_path):
+    """GPT-4 Vision APIで領収書分析"""
+    if not OPENAI_API_KEY:
+        raise Exception("OPENAI_API_KEY not set")
     
-    print("  Claude分析中...")
+    print("  GPT-4V分析中...")
     
     # 画像をbase64エンコード
     with open(image_path, 'rb') as f:
-        image_data = base64.standard_b64encode(f.read()).decode()
+        image_data = base64.b64encode(f.read()).decode()
     
-    # Claude API呼び出し
-    url = "https://api.anthropic.com/v1/messages"
+    # OpenAI API呼び出し
+    url = "https://api.openai.com/v1/chat/completions"
     headers = {
-        "x-api-key": ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json"
+        "Authorization": f"Bearer {OPENAI_API_KEY}",
+        "Content-Type": "application/json"
     }
     
     prompt = """この領収書・請求書の画像から以下の情報を抽出してJSON形式で回答してください：
@@ -67,36 +66,36 @@ def analyze_receipt_with_claude(image_path):
   "currency": "円"
 }
 
-JSONのみを出力してください。"""
+JSONのみを出力してください。他の説明は不要です。"""
     
     payload = {
-        "model": "claude-3-5-sonnet-20241022",
-        "max_tokens": 1024,
-        "messages": [{
-            "role": "user",
-            "content": [
-                {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/jpeg",
-                        "data": image_data
+        "model": "gpt-4o",
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": prompt
+                    },
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": f"data:image/jpeg;base64,{image_data}"
+                        }
                     }
-                },
-                {
-                    "type": "text",
-                    "text": prompt
-                }
-            ]
-        }]
+                ]
+            }
+        ],
+        "max_tokens": 1000
     }
     
     response = requests.post(url, headers=headers, json=payload)
     if response.status_code != 200:
-        raise Exception(f"Claude API error: {response.text}")
+        raise Exception(f"OpenAI API error: {response.text}")
     
     result = response.json()
-    text = result['content'][0]['text']
+    text = result['choices'][0]['message']['content']
     
     # JSONを抽出
     import re
@@ -106,7 +105,7 @@ JSONのみを出力してください。"""
     else:
         expense_data = json.loads(text)
     
-    print(f"  ✓ Claude分析完了")
+    print(f"  ✓ GPT-4V分析完了")
     print(f"    日付: {expense_data.get('date')}")
     print(f"    宛名: {expense_data.get('recipient')}")
     print(f"    金額: {expense_data.get('amount')}{expense_data.get('currency')}")
@@ -254,8 +253,8 @@ def handle_image_message(event):
         
         print(f"  ✓ 画像保存")
         
-        # Claude分析
-        expense_data = analyze_receipt_with_claude(image_path)
+        # GPT-4V分析
+        expense_data = analyze_receipt_with_gpt4v(image_path)
         
         # Driveアップロード
         drive_url = upload_to_drive(image_path)
@@ -293,10 +292,10 @@ Drive: {drive_url}"""
 @app.route("/health", methods=['GET'])
 def health():
     """ヘルスチェック"""
-    return {'status': 'ok', 'line_configured': bool(handler), 'anthropic_configured': bool(ANTHROPIC_API_KEY)}
+    return {'status': 'ok', 'line_configured': bool(handler), 'openai_configured': bool(OPENAI_API_KEY)}
 
 if __name__ == "__main__":
     port = int(os.getenv('PORT', 5001))
     print(f"Starting LINE Webhook server on port {port}")
-    print(f"Anthropic API: {'✓' if ANTHROPIC_API_KEY else '❌'}")
+    print(f"OpenAI API: {'✓' if OPENAI_API_KEY else '❌'}")
     app.run(host='0.0.0.0', port=port, debug=True)
