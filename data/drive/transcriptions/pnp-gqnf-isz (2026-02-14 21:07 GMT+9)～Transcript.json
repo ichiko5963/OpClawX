@@ -1,0 +1,6 @@
+{
+  "id": "1QYw1jXsAFHybdtGZStLhTpQUx8UzoFtViY85r0wtYaM",
+  "name": "pnp-gqnf-isz (2026-02-14 21:07 GMT+9)～Transcript",
+  "createdTime": "2026-02-14T12:13:26.300Z",
+  "transcript": "{\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"Only files with binary content can be downloaded. Use Export with Docs Editors files.\",\n    \"errors\": [\n      {\n        \"message\": \"Only files with binary content can be downloaded. Use Export with Docs Editors files.\",\n        \"domain\": \"global\",\n        \"reason\": \"fileNotDownloadable\",\n        \"location\": \"alt\",\n        \"locationType\": \"parameter\"\n      }\n    ]\n  }\n}\n"
+}
