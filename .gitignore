@@ -2,10 +2,17 @@ backups/
 .DS_Store
 bin/git-sync.log
 canvas/
-obsidian/
 pi/HUB.md
 pi/
 pi-voice/
 pi-avatar/
 security/
 projects/AI-Secretary-System.md
+
+# Obsidian設定全体（iCloudのロック問題を回避）
+obsidian/*/.obsidian/
+obsidian/*/.trash/
+
+# SQLiteデータベース（iCloudロック問題）
+*.sqlite
+*.sqlite-*
