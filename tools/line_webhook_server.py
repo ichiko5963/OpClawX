@@ -58,15 +58,27 @@ def analyze_receipt_with_gpt4v(image_path):
 {
   "date": "YYYY/MM/DD形式の日付",
   "recipient": "宛名（会社名・店名）",
-  "address": "発行者の住所（あれば、なければ空文字）",
-  "doc_type": "領収書 or 請求書",
-  "issuer": "発行元（会社名・個人名）",
-  "content": "内容・品目（例：交通費、売却報酬等）",
+  "category": "カテゴリー（以下から選択または新規提案）: 従業員請求書, 交通費, 消耗品費, 通信費, 広告宣伝費, 外注費, 会議費, 接待交際費, 備品購入, 書籍・資料費, その他経費",
+  "issuer_name_address": "発行者の名前と住所（改行区切りで両方、例: 山田太郎\\n東京都...）",
+  "memo": "メモ・詳細内容",
   "amount": "金額（数字のみ、カンマなし）",
-  "currency": "円"
+  "currency": "円",
+  "payment_due": "振り込み期日（YYYY/MM/DD形式、なければ空文字）"
 }
 
-JSONのみを出力してください。他の説明は不要です。"""
+カテゴリー判定ルール:
+- 個人名からの請求書 → 従業員請求書
+- 電車・バス・タクシー → 交通費
+- 文房具・消耗品 → 消耗品費
+- 携帯・通信サービス → 通信費
+- 広告・SNS広告 → 広告宣伝費
+- フリーランスへの支払い → 外注費
+- 飲食（会議用） → 会議費
+- 飲食（接待） → 接待交際費
+- 家具・機器 → 備品購入
+- 書籍・教材 → 書籍・資料費
+
+JSONのみを出力してください。"""
     
     payload = {
         "model": "gpt-4o",
@@ -151,7 +163,7 @@ def upload_to_drive(image_path):
     return drive_url
 
 def append_to_sheet(expense_data, drive_url):
-    """スプレッドシートに追記"""
+    """スプレッドシートに追記（新列構造: 9列）"""
     TOKEN_FILE = Path("/tmp/google_oauth_tokens.json")
     
     # OAuth token取得
@@ -164,26 +176,6 @@ def append_to_sheet(expense_data, drive_url):
         'grant_type': 'refresh_token'
     })
     access_token = response.json()['access_token']
-    
-    # メモ詳細化
-    parts = []
-    doc_type = expense_data.get('doc_type', '領収書')
-    parts.append(doc_type)
-    
-    issuer = expense_data.get('issuer', '')
-    if issuer:
-        parts.append(f"発行: {issuer}")
-    
-    if '請求書' in doc_type:
-        target_month = expense_data.get('target_month', '')
-        if target_month:
-            parts.append(f"{target_month}分")
-    
-    content = expense_data.get('content', '')
-    if content:
-        parts.append(content)
-    
-    memo = ' - '.join(parts) if parts else '領収書'
     
     # 空白行検索
     url = f"https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{EXPENSE_SHEET_NAME}!A:A"
@@ -198,24 +190,27 @@ def append_to_sheet(expense_data, drive_url):
             row_num = i + 1
             break
     
-    # Sheet追記
+    # Sheet追記（新列構造）
     row = [[
-        expense_data.get('date', ''),
-        expense_data.get('recipient', ''),
-        expense_data.get('address', ''),
-        memo,
-        expense_data.get('amount', ''),
-        expense_data.get('currency', '円'),
-        drive_url
+        expense_data.get('date', ''),                      # A: 日付
+        expense_data.get('recipient', ''),                 # B: 宛名
+        expense_data.get('category', 'その他経費'),        # C: カテゴリー
+        expense_data.get('issuer_name_address', ''),       # D: 発行者の名前と住所
+        expense_data.get('memo', ''),                      # E: メモ
+        expense_data.get('amount', ''),                    # F: 金額
+        expense_data.get('currency', '円'),                # G: 通貨
+        drive_url,                                         # H: URL
+        expense_data.get('payment_due', '')                # I: 振り込み期日
     ]]
     
-    range_name = f"{EXPENSE_SHEET_NAME}!A{row_num}:G{row_num}"
+    range_name = f"{EXPENSE_SHEET_NAME}!A{row_num}:I{row_num}"
     url = f"https://sheets.googleapis.com/v4/spreadsheets/{SHEET_ID}/values/{range_name}"
     headers = {'Authorization': f'Bearer {access_token}', 'Content-Type': 'application/json'}
     
     requests.put(url, params={'valueInputOption': 'RAW'}, headers=headers, json={'values': row})
     
     print(f"  ✓ Sheet追記: A{row_num}")
+    print(f"    カテゴリー: {expense_data.get('category')}")
 
 @app.route("/webhook/line", methods=['POST'])
 def webhook():
@@ -267,8 +262,9 @@ def handle_image_message(event):
 
 日付: {expense_data.get('date')}
 宛名: {expense_data.get('recipient')}
+カテゴリー: {expense_data.get('category')}
 金額: {expense_data.get('amount')}{expense_data.get('currency')}
-内容: {expense_data.get('content')}
+振込期日: {expense_data.get('payment_due') or 'なし'}
 
 Drive: {drive_url}"""
         
