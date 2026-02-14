@@ -13,11 +13,10 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # 環境変数
-GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
-GOOGLE_REFRESH_TOKEN = os.getenv("GOOGLE_REFRESH_TOKEN")
+OAUTH_TOKEN_FILE = Path("/tmp/google_oauth_tokens.json")
 SHEET_ID = os.getenv("SHEET_ID")
 DRIVE_FOLDER_ID = os.getenv("DRIVE_FOLDER_ID")
+STATE_FILE = Path("data/email_receipt_state.json")
 
 # 領収書検出キーワード
 RECEIPT_KEYWORDS = [
@@ -31,46 +30,66 @@ class ReceiptEmailMonitor:
     
     def get_access_token(self):
         """Access token取得"""
-        url = "https://oauth2.googleapis.com/token"
-        data = {
-            'client_id': GOOGLE_CLIENT_ID,
-            'client_secret': GOOGLE_CLIENT_SECRET,
-            'refresh_token': GOOGLE_REFRESH_TOKEN,
-            'grant_type': 'refresh_token'
-        }
+        if not OAUTH_TOKEN_FILE.exists():
+            raise Exception("OAuth token file not found")
         
-        response = requests.post(url, data=data)
+        data = json.loads(OAUTH_TOKEN_FILE.read_text())
+        
+        url = "https://oauth2.googleapis.com/token"
+        response = requests.post(url, data={
+            'client_id': data['client_id'],
+            'client_secret': data['client_secret'],
+            'refresh_token': data['refresh_token'],
+            'grant_type': 'refresh_token'
+        })
+        
         if response.status_code != 200:
             raise Exception(f"Token refresh failed: {response.text}")
         
         return response.json()['access_token']
     
-    def search_receipt_emails(self):
-        """過去1時間の領収書メールを検索"""
-        print("=== 領収書メール検索 ===")
+    def get_state(self):
+        """同期状態取得"""
+        if STATE_FILE.exists():
+            return json.loads(STATE_FILE.read_text())
+        return {
+            'last_check': None,
+            'initial_sync_done': False
+        }
+    
+    def update_state(self, state):
+        """同期状態更新"""
+        STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        STATE_FILE.write_text(json.dumps(state, indent=2))
+    
+    def search_receipt_emails(self, days_back=1):
+        """領収書メールを検索"""
+        print(f"=== 領収書メール検索（過去{days_back}日）===")
         
-        # 1時間前
-        after_date = (datetime.now() - timedelta(hours=1)).strftime('%Y/%m/%d')
+        # 日付計算
+        after_date = (datetime.now() - timedelta(days=days_back)).strftime('%Y/%m/%d')
         
-        # 検索クエリ: 添付ファイルあり + 領収書キーワード
-        query = f'has:attachment after:{after_date} ('
-        query += ' OR '.join([f'subject:{kw}' for kw in RECEIPT_KEYWORDS])
-        query += ')'
+        # キーワードクエリ
+        keywords_query = ' OR '.join([f'subject:{kw}' for kw in RECEIPT_KEYWORDS])
+        query = f'has:attachment ({keywords_query}) after:{after_date}'
+        
+        print(f"Query: {query}")
         
         url = "https://gmail.googleapis.com/gmail/v1/users/me/messages"
-        params = {'q': query, 'maxResults': 50}
         headers = {'Authorization': f'Bearer {self.access_token}'}
+        params = {
+            'q': query,
+            'maxResults': 100
+        }
         
-        response = requests.get(url, params=params, headers=headers)
-        if response.status_code != 200:
-            raise Exception(f"Gmail search failed: {response.text}")
-        
+        response = requests.get(url, headers=headers, params=params)
         messages = response.json().get('messages', [])
-        print(f"✓ {len(messages)}件のメール発見")
+        
+        print(f"✓ {len(messages)}件検出")
         
         return messages
     
-    def get_message_details(self, message_id):
+    def get_message_detail(self, message_id):
         """メール詳細取得"""
         url = f"https://gmail.googleapis.com/gmail/v1/users/me/messages/{message_id}"
         headers = {'Authorization': f'Bearer {self.access_token}'}
@@ -78,134 +97,117 @@ class ReceiptEmailMonitor:
         response = requests.get(url, headers=headers)
         return response.json()
     
-    def download_attachments(self, message_id, message_data):
-        """添付ファイル（画像）をダウンロード"""
-        attachments = []
+    def download_attachment(self, message_id, attachment_id, filename):
+        """添付ファイルダウンロード"""
+        url = f"https://gmail.googleapis.com/gmail/v1/users/me/messages/{message_id}/attachments/{attachment_id}"
+        headers = {'Authorization': f'Bearer {self.access_token}'}
         
-        for part in message_data.get('payload', {}).get('parts', []):
-            filename = part.get('filename', '')
-            
-            # 画像ファイルのみ
-            if not filename.lower().endswith(('.jpg', '.jpeg', '.png', '.pdf')):
-                continue
-            
-            attachment_id = part.get('body', {}).get('attachmentId')
-            if not attachment_id:
-                continue
-            
-            # ダウンロード
-            url = f"https://gmail.googleapis.com/gmail/v1/users/me/messages/{message_id}/attachments/{attachment_id}"
-            headers = {'Authorization': f'Bearer {self.access_token}'}
-            
-            response = requests.get(url, headers=headers)
-            if response.status_code != 200:
-                continue
-            
-            data = response.json().get('data', '')
-            file_data = base64.urlsafe_b64decode(data)
-            
-            attachments.append({
-                'filename': filename,
-                'data': file_data
-            })
+        response = requests.get(url, headers=headers)
+        data = response.json()['data']
         
-        return attachments
+        # Base64デコード
+        file_data = base64.urlsafe_b64decode(data)
+        
+        # 保存
+        temp_dir = Path("/tmp/receipts")
+        temp_dir.mkdir(exist_ok=True)
+        
+        file_path = temp_dir / filename
+        file_path.write_bytes(file_data)
+        
+        return file_path
     
-    def upload_to_drive(self, filename, file_data):
-        """Driveにアップロード"""
+    def upload_to_drive(self, file_path):
+        """Google Driveにアップロード"""
+        url = "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
+        headers = {'Authorization': f'Bearer {self.access_token}'}
+        
         metadata = {
-            'name': filename,
+            'name': file_path.name,
             'parents': [DRIVE_FOLDER_ID]
         }
         
         files = {
             'data': ('metadata', json.dumps(metadata), 'application/json'),
-            'file': (filename, file_data)
+            'file': open(file_path, 'rb')
         }
         
-        url = "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
-        headers = {'Authorization': f'Bearer {self.access_token}'}
-        
         response = requests.post(url, headers=headers, files=files)
-        if response.status_code != 200:
-            raise Exception(f"Upload failed: {response.text}")
-        
         file_id = response.json()['id']
-        return f"https://drive.google.com/file/d/{file_id}/view"
-    
-    def save_to_queue(self, receipt_info):
-        """処理キューに保存（OpenClawが後で処理）"""
-        queue_dir = Path('data/receipt_queue')
-        queue_dir.mkdir(parents=True, exist_ok=True)
+        drive_url = f"https://drive.google.com/file/d/{file_id}/view"
         
-        queue_file = queue_dir / f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        queue_file.write_text(json.dumps(receipt_info, ensure_ascii=False, indent=2))
-        
-        print(f"✓ キュー保存: {queue_file}")
+        return drive_url
     
-    def process(self):
-        """メイン処理"""
-        print(f"=== 領収書メール監視開始 ({datetime.now()}) ===")
+    def process_receipts(self):
+        """領収書処理メイン"""
+        state = self.get_state()
+        
+        # 初回同期チェック
+        if not state['initial_sync_done']:
+            print("✨ 初回同期モード（過去30日）")
+            days_back = 30
+        else:
+            print("📅 通常モード（過去1日）")
+            days_back = 1
         
         # メール検索
-        messages = self.search_receipt_emails()
+        messages = self.search_receipt_emails(days_back)
         
         if not messages:
-            print("新しい領収書メールなし")
+            print("✓ 新しい領収書メールなし")
             return
         
         processed = 0
-        for msg in messages:
+        for msg in messages[:10]:  # 最大10件
             try:
-                # メール詳細取得
-                message_data = self.get_message_details(msg['id'])
-                subject = ''
+                detail = self.get_message_detail(msg['id'])
                 
-                for header in message_data.get('payload', {}).get('headers', []):
-                    if header['name'] == 'Subject':
-                        subject = header['value']
-                        break
+                # 件名取得
+                headers = detail.get('payload', {}).get('headers', [])
+                subject = next((h['value'] for h in headers if h['name'] == 'Subject'), 'No Subject')
                 
-                print(f"\n処理中: {subject}")
+                print(f"\n📧 {subject}")
                 
-                # 添付ファイルダウンロード
-                attachments = self.download_attachments(msg['id'], message_data)
+                # 添付ファイル処理
+                parts = detail.get('payload', {}).get('parts', [])
+                for part in parts:
+                    if part.get('filename'):
+                        filename = part['filename']
+                        attachment_id = part['body'].get('attachmentId')
+                        
+                        if attachment_id:
+                            print(f"  📎 {filename}")
+                            
+                            # ダウンロード
+                            file_path = self.download_attachment(msg['id'], attachment_id, filename)
+                            
+                            # Driveアップロード
+                            drive_url = self.upload_to_drive(file_path)
+                            print(f"  ✓ Drive: {drive_url}")
+                            
+                            processed += 1
                 
-                if not attachments:
-                    print("  添付なし、スキップ")
-                    continue
-                
-                # 各添付ファイルを処理
-                for att in attachments:
-                    print(f"  添付: {att['filename']}")
-                    
-                    # Driveアップロード
-                    drive_url = self.upload_to_drive(att['filename'], att['data'])
-                    print(f"  ✓ Drive: {drive_url}")
-                    
-                    # 処理キューに保存
-                    self.save_to_queue({
-                        'email_subject': subject,
-                        'filename': att['filename'],
-                        'drive_url': drive_url,
-                        'received_at': datetime.now().isoformat(),
-                        'message_id': msg['id']
-                    })
-                    
-                    processed += 1
-            
             except Exception as e:
                 print(f"  ❌ エラー: {e}")
                 continue
         
+        # 状態更新
+        state['last_check'] = datetime.now().isoformat()
+        state['initial_sync_done'] = True
+        state['last_processed'] = processed
+        self.update_state(state)
+        
         print(f"\n✅ 処理完了: {processed}件")
 
-if __name__ == "__main__":
+def main():
     try:
         monitor = ReceiptEmailMonitor()
-        monitor.process()
+        monitor.process_receipts()
     except Exception as e:
         print(f"❌ エラー: {e}")
         import traceback
         traceback.print_exc()
         exit(1)
+
+if __name__ == "__main__":
+    main()
