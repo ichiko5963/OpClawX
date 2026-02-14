@@ -165,7 +165,7 @@ def sync_drive_transcriptions(access_token):
     # フォルダ内の文字起こしファイル取得
     params = {
         'q': f"'{folder_id}' in parents and name contains 'transcript'",
-        'fields': 'files(id, name, createdTime)',
+        'fields': 'files(id, name, createdTime, mimeType)',
         'orderBy': 'createdTime desc'
     }
     
@@ -178,19 +178,36 @@ def sync_drive_transcriptions(access_token):
     
     count = 0
     for file in files[:10]:  # 最新10件
-        # ファイルコンテンツ取得
-        download_url = f"https://www.googleapis.com/drive/v3/files/{file['id']}?alt=media"
-        content = requests.get(download_url, headers=headers).text
-        
-        output_file = output_dir / f"{file['name']}.json"
-        output_file.write_text(json.dumps({
-            'id': file['id'],
-            'name': file['name'],
-            'createdTime': file['createdTime'],
-            'transcript': content
-        }, indent=2, ensure_ascii=False))
-        
-        count += 1
+        try:
+            # Google Docs形式ならExportで取得
+            if 'google-apps' in file.get('mimeType', ''):
+                # Docsとして取得
+                export_url = f"https://www.googleapis.com/drive/v3/files/{file['id']}/export?mimeType=text/plain"
+                content_response = requests.get(export_url, headers=headers)
+            else:
+                # バイナリファイルとして取得
+                download_url = f"https://www.googleapis.com/drive/v3/files/{file['id']}?alt=media"
+                content_response = requests.get(download_url, headers=headers)
+            
+            if content_response.status_code != 200:
+                print(f"  ⚠️  {file['name']}: {content_response.status_code}")
+                continue
+            
+            content = content_response.text
+            
+            output_file = output_dir / f"{file['name']}.json"
+            output_file.write_text(json.dumps({
+                'id': file['id'],
+                'name': file['name'],
+                'createdTime': file['createdTime'],
+                'transcript': content
+            }, indent=2, ensure_ascii=False))
+            
+            count += 1
+            
+        except Exception as e:
+            print(f"  ❌ {file['name']}: {e}")
+            continue
     
     print(f"  ✓ {count}件取得")
     return count
