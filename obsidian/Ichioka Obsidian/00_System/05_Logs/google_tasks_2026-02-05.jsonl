@@ -1,0 +1,3 @@
+{"timestamp": "2026-02-05T13:19:34.411281+09:00", "level": "INFO", "logger": "google_tasks", "message": "Added pending task", "data": {"id": "pending_20260205_131934_0466", "title": "【ClimbBeyond】ずぼらくんプロフィール画像候補を4つ用意"}}
+{"timestamp": "2026-02-05T13:19:34.411749+09:00", "level": "INFO", "logger": "google_tasks", "message": "Added pending task", "data": {"id": "pending_20260205_131934_8099", "title": "【ClimbBeyond】ずぼらくんプロフィール文を再検討"}}
+{"timestamp": "2026-02-05T13:19:34.412061+09:00", "level": "INFO", "logger": "google_tasks", "message": "Added pending task", "data": {"id": "pending_20260205_131934_4848", "title": "【ClimbBeyond】MTG資料をPDFでGoogleドライブ共有"}}

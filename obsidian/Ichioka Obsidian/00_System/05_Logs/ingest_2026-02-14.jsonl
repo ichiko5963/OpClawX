@@ -1,0 +1,6 @@
+{"timestamp": "2026-02-14T19:55:23.524758+09:00", "level": "INFO", "logger": "ingest", "message": "Sync started"}
+{"timestamp": "2026-02-14T19:55:23.551489+09:00", "level": "INFO", "logger": "ingest", "message": "Processing execution 58"}
+{"timestamp": "2026-02-14T19:55:23.590613+09:00", "level": "INFO", "logger": "ingest", "message": "fetch_data completed", "data": {"duration_ms": 38.91}}
+{"timestamp": "2026-02-14T19:55:23.590954+09:00", "level": "INFO", "logger": "ingest", "message": "Fetched: Gmail=50, Slack=50, Calendar=14, Tasks=5"}
+{"timestamp": "2026-02-14T19:55:23.613148+09:00", "level": "INFO", "logger": "ingest", "message": "normalize_events completed", "data": {"duration_ms": 21.6}}
+{"timestamp": "2026-02-14T19:55:23.613701+09:00", "level": "INFO", "logger": "ingest", "message": "No new events", "data": {"duplicates": 114, "gtasks": 5}}
