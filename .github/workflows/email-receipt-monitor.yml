@@ -5,6 +5,9 @@ on:
     - cron: '0 * * * *'  # 毎時0分
   workflow_dispatch:  # 手動実行も可能
 
+permissions:
+  contents: write
+
 jobs:
   check-receipts:
     runs-on: ubuntu-latest
@@ -22,11 +25,13 @@ jobs:
         run: |
           pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib requests
       
+      - name: Setup Google OAuth tokens
+        run: |
+          mkdir -p /tmp
+          echo '${{ secrets.GOOGLE_OAUTH_TOKENS }}' > /tmp/google_oauth_tokens.json
+      
       - name: Check for receipt emails
         env:
-          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
-          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
           SHEET_ID: 1FH_CZkEkn621MNvFioUHgT3_4UU_TL1POu-Bhpz7KCc
           DRIVE_FOLDER_ID: 1pzI8BkAGrio16HTGpVOyvB25rV8IOO_g
         run: |
