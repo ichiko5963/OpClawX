@@ -44,14 +44,26 @@
   - `11_Companies/` - 企業情報
 
 ## Active Projects (Top 5)
-1. AirCle - いちさんが代表の大学生AI団体
-2. ClimbBeyond
-3. SlideBox
-4. ClientWork - 外部案件
-5. Genspark - 協業案件
+1. **AirCle** - いちさんが代表の大学生AI団体
+   - チーム5名（いち、大山、さきくん、りょうせい、れある）
+   - 自動化システム実装済み（請求書管理）
+   - 構成: 議事録、運営チーム、イベント運営
+2. **ClimbBeyond** - ポート株式会社、就活系プロジェクト
+   - 最新: ずぼらくんプロフィール作成（2/15）
+3. **SlideBox** - スライド関連プロジェクト
+4. **ClientWork** - 外部案件（他社X投稿、マーケティング支援）
+5. **Genspark** - 協業案件
+   - 最新: ちぃたんゲーム、流行り音源×映像完了（2/15）
 
 ## Old Projects
 - VideoPocket → Gensparkへ移行 (2026-02-03)
+
+## プロジェクト整理履歴
+- 2026-02-16: 月曜日メモリ自動整理実施
+  - 04_Project/AirCle → 03_Projects/_Active/AirCle へ統合
+  - 全プロジェクトにREADME.md、STATUS.md作成
+  - プロジェクト構造の可視化（INDEX.md, STRUCTURE.md）
+  - 議事録フォルダのテンプレート追加
 
 ## Cron Jobs
 - context-curator-daily-brief: 毎日7:00 JST - Context Curatorブリーフ (Telegram)
