@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AirCle X投稿 - 2026-02-17</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #888;
+            font-size: 1.1em;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .post {
+            background: #1a1a1a;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid #2a2a2a;
+            position: relative;
+        }
+        .post-number {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .post-text {
+            margin: 10px 0 15px 0;
+            font-size: 1.05em;
+            white-space: pre-wrap;
+        }
+        .post-source {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #2a2a2a;
+        }
+        .source-title {
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .source-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.95em;
+            word-break: break-all;
+        }
+        .source-link:hover {
+            text-decoration: underline;
+        }
+        .copy-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            margin-top: 15px;
+            width: 100%;
+            transition: opacity 0.2s;
+        }
+        .copy-btn:hover {
+            opacity: 0.9;
+        }
+        .copy-btn:active {
+            opacity: 0.7;
+        }
+        .copied {
+            background: #10b981 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🚀 AirCle X投稿</h1>
+        <p>2026年2月17日 - 20投稿</p>
+    </div>
+    <div class="container">
+        <!-- 投稿1 -->
+        <div class="post">
+            <div class="post-number">#1</div>
+            <div class="post-text">【速報】Stripeが週1000件以上のPRを"完全AI生成"で運用開始🔥
+
+これ、何を意味するか👇
+・人間はレビューのみ
+・コードは1行も書いてない
+・Claude & Cursorで自動化
+・開発者のリソースを解放
+
+正直、2026年はコーディングより「AIとの協働スキル」の時代</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.reddit.com/r/ClaudeCode/comments/1r59hz2/why_ai_still_cant_replace_developers_in_2026/" class="source-link" target="_blank">Reddit - Stripe AI PR運用の実態</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 1)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿2 -->
+        <div class="post">
+            <div class="post-number">#2</div>
+            <div class="post-text">【海外で話題】Peon Ping、AIエージェントの待ち時間を"ゲーム化"😳
+
+対応ツール👇
+・Claude Code
+・Cursor
+・Codex
+・Google Antigravity
+
+待ち時間をミニゲームに変えるという発想。
+UX設計の新時代きてる</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://topaiproduct.com/2026/02/15/peon-ping-just-made-waiting-for-ai-agents-way-more-fun/" class="source-link" target="_blank">Top AI Product - Peon Ping発表</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 2)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿3 -->
+        <div class="post">
+            <div class="post-number">#3</div>
+            <div class="post-text">【結論から言います】Claude Code論争で見えた「シンプルさ vs パワーユーザー」問題
+
+開発者が求めてるのは👇
+・透明性
+・詳細なコントロール
+・設定の柔軟性
+
+でもAnthropicが目指してるのは
+「誰でも使える」シンプルさ
+
+正直、両方必要なんだよな</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://techplanet.today/post/the-claude-code-controversy-when-ai-development-tools-prioritize-simplicity-over-power-users" class="source-link" target="_blank">TechPlanet - Claude Code論争分析</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 3)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿4 -->
+        <div class="post">
+            <div class="post-number">#4</div>
+            <div class="post-text">【公式が答えを出してしまった】Claude Code開発者が明かす「35の実践Tips」
+
+本人の設定は👇
+「驚くほどバニラ」
+
+つまり、ツールより
+使い方とプロンプト設計が全て
+
+2026年2月最新版、必読です</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.anup.io/35-claude-code-tips-from-the-guy-who-built-it/" class="source-link" target="_blank">Claude Code開発者の35Tips</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 4)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿5 -->
+        <div class="post">
+            <div class="post-number">#5</div>
+            <div class="post-text">正直、Codex 5.3 vs Claude Code 4.6の比較記事読んで震えた
+
+結論👇
+「タスクによって使い分けろ」
+「両方使うのが最高ROI」
+
+レイテンシ許容度
+コンテキスト深度
+予算
+
+全部考慮して選ぶ時代</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://blog.wenhaofree.com/en/posts/articles/codex-53-vs-claude-code-46-which-ai-coding-assistant-is-better-in-2026/" class="source-link" target="_blank">Codex vs Claude Code 2026比較</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 5)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿6 -->
+        <div class="post">
+            <div class="post-number">#6</div>
+            <div class="post-text">【速報】Gemini Antigravityが「UI設計で最強」と話題に
+
+Redditで開発者の声👇
+・無駄な説明なし
+・即実装
+・デザイン実行力が異次元
+
+Claude/Gemini使い分け、
+UI系はAntigravity一択の時代きてる</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.reddit.com/r/ClaudeAI/comments/1r557rb/claude_completely_changed_my_life_and_im_not_even/" class="source-link" target="_blank">Reddit - Antigravity UI設計評価</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 6)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿7 -->
+        <div class="post">
+            <div class="post-number">#7</div>
+            <div class="post-text">【海外で大バズ】Claude Code vs Codex vs Cursor、ドイツ語圏で徹底比較動画が登場
+
+「直接比較は難しい」という結論
+
+理由👇
+・ユースケースが違う
+・モデルの強みが違う
+・ワークフローへの組み込み方が違う
+
+ツール選びより、設計思想を理解すべき</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.youtube.com/watch?v=oQgAytGUXLc" class="source-link" target="_blank">YouTube - AI Coding比較動画</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 7)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿8 -->
+        <div class="post">
+            <div class="post-number">#8</div>
+            <div class="post-text">【結論から言います】AntiGravity + Claude Codeが「全ワークフローツールを終わらせる」
+
+トルコ語圏で話題の動画👇
+・従来のワークフロー自動化を置き換え
+・新スキル追加で拡張性UP
+・AIチャットの枠を超えた
+
+正直、2026年の開発環境はこれがスタンダードになる</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.youtube.com/watch?v=jfTwpgI5ge4" class="source-link" target="_blank">YouTube - AntiGravity×Claude解説</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 8)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿9 -->
+        <div class="post">
+            <div class="post-number">#9</div>
+            <div class="post-text">【速報】Claude Codeが「開発者を置き換えられない理由」をRedditで議論中🔥
+
+Stripe事例から見えたもの👇
+・AIはタスクを並列化する
+・人間は計画・レビューに集中
+・開発者の役割が変わっただけ
+
+「置き換え」じゃなく「拡張」の時代</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.reddit.com/r/ClaudeCode/comments/1r59hz2/why_ai_still_cant_replace_developers_in_2026/" class="source-link" target="_blank">Reddit - AI置き換え議論</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 9)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿10 -->
+        <div class="post">
+            <div class="post-number">#10</div>
+            <div class="post-text">正直、「AIでコーディングが変わった」じゃなくて
+
+「プログラマーじゃない人が人生変わった」
+
+この視点、見落としがち
+
+非エンジニアが
+アイデアを形にできる時代
+
+これがClaude/Cursor/Codexの本当の革命</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.reddit.com/r/ClaudeAI/comments/1r557rb/claude_completely_changed_my_life_and_im_not_even/" class="source-link" target="_blank">Reddit - 非プログラマーの体験談</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 10)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿11 -->
+        <div class="post">
+            <div class="post-number">#11</div>
+            <div class="post-text">【公式が答えを出してしまった】Claude Code開発者「セットアップは驚くほどシンプル」
+
+複雑な設定不要👇
+・バニラ構成でOK
+・プロンプト設計が9割
+・ツールの理解が残り1割
+
+正直、みんな設定で悩みすぎ
+使い方を学ぶべき</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.anup.io/35-claude-code-tips-from-the-guy-who-built-it/" class="source-link" target="_blank">Claude Code開発者の実践Tips</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 11)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿12 -->
+        <div class="post">
+            <div class="post-number">#12</div>
+            <div class="post-text">【海外で話題】OpenAI Codex、最近は無料提供を開始
+
+Claude Code: $20/月〜
+Codex: 無料オプションあり
+Cursor: 別価格体系
+
+価格競争が激化してる
+
+正直、今から始めるならCodex試してから判断すべき</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://alexpanetta.substack.com/p/the-tool-behind-the-ai-freakout-a" class="source-link" target="_blank">AI Coding価格比較</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 12)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿13 -->
+        <div class="post">
+            <div class="post-number">#13</div>
+            <div class="post-text">【結論から言います】2026年、AIコーディングツールは「どちらか」じゃなく「両方」
+
+エンジニアリングチームの最適解👇
+・タスクに応じて使い分け
+・レイテンシ許容度で選択
+・予算とコンテキスト深度を考慮
+
+Codex 5.3とClaude Code 4.6
+両方使うのが最高ROI</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://blog.wenhaofree.com/en/posts/articles/codex-53-vs-claude-code-46-which-ai-coding-assistant-is-better-in-2026/" class="source-link" target="_blank">2026 AIツール使い分け戦略</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 13)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿14 -->
+        <div class="post">
+            <div class="post-number">#14</div>
+            <div class="post-text">正直、Peon PingのmacOS/Linux/Windows対応がエグい
+
+Claude Code
+Codex
+Cursor
+OpenCode
+Kilo CLI
+すべて対応😳
+
+AIエージェント待機中のUX改善
+こういう細かいとこが差を生む</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://topaiproduct.com/2026/02/15/peon-ping-just-made-waiting-for-ai-agents-way-more-fun/" class="source-link" target="_blank">Peon Ping互換性情報</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 14)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿15 -->
+        <div class="post">
+            <div class="post-number">#15</div>
+            <div class="post-text">【速報】Claude Code論争、透明性とユーザーコントロールの議論に発展🔥
+
+開発者が比較してるのは👇
+・Cursor: 詳細設定可能
+・OpenCode: 透明性高い
+・Codex: カスタマイズ性
+vs
+・Claude Code: シンプル優先
+
+正直、ターゲットユーザーが違うだけ</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://techplanet.today/post/the-claude-code-controversy-when-ai-development-tools-prioritize-simplicity-over-power-users" class="source-link" target="_blank">Claude Code論争の背景</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 15)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿16 -->
+        <div class="post">
+            <div class="post-number">#16</div>
+            <div class="post-text">【公式が答えを出してしまった】Claude Code開発チームが2026年1月と2月にTwitterスレッドで運用方法を公開
+
+内容👇
+・日常的な使い方
+・実践的なTips
+・驚くほどバニラな設定
+
+公式が語る「現場の使い方」
+これ以上の教材ない</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.anup.io/35-claude-code-tips-from-the-guy-who-built-it/" class="source-link" target="_blank">Claude Code公式Tips集</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 16)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿17 -->
+        <div class="post">
+            <div class="post-number">#17</div>
+            <div class="post-text">正直、「AIが開発者を置き換える」議論、Stripeの事例で答え出てる
+
+週1000+ PR、完全AI生成
+でも人間は必要
+
+役割が変わっただけ👇
+・計画立案
+・レビュー
+・アーキテクチャ設計
+・エージェントとの協働
+
+コーディング < 思考力の時代</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.reddit.com/r/ClaudeCode/comments/1r59hz2/why_ai_still_cant_replace_developers_in_2026/" class="source-link" target="_blank">Stripe AI開発事例</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 17)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿18 -->
+        <div class="post">
+            <div class="post-number">#18</div>
+            <div class="post-text">【海外で大バズ】Gemini Antigravityの「UI設計特化」評価が急上昇
+
+特徴👇
+・説明省略、即実装
+・デザイン実行力が異次元
+・無駄なおしゃべりなし
+
+Claude: 汎用性
+Antigravity: UI特化
+
+使い分けが重要</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.reddit.com/r/ClaudeAI/comments/1r557rb/claude_completely_changed_my_life_and_im_not_even/" class="source-link" target="_blank">Antigravity UI設計評価</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 18)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿19 -->
+        <div class="post">
+            <div class="post-number">#19</div>
+            <div class="post-text">【結論から言います】AIコーディングツール選び、YouTubeで徹底比較動画が各国で登場中
+
+ドイツ語圏: Claude Code vs Codex vs Cursor
+トルコ語圏: AntiGravity + Claude Code
+
+グローバルで議論されてる
+
+正直、言語超えて同じ課題に直面してる</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://www.youtube.com/watch?v=oQgAytGUXLc" class="source-link" target="_blank">グローバルAI Coding比較</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 19)">📋 投稿をコピー</button>
+        </div>
+
+        <!-- 投稿20 -->
+        <div class="post">
+            <div class="post-number">#20</div>
+            <div class="post-text">正直、2026年2月時点でのAIコーディング環境、整理すると
+
+無料〜低価格: Codex無料枠
+中価格: Claude Code $20/月〜
+ハイエンド: 複数ツール併用
+
+UI特化: Antigravity
+汎用: Claude/Codex
+カスタマイズ: Cursor
+
+選択肢が揃った。あとは使いこなすだけ</div>
+            <div class="post-source">
+                <div class="source-title">参考ソース:</div>
+                <a href="https://blog.wenhaofree.com/en/posts/articles/codex-53-vs-claude-code-46-which-ai-coding-assistant-is-better-in-2026/" class="source-link" target="_blank">2026 AIツール総まとめ</a>
+            </div>
+            <button class="copy-btn" onclick="copyPost(this, 20)">📋 投稿をコピー</button>
+        </div>
+    </div>
+
+    <script>
+        function copyPost(button, postNumber) {
+            const post = button.parentElement;
+            const postText = post.querySelector('.post-text').textContent;
+            
+            navigator.clipboard.writeText(postText).then(() => {
+                button.textContent = '✅ コピーしました！';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = '📋 投稿をコピー';
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(err => {
+                console.error('コピー失敗:', err);
+                button.textContent = '❌ コピー失敗';
+            });
+        }
+    </script>
+</body>
+</html>
