@@ -60,6 +60,25 @@ LABELS = {
     "後で対応": {"color": {"backgroundColor": "#b99aff", "textColor": "#ffffff"}}, # 紫
 }
 
+# 除外パターン（営業・プロモーション）
+PROMOTIONAL_PATTERNS = [
+    r"セミナー",
+    r"ウェビナー",
+    r"キャンペーン",
+    r"プレゼント",
+    r"資料.*ダウンロード",
+    r"無料.*公開",
+    r"限定.*公開",
+    r"解説",
+    r"ポイント.*解説",
+    r"導入.*ポイント",
+    r"ご紹介",
+    r"お知らせ",
+    r"ニュースレター",
+    r"メールマガジン",
+    r"登録.*ありがとう",
+]
+
 # 分類ルール
 CLASSIFICATION_RULES = {
     "要返信": {
@@ -82,24 +101,29 @@ CLASSIFICATION_RULES = {
             r"ご都合.*いかが",
         ],
         "sender_patterns": IMPORTANT_SENDERS,
+        "exclude_patterns": PROMOTIONAL_PATTERNS,  # プロモーション除外
     },
     "案件": {
         "subject_patterns": [
-            r"見積",
-            r"契約",
+            r"見積.*依頼",
+            r"見積.*お願い",
+            r"契約.*締結",
+            r"契約.*お願い",
             r"発注",
-            r"納品",
-            r"プロジェクト",
-            r"案件",
-            r"ご依頼",
-            r"お仕事",
+            r"納品.*予定",
+            r"納品.*日程",
+            r"業務委託.*依頼",
+            r"業務委託.*お願い",
         ],
         "body_patterns": [
-            r"お見積",
-            r"ご契約",
-            r"業務委託",
-            r"報酬",
+            r"お見積.*お願い",
+            r"お見積.*いただけ",
+            r"ご契約.*お願い",
+            r"業務委託.*検討",
+            r"報酬.*ご提示",
+            r"案件.*ご相談",
         ],
+        "exclude_patterns": PROMOTIONAL_PATTERNS,  # プロモーション除外
     },
     "請求/経費": {
         "subject_patterns": [
@@ -182,6 +206,16 @@ def classify_email(subject: str, body: str, sender: str) -> List[str]:
     # 各分類ルールをチェック
     for label_name, rules in CLASSIFICATION_RULES.items():
         matched = False
+        
+        # プロモーション除外チェック（要返信・案件のみ）
+        if label_name in ["要返信", "案件"]:
+            is_promotional = False
+            for pattern in rules.get('exclude_patterns', []):
+                if re.search(pattern, subject, re.IGNORECASE) or re.search(pattern, body[:2000], re.IGNORECASE):
+                    is_promotional = True
+                    break
+            if is_promotional:
+                continue  # このラベルはスキップ
         
         # 件名パターン
         for pattern in rules.get('subject_patterns', []):
