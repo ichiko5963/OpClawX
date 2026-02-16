@@ -16,10 +16,20 @@ import hashlib
 import sqlite3
 import re
 import subprocess
+import signal
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Optional, Tuple
 from Crypto.Cipher import AES
+
+# タイムアウト設定（30秒）
+TIMEOUT_SECONDS = 30
+
+class TimeoutError(Exception):
+    pass
+
+def timeout_handler(signum, frame):
+    raise TimeoutError("Email processing timed out")
 
 # 設定
 JST = timezone(timedelta(hours=9))
@@ -574,17 +584,27 @@ if __name__ == "__main__":
         print("Seen emails reset")
         exit(0)
     
-    results = process_emails(args.all)
+    # タイムアウト設定
+    signal.signal(signal.SIGALRM, timeout_handler)
+    signal.alarm(TIMEOUT_SECONDS)
     
-    if args.json:
-        print(json.dumps(results, indent=2, ensure_ascii=False))
-    elif args.check:
-        report = format_report(results)
-        if report:
-            print(report)
+    try:
+        results = process_emails(args.all)
+        signal.alarm(0)  # タイムアウト解除
+        
+        if args.json:
+            print(json.dumps(results, indent=2, ensure_ascii=False))
+        elif args.check:
+            report = format_report(results)
+            if report:
+                print(report)
+            else:
+                print("NO_NEW_EMAILS")
         else:
-            print("NO_NEW_EMAILS")
-    else:
-        print(f"Processed {results['total']} emails, {results['new']} new")
-        print(f"P1: {len(results['p1'])}, P2: {len(results['p2'])}, P3: {len(results['p3'])}")
-        print(f"Needs reply: {len(results['needs_reply'])}")
+            print(f"Processed {results['total']} emails, {results['new']} new")
+            print(f"P1: {len(results['p1'])}, P2: {len(results['p2'])}, P3: {len(results['p3'])}")
+            print(f"Needs reply: {len(results['needs_reply'])}")
+    except TimeoutError:
+        print("ERROR: Email processing timed out after 30 seconds", file=__import__('sys').stderr)
+        exit(124)  # タイムアウトエラーコード
+
