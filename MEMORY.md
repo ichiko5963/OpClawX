@@ -84,6 +84,7 @@
 - **Driveフォルダ**: https://drive.google.com/drive/folders/1oLO6kGT31AV780TzymtC6puZ9vM8xqMH
 - 毎日23:00に `expense_append.py` で自動追記
 - 収入判定: 「お支払いがありました」= Stripe入金、案件受注
+- **領収書メールは返信不要**（2026-02-16 追加）
 
 ## Pi Voice (2026-02-05 追加)
 - URL: https://pi-voice.vercel.app
