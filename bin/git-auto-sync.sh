@@ -69,40 +69,49 @@ if ! run_with_timeout "git remote -v" "Check remote"; then
     exit 0
 fi
 
-# まずリモートから変更をpull（常に実行）
-log "🔄 Pulling remote changes first..."
-if run_with_timeout "git pull --rebase" "Pull remote changes"; then
-    log "✅ Pull successful"
+# まずリモートから変更をfetch（常に実行）
+log "🔄 Fetching remote changes..."
+if run_with_timeout "git fetch origin" "Fetch remote"; then
+    log "✅ Fetch successful"
 else
-    log "⚠️ Pull failed or timeout, continuing anyway"
+    log "⚠️ Fetch failed or timeout"
 fi
 
 # 変更があるか確認
 CHANGES=$(git status --porcelain 2>/dev/null)
 
-# 変更がなければ終了
-if [ -z "$CHANGES" ]; then
-    log "💤 No local changes to commit"
-    exit 0
+# ローカル変更がある場合: コミット→pull→push
+if [ -n "$CHANGES" ]; then
+    log "📝 Local changes detected"
+    
+    # ステージング
+    if ! run_with_timeout "git add -A" "Stage changes"; then
+        log "❌ Failed to stage changes"
+        exit 1
+    fi
+    
+    # コミット
+    COMMIT_MSG="Auto-sync: $(date '+%Y-%m-%d %H:%M:%S')"
+    if ! run_with_timeout "git commit -m \"$COMMIT_MSG\"" "Commit changes"; then
+        log "❌ Failed to commit"
+        exit 1
+    fi
 fi
 
-# ステージング（タイムアウト付き）
-if ! run_with_timeout "git add -A" "Stage changes"; then
-    log "❌ Failed to stage changes"
-    exit 1
+# Pull（rebase）
+log "🔄 Pulling remote changes..."
+if run_with_timeout "git pull --rebase origin main" "Pull with rebase"; then
+    log "✅ Pull successful"
+else
+    log "⚠️ Pull failed, continuing anyway"
 fi
 
-# コミット
-COMMIT_MSG="Auto-sync: $(date '+%Y-%m-%d %H:%M:%S')"
-if ! run_with_timeout "git commit -m \"$COMMIT_MSG\"" "Commit changes"; then
-    log "❌ Failed to commit"
-    exit 1
-fi
-
-# プッシュ（タイムアウト付き）
-if ! run_with_timeout "git push origin main" "Push to remote"; then
-    log "❌ Failed to push (may need manual intervention)"
-    exit 1
+# ローカル変更があった場合のみPush
+if [ -n "$CHANGES" ]; then
+    if ! run_with_timeout "git push origin main" "Push to remote"; then
+        log "❌ Failed to push (may need manual intervention)"
+        exit 1
+    fi
 fi
 
 log "✅ Git auto-sync completed successfully"
