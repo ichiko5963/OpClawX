@@ -69,20 +69,20 @@ if ! run_with_timeout "git remote -v" "Check remote"; then
     exit 0
 fi
 
+# まずリモートから変更をpull（常に実行）
+log "🔄 Pulling remote changes first..."
+if run_with_timeout "git pull --rebase" "Pull remote changes"; then
+    log "✅ Pull successful"
+else
+    log "⚠️ Pull failed or timeout, continuing anyway"
+fi
+
 # 変更があるか確認
 CHANGES=$(git status --porcelain 2>/dev/null)
 
-# 変更がなければPullだけ試す
+# 変更がなければ終了
 if [ -z "$CHANGES" ]; then
-    log "💤 No changes to commit"
-    
-    # Pullだけ試す（タイムアウト付き）
-    if run_with_timeout "git pull --rebase" "Pull remote changes"; then
-        log "✅ Pull successful"
-    else
-        log "⚠️ Pull failed or timeout, skipping"
-    fi
-    
+    log "💤 No local changes to commit"
     exit 0
 fi
 
