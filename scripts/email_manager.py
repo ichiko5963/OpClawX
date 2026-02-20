@@ -22,14 +22,36 @@ from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Optional, Tuple
 from Crypto.Cipher import AES
 
-# タイムアウト設定（30秒）
-TIMEOUT_SECONDS = 30
+# タイムアウト設定（60秒に延長）
+TIMEOUT_SECONDS = 60
+
+# リトライ設定
+MAX_RETRIES = 3
+RETRY_BACKOFF_INITIAL = 2  # 秒
 
 class TimeoutError(Exception):
     pass
 
 def timeout_handler(signum, frame):
     raise TimeoutError("Email processing timed out")
+
+
+def retry_with_backoff(func):
+    """指数バックオフ付きで関数をリトライ"""
+    import time
+    def wrapper(*args, **kwargs):
+        last_exception = None
+        for attempt in range(MAX_RETRIES):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                last_exception = e
+                if attempt < MAX_RETRIES - 1:
+                    wait_time = RETRY_BACKOFF_INITIAL * (2 ** attempt)
+                    print(f"Retry {attempt + 1}/{MAX_RETRIES} after {wait_time}s: {e}")
+                    time.sleep(wait_time)
+        raise last_exception
+    return wrapper
 
 # 設定
 JST = timezone(timedelta(hours=9))
@@ -194,6 +216,7 @@ def get_access_token() -> str:
     return token_response['access_token']
 
 
+@retry_with_backoff
 def get_emails(max_results: int = 50, unread_only: bool = True) -> List[Dict]:
     """メールを取得"""
     access_token = get_access_token()
@@ -220,6 +243,7 @@ def get_emails(max_results: int = 50, unread_only: bool = True) -> List[Dict]:
     return emails
 
 
+@retry_with_backoff
 def get_email_detail(access_token: str, msg_id: str) -> Optional[Dict]:
     """メールの詳細を取得"""
     url = f"https://gmail.googleapis.com/gmail/v1/users/me/messages/{msg_id}?format=full"
@@ -605,6 +629,6 @@ if __name__ == "__main__":
             print(f"P1: {len(results['p1'])}, P2: {len(results['p2'])}, P3: {len(results['p3'])}")
             print(f"Needs reply: {len(results['needs_reply'])}")
     except TimeoutError:
-        print("ERROR: Email processing timed out after 30 seconds", file=__import__('sys').stderr)
+        print("ERROR: Email processing timed out after 60 seconds", file=__import__('sys').stderr)
         exit(124)  # タイムアウトエラーコード
 

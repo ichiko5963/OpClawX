@@ -94,8 +94,8 @@ def get_tokens() -> Tuple[str, str]:
     return refresh(gmail_creds), refresh(drive_creds)
 
 
-def download_spreadsheet_as_csv(drive_token: str, file_id: str) -> List[Dict]:
-    """スプレッドシートをCSVとしてダウンロード"""
+def download_spreadsheet_as_csv(drive_token: str, file_id: str) -> Tuple[List[Dict], List[str]]:
+    """スプレッドシートをCSVとしてダウンロード（ヘッダー含む）"""
     url = f"https://www.googleapis.com/drive/v3/files/{file_id}/export?mimeType=text/csv"
     req = urllib.request.Request(url)
     req.add_header('Authorization', f'Bearer {drive_token}')
@@ -104,14 +104,29 @@ def download_spreadsheet_as_csv(drive_token: str, file_id: str) -> List[Dict]:
         with urllib.request.urlopen(req) as response:
             csv_content = response.read().decode('utf-8')
             reader = csv.DictReader(io.StringIO(csv_content))
-            return list(reader)
+            return list(reader), reader.fieldnames or []
     except Exception as e:
         print(f"Failed to download spreadsheet: {e}")
-        return []
+        return [], []
 
 
-def update_spreadsheet(drive_token: str, file_id: str, rows: List[Dict], headers: List[str]):
+def get_spreadsheet_headers(drive_token: str, file_id: str) -> List[str]:
+    """スプレッドシートのヘッダー（列名）を取得"""
+    data, headers = download_spreadsheet_as_csv(drive_token, file_id)
+    return headers
+
+
+def update_spreadsheet(drive_token: str, file_id: str, rows: List[Dict]):
     """スプレッドシートを更新（全体を置き換え）"""
+    if not rows:
+        return True
+    
+    # 既存のヘッダーを取得
+    headers = get_spreadsheet_headers(drive_token, file_id)
+    if not headers:
+        # デフォルトヘッダー
+        headers = ['日付', '件名', '金額', '通貨', 'カテゴリ', 'プロジェクト', 'Drive URL', 'メールID']
+    
     # CSVを生成
     csv_buffer = io.StringIO()
     writer = csv.DictWriter(csv_buffer, fieldnames=headers)
@@ -134,8 +149,12 @@ def update_spreadsheet(drive_token: str, file_id: str, rows: List[Dict], headers
     req.add_header('Authorization', f'Bearer {drive_token}')
     req.add_header('Content-Type', f'multipart/related; boundary={boundary}')
     
-    with urllib.request.urlopen(req) as response:
-        return True
+    try:
+        with urllib.request.urlopen(req) as response:
+            return True
+    except Exception as e:
+        print(f"Failed to update spreadsheet: {e}")
+        return False
 
 
 def classify_email(subject: str, from_addr: str, snippet: str) -> Tuple[str, str, str]:
@@ -322,12 +341,10 @@ def append_to_spreadsheets(drive_token: str, new_items: List[Dict]):
     # 経費を追記
     expenses = [i for i in new_items if i['type'] == 'expense' and i['amount']]
     if expenses:
-        existing = download_spreadsheet_as_csv(drive_token, sheet_ids['expense_sheet_id'])
-        
-        headers = ['日付', '件名', '金額', '通貨', 'カテゴリ', 'プロジェクト', 'Drive URL', 'メールID']
+        existing, existing_headers = download_spreadsheet_as_csv(drive_token, sheet_ids['expense_sheet_id'])
         
         for e in expenses:
-            existing.append({
+            row = {
                 '日付': e['date'],
                 '件名': e['subject'],
                 '金額': str(e['amount']),
@@ -336,20 +353,28 @@ def append_to_spreadsheets(drive_token: str, new_items: List[Dict]):
                 'プロジェクト': e.get('project', ''),
                 'Drive URL': '',
                 'メールID': e['msg_id'],
-            })
+            }
+            # 既存のヘッダーに合わせてフィルタリング
+            filtered_row = {}
+            for k in existing_headers:
+                if k in row:
+                    filtered_row[k] = row[k]
+                elif existing and k in existing[0]:
+                    filtered_row[k] = existing[0].get(k, '')
+                else:
+                    filtered_row[k] = ''
+            existing.append(filtered_row)
         
-        update_spreadsheet(drive_token, sheet_ids['expense_sheet_id'], existing, headers)
-        print(f"✅ {len(expenses)} expenses added to spreadsheet")
+        if update_spreadsheet(drive_token, sheet_ids['expense_sheet_id'], existing):
+            print(f"✅ {len(expenses)} expenses added to spreadsheet")
     
     # 収入を追記
     income = [i for i in new_items if i['type'] == 'income' and i['amount']]
     if income:
-        existing = download_spreadsheet_as_csv(drive_token, sheet_ids['income_sheet_id'])
-        
-        headers = ['日付', '件名', '金額', '通貨', 'カテゴリ', '詳細', 'メールID']
+        existing, existing_headers = download_spreadsheet_as_csv(drive_token, sheet_ids['income_sheet_id'])
         
         for i in income:
-            existing.append({
+            row = {
                 '日付': i['date'],
                 '件名': i['subject'],
                 '金額': str(i['amount']),
@@ -357,10 +382,20 @@ def append_to_spreadsheets(drive_token: str, new_items: List[Dict]):
                 'カテゴリ': i['category'],
                 '詳細': '',
                 'メールID': i['msg_id'],
-            })
+            }
+            # 既存のヘッダーに合わせてフィルタリング
+            filtered_row = {}
+            for k in existing_headers:
+                if k in row:
+                    filtered_row[k] = row[k]
+                elif existing and k in existing[0]:
+                    filtered_row[k] = existing[0].get(k, '')
+                else:
+                    filtered_row[k] = ''
+            existing.append(filtered_row)
         
-        update_spreadsheet(drive_token, sheet_ids['income_sheet_id'], existing, headers)
-        print(f"✅ {len(income)} income items added to spreadsheet")
+        if update_spreadsheet(drive_token, sheet_ids['income_sheet_id'], existing):
+            print(f"✅ {len(income)} income items added to spreadsheet")
     
     # 処理済みに追加
     for item in new_items:
