@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>請求書一覧</title>
+    <style>
+        @page { size: A4; margin: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: "Yu Gothic", "Meiryo", "Hiragino Sans", sans-serif; font-size: 12pt; line-height: 1.8; color: #333; width: 100%; max-width: 900px; margin: 0 auto; padding: 40px; }
+        h1 { font-size: 24pt; text-align: center; margin-bottom: 30px; letter-spacing: 8px; }
+        .invoice-list { list-style: none; }
+        .invoice-item { border: 2px solid #333; margin-bottom: 15px; }
+        .invoice-item a { display: block; padding: 20px; text-decoration: none; color: #333; transition: background 0.2s; }
+        .invoice-item a:hover { background: #f5f5f5; }
+        .invoice-header { display: flex; justify-content: space-between; align-items: center; }
+        .invoice-no { font-size: 16pt; font-weight: bold; }
+        .invoice-date { color: #666; }
+        .invoice-company { font-size: 14pt; font-weight: bold; margin-top: 5px; }
+        .invoice-title { color: #333; font-size: 12pt; margin-top: 5px; }
+        .invoice-amount { font-size: 18pt; font-weight: bold; color: #c00; margin-top: 8px; }
+        .invoice-actions { margin-top: 10px; }
+        .btn { display: inline-block; padding: 5px 12px; margin-right: 8px; font-size: 10pt; border: 1px solid #333; background: #fff; cursor: pointer; text-decoration: none; color: #333; }
+        .btn:hover { background: #333; color: #fff; }
+    </style>
+</head>
+<body>
+    <h1>請求書一覧</h1>
+    <ul class="invoice-list">
+        <li class="invoice-item">
+            <a href="/02.html">
+                <div class="invoice-header">
+                    <span class="invoice-no">No.02</span>
+                    <span class="invoice-date">2026年02月21日</span>
+                </div>
+                <div class="invoice-company">ポート株式会社</div>
+                <div class="invoice-title">Xプレミアム2月分</div>
+                <div class="invoice-amount">¥1,648-</div>
+                <div class="invoice-actions">
+                    <span class="btn" onclick="event.preventDefault(); window.print();">PDF保存</span>
+                </div>
+            </a>
+        </li>
+        <li class="invoice-item">
+            <a href="/01.html">
+                <div class="invoice-header">
+                    <span class="invoice-no">No.01</span>
+                    <span class="invoice-date">2026年02月21日</span>
+                </div>
+                <div class="invoice-company">Genspark</div>
+                <div class="invoice-title">SNSコンサルティング</div>
+                <div class="invoice-amount">¥225,000-</div>
+                <div class="invoice-actions">
+                    <span class="btn" onclick="event.preventDefault(); window.print();">PDF保存</span>
+                </div>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>

@@ -90,6 +90,39 @@
 - git-auto-sync: 毎時 - Git自動同期
 - daily-efficiency-suggestions: 毎日12:00 JST - 効率化提案
 
+## Skills構造 (2026-02-22)
+```
+skills/
+├── browser-skills/     - ブラウザ操作スキル
+│   └── youtube-live-scheduler/
+├── slides-generator/   - スライド自動生成
+└── invoice-generator/  - 請求書自動生成→PDF→Drive
+```
+
+## Tools (2026-02-22 更新)
+```
+tools/
+├── x_post_quality_checker.py  - X投稿品質スコアリング（NEW）
+├── memory_organizer.py        - メモリ整理分析ツール（NEW）
+├── x_scheduler.py             - X投稿スケジューラー
+├── viral_analyzer.py          - バイラル度分析
+├── past_tweets_analysis.py    - 過去投稿分析
+├── x_analysis_report.py       - 詳細レポート生成
+├── morning_brief.py           - モーニングブリーフィング
+├── workspace_health.py        - ヘルスチェック
+├── efficiency_suggestions.py  - 効率化提案
+├── daily_summary.py           - デイリーサマリー
+├── project_status.py          - プロジェクト状況
+├── session_analysis.py        - セッション分析
+├── md_to_html.py              - MD→HTML変換
+├── project_dashboard.py       - プロジェクトダッシュボード
+├── session_reporter.py        - セッションレポーター
+├── x_export.py                - X投稿エクスポート
+├── x_pattern_analysis.py      - 投稿パターン分析
+├── x_posts_generator.py       - 投稿生成ツール
+└── x_quality_scorer.py        - 品質スコアラー
+```
+
 ## External Integrations (TODO)
 - Slack: AirCle｜大学生AI団体 (未接続)
 - Google: Gmail/Calendar/Drive (Connected via gog skill)

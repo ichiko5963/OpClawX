@@ -148,6 +148,42 @@ python3 tools/x_analysis_report.py
 
 ---
 
+### 📋 x_post_quality_checker.py
+X投稿のクオリティをスコアリング。改善ポイントを自動提案。
+
+```bash
+python3 tools/x_post_quality_checker.py                          # 最新ファイル
+python3 tools/x_post_quality_checker.py projects/x-posts-XXX.md  # 指定ファイル
+```
+
+**チェック項目:**
+- フックパターン（【速報】【結論から言います】等）
+- 構造（箇条書き、絵文字、参考リンク）
+- 具体的数字の有無
+- 文字数の適正範囲
+- 禁止絵文字チェック
+- CTA（行動喚起）
+- 対比構造
+- S/A/B/C/Dグレード判定
+
+---
+
+### 🧠 memory_organizer.py
+メモリの整理状況を分析・レポート。
+
+```bash
+python3 tools/memory_organizer.py
+```
+
+**出力内容:**
+- 日次ファイルの統計（件数、期間、サイズ）
+- 欠落日の検出
+- MEMORY.mdの状態チェック
+- 頻出キーワード・見出し分析
+- 推奨アクション
+
+---
+
 ## 拡張
 
 新しいツールを追加する場合：
