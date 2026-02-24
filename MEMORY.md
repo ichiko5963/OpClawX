@@ -42,6 +42,12 @@
   - 7:00 Daily Brief (Telegram)
   - Hourly Pulse (毎時30分)
 
+## Known Issues
+- **2026-02-24: Google API認証エラー発生**
+  - 全Googleサービス（Gmail, Calendar, Tasks, Drive）でHTTP 400 Bad Request
+  - 影響スクリプト: email_manager.py, meeting_prep_reminder.py, task_reminder.py, overdue_tasks.py, expense_append.py
+  - 対応: OAuth再設定が必要（gog CLIでも発生）
+
 ## Obsidian Integration
 - Vault場所: `obsidian/Ichioka Obsidian/`
 - 新構造 (2026-02-03):

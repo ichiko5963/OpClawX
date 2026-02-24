@@ -13,12 +13,13 @@
             font-size: 9pt;
             line-height: 1.3;
             color: #333;
-            width: 297mm;
-            height: 210mm;
-            margin: 0;
+            width: 210mm;
+            height: 297mm;
+            margin: 0 auto;
             padding: 5mm;
             overflow: hidden;
             background: #fff;
+            page-break-after: avoid;
         }
         
         .action-bar { 
@@ -248,8 +249,8 @@
             },
             jsPDF: {
                 unit: 'pt',
-                format: [842, 595],
-                orientation: 'landscape'
+                format: 'a4',
+                orientation: 'portrait'
             },
             margin: 0
         };
