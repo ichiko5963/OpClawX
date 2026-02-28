@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClawを使いこなせない99%の原因</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      background: #f8f8f4;
+      color: #3a3b5a;
+      overflow: hidden;
+    }
+    .slide {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      padding: 60px 80px;
+      font-size: 28px;
+      line-height: 1.8;
+      border-bottom: 10px solid #4f86c6;
+      position: relative;
+    }
+    .slide.active { display: flex; flex-direction: column; justify-content: center; }
+    h1 { font-size: 64px; color: #4f86c6; margin-bottom: 40px; line-height: 1.3; }
+    h2 { font-size: 48px; color: #4f86c6; margin-bottom: 30px; }
+    h3 { font-size: 36px; color: #4f86c6; margin: 30px 0 20px; }
+    ul, ol { padding-left: 40px; }
+    li { margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin: 30px 0; font-size: 24px; }
+    th, td { border: 2px solid #4f86c6; padding: 16px; text-align: left; }
+    th { background: #4f86c6; color: white; }
+    code { background: #eee; padding: 4px 8px; border-radius: 4px; font-size: 20px; }
+    pre { background: #2d2d2d; color: #fff; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 18px; margin: 20px 0; }
+    .highlight { color: #e91e63; font-weight: bold; }
+    .nav {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+    .nav button {
+      background: #4f86c6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .nav button:hover { background: #3a6cb6; }
+    .progress {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 6px;
+      background: #4f86c6;
+      transition: width 0.3s;
+    }
+    .slide-number {
+      position: absolute;
+      bottom: 20px;
+      left: 40px;
+      font-size: 16px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<div class="slide active" data-num="1">
+  <h1>OpenClawを使いこなせない<br>99%の原因</h1>
+  <h3 style="margin-top: 40px;">たった1つの共通点</h3>
+  <div class="slide-number">1 / 28</div>
+</div>
+
+<div class="slide" data-num="2">
+  <h2>はじめに</h2>
+  <ul>
+    <li>いち（市岡直人）</li>
+    <li>AirCle代表</li>
+    <li>大学生で事業をM&Aした経験あり</li>
+  </ul>
+  <div class="slide-number">2 / 28</div>
+</div>
+
+<div class="slide" data-num="3">
+  <h2>多くの人の误区</h2>
+  <ul>
+    <li>「OpenClaw入れたerset動いた」</li>
+    <li>↓</li>
+    <li>「でも Manus랑差不多？」</li>
+  </ul>
+  <div class="slide-number">3 / 28</div>
+</div>
+
+<div class="slide" data-num="4">
+  <h2>現実</h2>
+  <p style="font-size: 36px; margin: 40px 0;">
+    OpenClawを使ってる人の<br>
+    <span class="highlight">99%</span>が<br>
+    まだ本領を発揮できていない
+  </p>
+  <div class="slide-number">4 / 28</div>
+</div>
+
+<div class="slide" data-num="5">
+  <h2>原因</h2>
+  <h3>たった1つの共通点</h3>
+  <p style="font-size: 42px; color: #e91e63; margin-top: 30px;">
+    情報的一元管理ができてない
+  </p>
+  <div class="slide-number">5 / 28</div>
+</div>
+
+<div class="slide" data-num="6">
+  <h2>つまりこういうこと</h2>
+  <ul>
+    <li><strong>Manus</strong> → 「優秀な派遣社員」</li>
+    <li><strong>OpenClaw</strong> → 「もう一人のは自分」</li>
+  </ul>
+  <h3 style="margin-top: 40px;">この差が出るのは<br>情報的一元管理やったときだけ</h3>
+  <div class="slide-number">6 / 28</div>
+</div>
+
+<div class="slide" data-num="7">
+  <h2>マ二ス・Notion AIとの差</h2>
+  <table>
+    <tr>
+      <th></th>
+      <th>Manus</th>
+      <th>OpenClaw</th>
+    </tr>
+    <tr>
+      <td>文脈把握</td>
+      <td>弱い</td>
+      <td>強い（設定をしたら）</td>
+    </tr>
+    <tr>
+      <td>自発的行動</td>
+      <td>なし</td>
+      <td>あり</td>
+    </tr>
+    <tr>
+      <td>タスク実行</td>
+      <td>○</td>
+      <td>○</td>
+    </tr>
+  </table>
+  <div class="slide-number">7 / 28</div>
+</div>
+
+<div class="slide" data-num="8">
+  <h2>本来の動きができるOpenClaw</h2>
+  <ul style="font-size: 26px;">
+    <li>「3時間後のMTG、協業案3つ作っといたよ」</li>
+    <li>「昨天的X投稿パターン伸びそう 作っといた」</li>
+    <li>「それ非効率やわ〜自動化しといた」</li>
+  </ul>
+  <div class="slide-number">8 / 28</div>
+</div>
+
+<div class="slide" data-num="9">
+  <h2>なぜ差が付くのか</h2>
+  <p style="font-size: 36px; margin: 30px 0;">全部GitHubで管理してるから</p>
+  <pre style="font-size: 16px;">~/OpenClaw-Workspace/
+├── MEMORY.md
+├── memory/
+├── obsidian/
+├── scripts/
+└── tools/</pre>
+  <div class="slide-number">9 / 28</div>
+</div>
+
+<div class="slide" data-num="10">
+  <h2>GitHub Actionsで全自動化</h2>
+  <ul>
+    <li>Gmail同步（毎時）</li>
+    <li>Googleカレンダー同步（毎時）</li>
+    <li>Google Tasks同步（1日4回）</li>
+    <li>X投稿生成・Discord通知（毎朝7時）</li>
+    <li>経費自動記録</li>
+  </ul>
+  <div class="slide-number">10 / 28</div>
+</div>
+
+<div class="slide" data-num="11">
+  <h2>Gmail同步</h2>
+  <pre>name: Gmail Sync
+on:
+  schedule:
+    - cron: '0 * * * *'</pre>
+  <p style="margin-top: 20px;">メールを取得→優先度分類（P0/P1/P2/P3）→markdown保存</p>
+  <div class="slide-number">11 / 28</div>
+</div>
+
+<div class="slide" data-num="12">
+  <h2>カレンダー同步</h2>
+  <pre>name: Calendar Sync
+on:
+  schedule:
+    - cron: '0 * * * *'</pre>
+  <p style="margin-top: 20px;">2時間以内にMTG→参加者をObsidianから検索→準備リスト自動生成</p>
+  <div class="slide-number">12 / 28</div>
+</div>
+
+<div class="slide" data-num="13">
+  <h2>X投稿自动化</h2>
+  <pre>name: X Morning Posts
+on:
+  schedule:
+    - cron: '0 22 * * *'</pre>
+  <p style="margin-top: 20px;">过去820件のデータからパターン分析→最新ニュース踏まえて投稿生成</p>
+  <div class="slide-number">13 / 28</div>
+</div>
+
+<div class="slide" data-num="14">
+  <h2>経費自动记录</h2>
+  <pre>name: Expense Tracker
+on:
+  schedule:
+    - cron: '0 * * *'</pre>
+  <p style="margin-top: 20px;">Gmailから領収書を検知→Google Sheetsに自动记录</p>
+  <div class="slide-number">14 / 28</div>
+</div>
+
+<div class="slide" data-num="15">
+  <h2>一元管理の效果</h2>
+  <p>OpenClawが知ることができる：</p>
+  <ul>
+    <li>プロジェクトの進捗</li>
+    <li>関係者の情報</li>
+    <li>過去の判断・失敗</li>
+    <li>定期的なイベント</li>
+  </ul>
+  <div class="slide-number">15 / 28</div>
+</div>
+
+<div class="slide" data-num="16">
+  <h2>「もう一人のは自分」になる瞬间</h2>
+  <pre style="font-size: 20px;">「明日の打ち合わせ準備しといて」
+↓
+「〇株式会社との定例ですね。
+ 前回の議事録見たけど、
+ 進捗報告とマイルストーンが議題です。
+ 協作案3つ作っといました」</pre>
+  <div class="slide-number">16 / 28</div>
+</div>
+
+<div class="slide" data-num="17">
+  <h2>設定はめどう感じる？</h2>
+  <p style="font-size: 32px; margin: 30px 0;">正直、最初は何日もかかる</p>
+  <p style="font-size: 28px; color: #e91e63;">でも1回やれば毎日の作业が自动化</p>
+  <div class="slide-number">17 / 28</div>
+</div>
+
+<div class="slide" data-num="18">
+  <h2>まとめ</h2>
+  <ul>
+    <li>信息散らばってたら Manusと同じ</li>
+    <li>一元管理やると OpenClawが化ける</li>
+    <li>GitHubに全部集める が正解</li>
+  </ul>
+  <div class="slide-number">18 / 28</div>
+</div>
+
+<div class="slide" data-num="19">
+  <h2>AirCleの活動</h2>
+  <ul>
+    <li>OpenClaw Guild(LINEオープンチャット)</li>
+    <li>2/27 20:00〜 セミナー開催</li>
+  </ul>
+  <div class="slide-number">19 / 28</div>
+</div>
+
+<div class="slide" data-num="20">
+  <h2>最後に</h2>
+  <p style="font-size: 32px; margin: 30px 0;">「全部自动化したい」</p>
+  <p style="font-size: 32px; margin: 30px 0;">「每次零から説明するのはもうイヤ」</p>
+  <p style="font-size: 36px; color: #4f86c6; margin-top: 40px;">↓<br>GitHubから始めてみて</p>
+  <div class="slide-number">20 / 28</div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<div class="nav">
+  <button onclick="prevSlide()">◀ 前へ</button>
+  <button onclick="nextSlide()">次へ ▶</button>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const progress = document.getElementById('progress');
+const total = slides.length;
+
+function showSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (n + total) % total;
+  slides[currentSlide].classList.add('active');
+  progress.style.width = ((currentSlide + 1) / total * 100) + '%';
+}
+
+function nextSlide() { showSlide(currentSlide + 1); }
+function prevSlide() { showSlide(currentSlide - 1); }
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+  if (e.key === 'ArrowLeft') prevSlide();
+});
+
+showSlide(0);
+</script>
+
+</body>
+</html>
