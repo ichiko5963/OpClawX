@@ -1,0 +1,44 @@
+# Email Auto Reply Configuration
+
+# Auto-send mode: true = send without confirmation, false = save as draft
+auto_send_mode: false
+
+# Priority levels to process (P1 = urgent, P2 = important)
+process_priorities:
+  - P1
+  - P2
+
+# Cron schedule (hourly by default)
+# Examples:
+#   "0 * * * *" = every hour at minute 0
+#   "0 9,12,15,18,21 * * *" = 9am, 12pm, 3pm, 6pm, 9pm
+#   "0 9-18 * * *" = every hour from 9am to 6pm
+cron_schedule: "0 * * * *"
+
+# Maximum emails to process per run
+max_emails_per_run: 10
+
+# Ignore patterns (regex)
+ignore_patterns:
+  - "noreply@"
+  - "no-reply@"
+  - "notifications@"
+  - "newsletter@"
+  - ".*@zapier\\.com"
+  - ".*@sendenkaigi\\.com"
+
+# AI reply settings
+ai_settings:
+  # Temperature for AI generation (0.0 - 1.0)
+  temperature: 0.7
+  # Max tokens for reply
+  max_tokens: 500
+  # Language for reply
+  language: "ja"
+
+# Logging
+log_level: "INFO"
+log_file: "logs/email_auto_reply.log"
+
+# State file (to track processed emails)
+state_file: "data/email_auto_reply_state.json"
