@@ -105,12 +105,14 @@ skills/
 └── invoice-generator/  - 請求書自動生成→PDF→Drive
 ```
 
-## Tools (2026-03-03 更新)
+## Tools (2026-03-04 更新)
 ```
 tools/
-├── news_digest_generator.py   - ニュースダイジェスト生成（NEW 3/3）
-├── session_progress.py        - セッション進捗トラッキング（NEW 3/3）
-├── post_dedup_checker.py      - 投稿重複チェック（NEW 3/3）
+├── post_performance_predictor.py - 投稿パフォーマンス予測（NEW 3/4）
+├── trend_tracker.py           - トレンド追跡・ネタ鮮度管理（NEW 3/4）
+├── news_digest_generator.py   - ニュースダイジェスト生成（3/3）
+├── session_progress.py        - セッション進捗トラッキング（3/3）
+├── post_dedup_checker.py      - 投稿重複チェック（3/3）
 ├── session_tracker.py         - 深夜セッション進捗トラッカー（3/1）
 ├── x_post_validator.py        - X投稿バリデーター（3/1）
 ├── x_post_quality_checker.py  - X投稿品質スコアリング
