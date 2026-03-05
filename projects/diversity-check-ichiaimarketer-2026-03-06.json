@@ -1,0 +1,196 @@
+{
+  "total_posts": 103,
+  "files_analyzed": 6,
+  "type_distribution": {
+    "結論": 31,
+    "正直": 26,
+    "海外バズ": 26,
+    "速報": 10,
+    "公式": 3,
+    "other": 6,
+    "配布": 1
+  },
+  "top_keywords": [
+    [
+      "GPT[-d]*",
+      30
+    ],
+    [
+      "アルゴリズム",
+      17
+    ],
+    [
+      "SaaS",
+      17
+    ],
+    [
+      "Notion",
+      16
+    ],
+    [
+      "GTM",
+      15
+    ],
+    [
+      "PLG",
+      13
+    ],
+    [
+      "Midjourney",
+      13
+    ],
+    [
+      "Cursor",
+      11
+    ],
+    [
+      "Claude Code",
+      11
+    ],
+    [
+      "スレッド",
+      10
+    ],
+    [
+      "Anthropic",
+      9
+    ],
+    [
+      "Jasper",
+      9
+    ],
+    [
+      "SEO",
+      9
+    ],
+    [
+      "AI エージェント",
+      8
+    ],
+    [
+      "OpenAI",
+      7
+    ]
+  ],
+  "avg_char_count": 343,
+  "char_range": [
+    220,
+    693
+  ],
+  "daily_counts": {
+    "x-posts-2026-03-06-ichiaimarketer.md": 20,
+    "x-posts-2026-03-05-ichiaimarketer.md": 20,
+    "x-posts-2026-03-04-ichiaimarketer.md": 20,
+    "x-posts-2026-03-03-ichiaimarketer.md": 3,
+    "x-posts-2026-03-02-ichiaimarketer.md": 20,
+    "x-posts-2026-03-01-ichiaimarketer.md": 20
+  },
+  "potential_duplicates": [
+    {
+      "post1": "x-posts-2026-03-06-ichiaimarketer.md#3",
+      "post2": "x-posts-2026-03-05-ichiaimarketer.md#3",
+      "overlap": [
+        "GPT[-d]*",
+        "GitHub Copilot",
+        "Gemini",
+        "GTM"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-06-ichiaimarketer.md#3",
+      "post2": "x-posts-2026-03-02-ichiaimarketer.md#11",
+      "overlap": [
+        "GPT[-d]*",
+        "GitHub Copilot",
+        "GTM"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-06-ichiaimarketer.md#13",
+      "post2": "x-posts-2026-03-02-ichiaimarketer.md#11",
+      "overlap": [
+        "GPT[-d]*",
+        "GTM",
+        "Cursor",
+        "Midjourney"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-06-ichiaimarketer.md#13",
+      "post2": "x-posts-2026-03-01-ichiaimarketer.md#14",
+      "overlap": [
+        "GPT[-d]*",
+        "Cursor",
+        "GTM"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-06-ichiaimarketer.md#14",
+      "post2": "x-posts-2026-03-02-ichiaimarketer.md#11",
+      "overlap": [
+        "Notion",
+        "Cursor",
+        "Midjourney"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-06-ichiaimarketer.md#14",
+      "post2": "x-posts-2026-03-01-ichiaimarketer.md#13",
+      "overlap": [
+        "Slack",
+        "Notion",
+        "Cursor",
+        "PLG"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-05-ichiaimarketer.md#3",
+      "post2": "x-posts-2026-03-02-ichiaimarketer.md#11",
+      "overlap": [
+        "GPT[-d]*",
+        "GitHub Copilot",
+        "GTM"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-05-ichiaimarketer.md#7",
+      "post2": "x-posts-2026-03-05-ichiaimarketer.md#10",
+      "overlap": [
+        "GPT[-d]*",
+        "Jasper",
+        "Midjourney"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-05-ichiaimarketer.md#7",
+      "post2": "x-posts-2026-03-02-ichiaimarketer.md#7",
+      "overlap": [
+        "GPT[-d]*",
+        "Jasper",
+        "Midjourney"
+      ]
+    },
+    {
+      "post1": "x-posts-2026-03-05-ichiaimarketer.md#10",
+      "post2": "x-posts-2026-03-03-ichiaimarketer.md#2",
+      "overlap": [
+        "GPT[-d]*",
+        "SEO",
+        "Jasper"
+      ]
+    }
+  ],
+  "phrase_usage": {
+    "ポイントは": 4,
+    "教訓": 3,
+    "これが超重要": 1,
+    "結果": 13,
+    "対策": 2,
+    "つまり": 9,
+    "何ができるか": 2,
+    "これ、何を意味するか": 8
+  },
+  "recommendations": [
+    "⚠️ テーマが重複している投稿ペアが35件。差別化を意識しよう。"
+  ]
+}

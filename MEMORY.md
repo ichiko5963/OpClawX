@@ -105,13 +105,15 @@ skills/
 └── invoice-generator/  - 請求書自動生成→PDF→Drive
 ```
 
-## Tools (2026-03-05 更新)
+## Tools (2026-03-06 更新)
 ```
 tools/
-├── content_calendar.py        - コンテンツカレンダー管理（NEW 3/5）
-├── engagement_optimizer.py    - エンゲージメント最適化（NEW 3/5）
-├── post_performance_predictor.py - 投稿パフォーマンス予測（NEW 3/4）
-├── trend_tracker.py           - トレンド追跡・ネタ鮮度管理（NEW 3/4）
+├── daily_memory_digest.py     - メモリダイジェスト自動生成（NEW 3/6）
+├── x_post_diversity_checker.py - 投稿多様性・重複チェック（NEW 3/6）
+├── content_calendar.py        - コンテンツカレンダー管理（3/5）
+├── engagement_optimizer.py    - エンゲージメント最適化（3/5）
+├── post_performance_predictor.py - 投稿パフォーマンス予測（3/4）
+├── trend_tracker.py           - トレンド追跡・ネタ鮮度管理（3/4）
 ├── news_digest_generator.py   - ニュースダイジェスト生成（3/3）
 ├── session_progress.py        - セッション進捗トラッキング（3/3）
 ├── post_dedup_checker.py      - 投稿重複チェック（3/3）
