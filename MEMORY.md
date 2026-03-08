@@ -47,6 +47,14 @@
   - 全Googleサービス（Gmail, Calendar, Tasks, Drive）でHTTP 400 Bad Request
   - 影響スクリプト: email_manager.py, meeting_prep_reminder.py, task_reminder.py, overdue_tasks.py, expense_append.py
   - 対応: OAuth再設定が必要（gog CLIでも発生）
+  - 2026-03-08: gog CLIで再認証完了（jiuhuot10@gmail.com）、しかしgogコマンドがタイムアウトする問題あり
+
+## AI業界動向メモ（2026-03-09 更新）
+- **米政府がAnthropic排除**: 自律型兵器・大規模監視への使用拒否が原因。OpenAI/Geminiに移行。
+- **OpenAI Symphony**: Elixir製オープンソースエージェントフレームワーク（3/5）
+- **GPT-5.4**: 100万トークンコンテキスト、ネイティブPC操作、幻覚33%減（3/5）
+- **Cursor Automations**: イベント駆動AIエージェント、ARR $2B、評価額$29.3B（3/4）
+- **Codex 0.111.0**: ローカルモデル対応（Ollama/LM Studio/MLX）
 
 ## Obsidian Integration
 - Vault場所: `obsidian/Ichioka Obsidian/`
@@ -105,11 +113,13 @@ skills/
 └── invoice-generator/  - 請求書自動生成→PDF→Drive
 ```
 
-## Tools (2026-03-06 更新)
+## Tools (2026-03-09 更新)
 ```
 tools/
-├── daily_memory_digest.py     - メモリダイジェスト自動生成（NEW 3/6）
-├── x_post_diversity_checker.py - 投稿多様性・重複チェック（NEW 3/6）
+├── weekly_report_generator.py  - 週次レポート自動生成（NEW 3/9）
+├── x_post_freshness_checker.py - 投稿ネタ鮮度チェック（NEW 3/9）
+├── daily_memory_digest.py     - メモリダイジェスト自動生成（3/6）
+├── x_post_diversity_checker.py - 投稿多様性・重複チェック（3/6）
 ├── content_calendar.py        - コンテンツカレンダー管理（3/5）
 ├── engagement_optimizer.py    - エンゲージメント最適化（3/5）
 ├── post_performance_predictor.py - 投稿パフォーマンス予測（3/4）
