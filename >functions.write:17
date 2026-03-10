@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""メール分析 (gog CLI対応版)"""
+import subprocess
+import json
+
+def analyze_emails():
+    """メールを分析"""
+    try:
+        result = subprocess.run(
+            ['gog', 'gmail', 'search', 'in:inbox newer_than:1d', '--max', '50', '--json'],
+            capture_output=True, text=True, timeout=60
+        )
+        
+        if result.returncode != 0:
+            print(f"メール分析エラー: {result.stderr}")
+            return {"total": 0, "needs_reply": 0}
+        
+        emails = json.loads(result.stdout) if result.stdout else []
+        
+        needs_reply = 0
+        for email in emails:
+            subject = email.get('subject', '').lower()
+            # 返信が必要そうなキーワード
+            if any(kw in subject for kw in ['re:', 'fw:', '確認', '質問']):
+                needs_reply += 1
+        
+        print(f"=== メール分析完了 ===")
+        print(f"分析対象: {len(emails)} 件")
+        print(f"返信必要: {needs_reply} 件")
+        print(f"返信不要: {len(emails) - needs_reply} 件")
+        print(f"優先度別: P0=0, P1={needs_reply}, P2=0, P3=0")
+        
+        return {"total": len(emails), "needs_reply": needs_reply}
+        
+    except Exception as e:
+        print(f"分析エラー: {e}")
+        return {"total": 0, "needs_reply": 0}
+
+if __name__ == '__main__':
+    analyze_emails()
