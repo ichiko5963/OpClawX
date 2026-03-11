@@ -1,28 +1,29 @@
 {
-  "name": "viral-post-automation",
+  "name": "opclawx",
   "version": "2.0.0",
-  "description": "Analyze X/Twitter data with 15 viral patterns → auto-generate daily posts → deliver via URL every morning",
+  "description": "Daily 15 viral post ideas from 15 patterns + latest trends, delivered via URL. Supports X Premium analytics, Numbers files, and customizable patterns.",
   "main": "core/analyzer.js",
-  "bin": { "vpa": "./cli.js" },
+  "bin": { "vpa": "./cli.js", "opclawx": "./cli.js" },
   "scripts": {
-    "start":   "node cli.js help",
+    "start": "node cli.js help",
     "analyze": "node cli.js analyze",
-    "gen":     "node cli.js generate",
-    "sched":   "node cli.js schedule",
-    "web":     "npx serve web -l 3000",
-    "sched:run":"node scheduler/daily.js --run-due",
-    "test":    "node tests/test.js"
+    "daily": "node scheduler/daily-15.js",
+    "web": "npx serve web -l 3000",
+    "test": "node tests/test.js",
+    "setup": "cp .env.example .env && echo 'Edit .env with your settings'"
   },
   "keywords": [
     "viral","x","twitter","social-media","content","automation","ai","analytics",
-    "openclaw","バズる","自動化","病毒式","바이럴"
+    "バズる","自動化","病毒式","바이럴","小红书","种草"
   ],
-  "author": "AirCle / いち@Aircle代表",
+  "author": "AirCle (https://x.com/AiAircle34052)",
   "license": "MIT",
   "repository": { "type":"git","url":"https://github.com/ichiko5963/OpClawX.git" },
-  "homepage": "https://github.com/ichiko5963/OpClawX",
+  "homepage": "https://github.com/ichiko5963/OpClawX#readme",
   "bugs": { "url":"https://github.com/ichiko5963/OpClawX/issues" },
-  "engines": { "node": ">=14.0.0" },
-  "dependencies": {},
+  "engines": { "node": ">=16.0.0" },
+  "dependencies": {
+    "adm-zip": "^0.5.10"
+  },
   "devDependencies": {}
 }
