@@ -1,0 +1,215 @@
+{
+  "version": "1.0.0",
+  "patterns": [
+    {
+      "id": "01-breaking-news",
+      "name": "速報型",
+      "name_en": "Breaking News",
+      "trigger_keywords": ["速報", "ついに", "登場", "リリース"],
+      "psychology": "FOMO（見逃し恐怖）と早期情報入手の欲求",
+      "engagement_type": "リツイート・ブックマーク",
+      "max_length": 280,
+      "structure": {
+        "hook": "【速報】+ 対象 + ついにリリース/登場！",
+        "body": "3つの核心ポイント（箇条書き）",
+        "cta": "リンク先で詳細確認の呼びかけ"
+      }
+    },
+    {
+      "id": "02-save-for-later",
+      "name": "保存版型",
+      "name_en": "Save for Later",
+      "trigger_keywords": ["保存版", "まとめ", "完全ガイド"],
+      "psychology": "後で見返したいという安心感とFOMO",
+      "engagement_type": "ブックマーク・いいね",
+      "max_length": 280,
+      "structure": {
+        "hook": "【保存版】+ 誰が + 何を + 解説/まとめ",
+        "body": "具体的な手法・ツール・ステップ",
+        "cta": "実践の呼びかけ"
+      }
+    },
+    {
+      "id": "03-global-trend",
+      "name": "海外バズ型",
+      "name_en": "Global Trend",
+      "trigger_keywords": ["海外で話題", "海外バズ", "世界が注目"],
+      "psychology": "先行者利益と海外の評判を気にする心理",
+      "engagement_type": "リツイート・コメント",
+      "max_length": 280,
+      "structure": {
+        "hook": "【海外で話題】+ 対象 + が注目されてる",
+        "body": "海外での評価・具体的な活用事例",
+        "cta": "日本での展開予想・活用アドバイス"
+      }
+    },
+    {
+      "id": "04-conclusion-first",
+      "name": "結論型",
+      "name_en": "Conclusion First",
+      "trigger_keywords": ["結論", "結論から言います", "要するに"],
+      "psychology": "結論が先に知りたいという即時満足欲求",
+      "engagement_type": "いいね・ブックマーク",
+      "max_length": 280,
+      "structure": {
+        "hook": "【結論】+ 核心メッセージ",
+        "body": "その理由を3点で説明",
+        "cta": "実践の呼びかけ"
+      }
+    },
+    {
+      "id": "05-honest-opinion",
+      "name": "正直型",
+      "name_en": "Honest Opinion",
+      "trigger_keywords": ["正直", "本音", "リアル"],
+      "psychology": "本音が知りたいという信頼欲求",
+      "engagement_type": "いいね・コメント（共感）",
+      "max_length": 280,
+      "structure": {
+        "hook": "正直、+ 核心メッセージ",
+        "body": "その理由・背景を説明",
+        "cta": "共感を呼ぶ締めくくり"
+      }
+    },
+    {
+      "id": "06-vs-battle",
+      "name": "比較型",
+      "name_en": "VS Battle",
+      "trigger_keywords": ["vs", "比較", "どっち", "頂上決戦"],
+      "psychology": "選択の迷いを解消したいという意思決定支援欲求",
+      "engagement_type": "コメント（意見）・ブックマーク",
+      "max_length": 280,
+      "structure": {
+        "hook": "【頂上決戦】+ A vs B",
+        "body": "それぞれの強み・弱みを対比",
+        "cta": "結論・おすすめの選択基準"
+      }
+    },
+    {
+      "id": "07-first-impression",
+      "name": "体験記型",
+      "name_en": "First Impression",
+      "trigger_keywords": ["使ってみた", "体験", "感想"],
+      "psychology": "本当に使えるかという検証欲求",
+      "engagement_type": "いいね・リツイート",
+      "max_length": 280,
+      "structure": {
+        "hook": "【体験記】+ 対象 + を使ってみた",
+        "body": "使用前の期待 vs 使用後の感想",
+        "cta": "「想像以上」などの評価"
+      }
+    },
+    {
+      "id": "08-by-numbers",
+      "name": "数字強調型",
+      "name_en": "By The Numbers",
+      "trigger_keywords": ["%", "倍", "データ", "統計"],
+      "psychology": "データで判断したいという合理的欲求",
+      "engagement_type": "リツイート・ブックマーク",
+      "max_length": 280,
+      "structure": {
+        "hook": "【数字で見る】+ 対象 + の衝撃事実",
+        "body": "具体的な数字・率・比較データ",
+        "cta": "その数字が意味すること"
+      }
+    },
+    {
+      "id": "09-insight",
+      "name": "批判・論評型",
+      "name_en": "Insight",
+      "trigger_keywords": ["実は", "裏話", "真実"],
+      "psychology": "裏があるのではという探求欲求",
+      "engagement_type": "コメント（議論）・リツイート",
+      "max_length": 280,
+      "structure": {
+        "hook": "【実は】+ 一般的誤解 + 正しい理解",
+        "body": "なぜ誤解されたか・本当の姿は",
+        "cta": "新しい視点での活用方法"
+      }
+    },
+    {
+      "id": "10-freebie",
+      "name": "リソース配布型",
+      "name_en": "Free Resource",
+      "trigger_keywords": ["配布", "プレゼント", "無料"],
+      "psychology": "もらえるものはもらうという損失回避",
+      "engagement_type": "フォロー・RT・ブックマーク",
+      "max_length": 280,
+      "structure": {
+        "hook": "【配布】+ リソース名 + 欲しい人いますか？",
+        "body": "そのリソースの内容・使い方",
+        "cta": "入手方法（フォロー・RT・DMなど）"
+      }
+    },
+    {
+      "id": "11-pro-tips",
+      "name": "裏技・Tips型",
+      "name_en": "Pro Tips",
+      "trigger_keywords": ["裏技", "Tips", "知ってると差がつく"],
+      "psychology": "他の人が知らないことを知りたいという優越感",
+      "engagement_type": "ブックマーク・リツイート",
+      "max_length": 280,
+      "structure": {
+        "hook": "【知ってると差がつく】+ Tips内容",
+        "body": "具体的な手順・効果",
+        "cta": "実践で変わるポイント"
+      }
+    },
+    {
+      "id": "12-warning",
+      "name": "警告・アラート型",
+      "name_en": "Warning",
+      "trigger_keywords": ["注意", "警告", "危険"],
+      "psychology": "被害を避けたいという損失回避",
+      "engagement_type": "リツイート・ブックマーク",
+      "max_length": 280,
+      "structure": {
+        "hook": "【注意】+ 対象 + で○○が変わる",
+        "body": "具体的な影響・対応策",
+        "cta": "早めの対応を促す"
+      }
+    },
+    {
+      "id": "13-storytelling",
+      "name": "ストーリー型",
+      "name_en": "Storytelling",
+      "trigger_keywords": ["話", "経験", "元々"],
+      "psychology": "共感と希望を求める感情移入欲求",
+      "engagement_type": "いいね・コメント（応援）",
+      "max_length": 280,
+      "structure": {
+        "hook": "○○だった私が + 今は",
+        "body": "変化のプロセス・苦労・工夫",
+        "cta": "読者へのエール・メッセージ"
+      }
+    },
+    {
+      "id": "14-complete-guide",
+      "name": "完全解説型",
+      "name_en": "Complete Guide",
+      "trigger_keywords": ["完全版", "これだけ", "徹底解説"],
+      "psychology": "一度に全部知りたいという効率化欲求",
+      "engagement_type": "ブックマーク・リツイート",
+      "max_length": 280,
+      "structure": {
+        "hook": "【これだけ読めばOK】+ 対象 + 完全解説",
+        "body": "基礎から応用まで体系的に",
+        "cta": "次のステップへの誘導"
+      }
+    },
+    {
+      "id": "15-future-forecast",
+      "name": "予測・展望型",
+      "name_en": "Future Forecast",
+      "trigger_keywords": ["年後", "未来", "次", "予測"],
+      "psychology": "将来を知りたいという不安解消と準備欲求",
+      "engagement_type": "ブックマーク・コメント（意見）",
+      "max_length": 280,
+      "structure": {
+        "hook": "○○年後の + 業界/技術 + はこうなる",
+        "body": "予測の根拠・変化のポイント",
+        "cta": "今やるべき対策"
+      }
+    }
+  ]
+}
