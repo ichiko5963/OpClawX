@@ -1,0 +1,9 @@
+node_modules/
+.schedule.json
+logs/
+config/schedule.json
+.env
+*.log
+.DS_Store
+dist/
+coverage/
