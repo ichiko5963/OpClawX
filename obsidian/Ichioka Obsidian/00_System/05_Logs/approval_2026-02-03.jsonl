@@ -1,2 +1,0 @@
-{"timestamp": "2026-02-03T21:13:35.675557+09:00", "level": "INFO", "logger": "approval", "message": "Approval flow started"}
-{"timestamp": "2026-02-03T21:13:35.676653+09:00", "level": "INFO", "logger": "approval", "message": "Approval flow completed", "data": {"total": 8, "processed": 0}}

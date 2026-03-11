@@ -1,20 +1,25 @@
-backups/
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment variables
+.env
+
+# Generated files
+web/daily/*.json
+logs/
+
+# OS files
 .DS_Store
-bin/git-sync.log
-canvas/
-pi/HUB.md
-pi/
-pi-voice/
-pi-avatar/
-security/
-projects/AI-Secretary-System.md
+Thumbs.db
 
-# Obsidian設定全体（iCloudのロック問題を回避）
-obsidian/*/.obsidian/
-obsidian/*/.trash/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# SQLiteデータベース（iCloudロック問題）
-*.sqlite
-*.sqlite-*
-obsidian/Ichioka Obsidian/01_Daily/2025-09-24.md
-.vercel
+# Temp files
+*.tmp
+*.temp
+*.log
