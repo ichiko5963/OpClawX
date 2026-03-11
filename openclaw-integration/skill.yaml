@@ -1,0 +1,188 @@
+# Viral Post Automation - OpenClaw Skill / OpenClawスキル
+
+name: viral-post-automation
+version: 2.0.0
+description: |
+  AI-powered viral content analysis & daily generation system.
+  Analyze your X/Twitter data and get daily post suggestions via URL.
+  AI搭載バイラルコンテンツ分析・毎日自動生成システム。
+  X/Twitterデータを分析し、毎日URLで投稿案を受け取れます。
+
+author: AirCle / いち@Aircle代表
+license: MIT
+repository: https://github.com/ichiko5963/OpClawX
+
+entry:
+  command: cli
+  script: ./cli.js
+
+commands:
+  # Analyze command / 分析コマンド
+  analyze:
+    description: |
+      Analyze your post data using 15 viral patterns.
+      15のバズ型を使って投稿データを分析。
+    args:
+      - name: file
+        type: file
+        description: CSV or JSON file with post data
+        required: true
+      - name: language
+        type: string
+        description: Output language (en, ja, cn, ko, es)
+        default: auto
+        options: [en, ja, cn, ko, es, auto]
+      - name: output
+        type: string
+        description: Output file path for analysis results
+        required: false
+    
+  # Generate command / 生成コマンド
+  generate:
+    description: |
+      Generate a viral post using selected pattern.
+      選択した型を使ってバズ投稿を生成。
+    args:
+      - name: pattern
+        type: string
+        description: Pattern ID (01-breaking-news, etc.)
+        required: true
+        options: 
+          - 01-breaking-news
+          - 02-save-for-later
+          - 03-global-trend
+          - 04-conclusion-first
+          - 05-honest-opinion
+          - 06-vs-battle
+          - 07-first-impression
+          - 08-by-numbers
+          - 09-insight
+          - 10-freebie
+          - 11-pro-tips
+          - 12-warning
+          - 13-storytelling
+          - 14-complete-guide
+          - 15-future-forecast
+      - name: topic
+        type: string
+        description: Post topic/theme
+        required: true
+      - name: language
+        type: string
+        description: Language for generated post
+        default: en
+        options: [en, ja, cn, ko, es]
+      - name: platform
+        type: string
+        description: Target platform
+        default: x-twitter
+        options: [x-twitter, instagram, linkedin, note]
+    
+  # Schedule command / スケジュールコマンド
+  schedule:
+    description: |
+      Setup daily automated post generation.
+      毎日の自動投稿生成を設定。
+    args:
+      - name: frequency
+        type: string
+        description: How often to generate
+        default: daily
+        options: [daily, weekly, custom]
+      - name: time
+        type: string
+        description: Time to generate (HH:MM format)
+        default: "07:00"
+      - name: timezone
+        type: string
+        description: Timezone (e.g., Asia/Tokyo, America/New_York)
+        default: "UTC"
+      - name: webhook
+        type: string
+        description: Webhook URL for delivery (Discord, Slack, etc.)
+        required: false
+      - name: pattern
+        type: string
+        description: Default pattern to use
+        default: auto
+      - name: topic
+        type: string
+        description: Default topic/theme
+        required: false
+      - name: language
+        type: string
+        description: Language for posts
+        default: auto
+        
+  # List command / 一覧コマンド
+  list:
+    description: |
+      List all schedules and patterns.
+      全スケジュールとパターンを一覧表示。
+    args:
+      - name: type
+        type: string
+        description: What to list
+        default: patterns
+        options: [patterns, schedules, history]
+        
+  # Suggest command / 推奨コマンド
+  suggest:
+    description: |
+      Suggest best pattern for your topic.
+      トピックに最適な型を推奨。
+    args:
+      - name: topic
+        type: string
+        description: Your post topic
+        required: true
+      - name: language
+        type: string
+        description: Language
+        default: en
+
+# Default settings / デフォルト設定
+defaults:
+  language: en
+  platform: x-twitter
+  max_length: 280
+  emoji_limit: 3
+  timezone: UTC
+  
+# Supported platforms / サポートされるプラットフォーム
+platforms:
+  x-twitter:
+    max_length: 280
+    emoji_limit: 3
+    features: [threads, media, hashtags]
+    
+  instagram:
+    max_length: 2200
+    emoji_limit: 10
+    features: [carousel, stories, reels]
+    
+  linkedin:
+    max_length: 3000
+    emoji_limit: 5
+    features: [articles, documents, polls]
+    
+  note:
+    max_length: 10000
+    emoji_limit: no_limit
+    features: [images, embeds]
+
+# Paths / パス
+paths:
+  core: ../core
+  scheduler: ../scheduler
+  i18n: ../i18n
+  web: ../web
+  
+# Features / 機能
+features:
+  analysis: true
+  generation: true
+  scheduling: true
+  multi_language: true
+  webhook_delivery: true
+  web_dashboard: true

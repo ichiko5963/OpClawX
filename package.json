@@ -1,0 +1,28 @@
+{
+  "name": "viral-post-automation",
+  "version": "2.0.0",
+  "description": "Analyze X/Twitter data with 15 viral patterns → auto-generate daily posts → deliver via URL every morning",
+  "main": "core/analyzer.js",
+  "bin": { "vpa": "./cli.js" },
+  "scripts": {
+    "start":   "node cli.js help",
+    "analyze": "node cli.js analyze",
+    "gen":     "node cli.js generate",
+    "sched":   "node cli.js schedule",
+    "web":     "npx serve web -l 3000",
+    "sched:run":"node scheduler/daily.js --run-due",
+    "test":    "node tests/test.js"
+  },
+  "keywords": [
+    "viral","x","twitter","social-media","content","automation","ai","analytics",
+    "openclaw","バズる","自動化","病毒式","바이럴"
+  ],
+  "author": "AirCle / いち@Aircle代表",
+  "license": "MIT",
+  "repository": { "type":"git","url":"https://github.com/ichiko5963/OpClawX.git" },
+  "homepage": "https://github.com/ichiko5963/OpClawX",
+  "bugs": { "url":"https://github.com/ichiko5963/OpClawX/issues" },
+  "engines": { "node": ">=14.0.0" },
+  "dependencies": {},
+  "devDependencies": {}
+}

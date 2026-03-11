@@ -1,0 +1,76 @@
+{
+  "_comment": "Add your custom viral patterns here. They will be merged with built-in patterns.",
+  "_usage": "Copy this file to patterns.json and edit. Set 'override': true to replace a built-in pattern.",
+
+  "xiaohongshu-style": {
+    "name": {
+      "en": "Xiaohongshu Review",
+      "ja": "小紅書レビュー型",
+      "cn": "小红书种草型",
+      "ko": "샤오홍슈 스타일",
+      "es": "Estilo Xiaohongshu"
+    },
+    "indicators": ["绝了","必看","🔥","yyds","种草"],
+    "keywords": {
+      "cn": ["种草","必入","测评","真心推荐","绝了","必看","yyds"],
+      "en": ["must have","review","honest thoughts","obsessed"],
+      "ja": ["絶対買い","レビュー","本音","おすすめ"]
+    },
+    "structure": "【绝了】Topic — 真心推荐🔥\n・Point 1\n・Point 2\n・Point 3\n冲！👇",
+    "weight": 2.2
+  },
+
+  "douyin-hook": {
+    "name": {
+      "en": "Douyin Hook",
+      "ja": "抖音フック型",
+      "cn": "抖音钩子型",
+      "ko": "더우인 후크",
+      "es": "Gancho Douyin"
+    },
+    "indicators": ["千万别","后悔","才知道","震惊"],
+    "keywords": {
+      "cn": ["千万别","后悔没早点","才知道","震惊","原来"],
+      "en": ["don't make this mistake","I regret","wait for it"],
+      "ja": ["絶対やめて","後悔","知らなかった","衝撃"]
+    },
+    "structure": "千万别Topic！后悔没早点知道😱\n① Hook\n② Twist\n③ CTA 👇",
+    "weight": 1.9
+  },
+
+  "web3-crypto": {
+    "name": {
+      "en": "Web3 Alpha",
+      "ja": "Web3アルファ型",
+      "cn": "Web3内幕型",
+      "ko": "Web3 알파",
+      "es": "Alpha Web3"
+    },
+    "indicators": ["Alpha","🧠","WL","空投","airdrop"],
+    "keywords": {
+      "en": ["alpha","early","wl","airdrop","mint"],
+      "cn": ["内幕","早期","空投","铸造"],
+      "ja": ["アルファ","先行","エアドロ","ミント"]
+    },
+    "structure": "🧠 Alpha: Topic\n・Why it matters\n・How to get in\n・Timeline\nDon't miss 👇",
+    "weight": 2.5
+  },
+
+  "newsletter-curation": {
+    "name": {
+      "en": "Newsletter Curation",
+      "ja": "ニュースレターまとめ型",
+      "cn": "Newsletter精选型",
+      "ko": "뉴스레터 큐레이션",
+      "es": "Curación de Newsletter"
+    },
+    "indicators": ["本周","This week","まとめ","Top 5"],
+    "keywords": {
+      "en": ["this week","top 5","curated","what I learned"],
+      "cn": ["本周","Top 5","精选","学到了"],
+      "ja": ["今週","トップ5","まとめ","学び"]
+    },
+    "structure": "📧 This Week's Top 5: Topic\n① Item\n② Item\n③ Item\n④ Item\n⑤ Item\nRead more 👇",
+    "weight": 1.6
+  }
+}
