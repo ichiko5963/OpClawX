@@ -5,6 +5,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { extractFromNumbers } = require('./numbers-parser');
 
 // ─── Load custom patterns if exist ────────────────────────────────────────────
 
@@ -246,12 +247,17 @@ const BUILTIN_PATTERNS = {
 
 // ─── CSV/JSON loading ────────────────────────────────────────────────────────
 
-function loadFile(filePath) {
+async function loadFile(filePath) {
   if (!fs.existsSync(filePath)) throw new Error(`File not found: ${filePath}`);
   const ext = path.extname(filePath).toLowerCase();
   if (ext === '.json') return JSON.parse(fs.readFileSync(filePath, 'utf8'));
   if (ext === '.csv')  return fs.readFileSync(filePath, 'utf8');
-  throw new Error(`Unsupported format: ${ext}. Use .csv or .json`);
+  if (ext === '.numbers') {
+    console.log('[analyzer] Detected Numbers file, extracting data...');
+    const result = extractFromNumbers(filePath);
+    return result.posts;
+  }
+  throw new Error(`Unsupported format: ${ext}. Use .csv, .json, or .numbers`);
 }
 
 // ─── X Premium / Standard column name mapping ─────────────────────────────────
@@ -384,8 +390,8 @@ function autoDetectLang(posts) {
 
 // ─── Main analysis ───────────────────────────────────────────────────────────
 
-function analyzeData(filePath, lang = 'auto') {
-  const raw   = loadFile(filePath);
+async function analyzeData(filePath, lang = 'auto') {
+  const raw   = await loadFile(filePath);
   const posts = Array.isArray(raw) ? raw : parseCSV(raw);
 
   if (lang === 'auto') lang = autoDetectLang(posts);

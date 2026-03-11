@@ -98,8 +98,8 @@ const SAMPLE_CSV = 'text,likes,retweets,replies,date\n' +
   '"正直、これは難しい",80,20,15,"2026-01-03"';
 const tmpFile = path.join(__dirname, '.tmp_test.csv');
 fs.writeFileSync(tmpFile, SAMPLE_CSV);
-assert('Analyzes CSV correctly', () => {
-  const r = analyzeData(tmpFile, 'ja');
+assert('Analyzes CSV correctly', async () => {
+  const r = await analyzeData(tmpFile, 'ja');
   if (r.totalPosts !== 3) throw new Error(`Expected 3 posts, got ${r.totalPosts}`);
   if (!r.ranked.length) throw new Error('No patterns detected');
 });

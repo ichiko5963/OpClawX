@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily 15 Viral Posts — OpClawX</title>
+<style>
+  :root {
+    --bg: #0f1117; --panel: #1a1d27; --border: #2d3148;
+    --accent: #5865f2; --accent2: #57f287; --text: #e2e8f0;
+    --text2: #94a3b8; --warn: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+  
+  .header {
+    background: var(--panel); border-bottom: 1px solid var(--border);
+    padding: 20px 24px; text-align: center;
+  }
+  .header h1 { font-size: 1.4rem; margin-bottom: 6px; }
+  .header .date { color: var(--accent2); font-size: 1rem; }
+  .header .subtitle { color: var(--text2); font-size: 0.85rem; margin-top: 4px; }
+  
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  
+  .intro {
+    background: linear-gradient(135deg, rgba(88,101,242,0.15), rgba(87,242,135,0.1));
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-bottom: 24px;
+  }
+  .intro h2 { font-size: 1rem; margin-bottom: 10px; color: var(--accent); }
+  .intro p { color: var(--text2); font-size: 0.9rem; line-height: 1.6; }
+  .intro code {
+    background: var(--bg); padding: 2px 8px; border-radius: 4px;
+    font-family: monospace; font-size: 0.85rem;
+  }
+  
+  .post-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 16px; overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .post-card:hover { border-color: var(--accent); }
+  
+  .post-header {
+    background: var(--bg); padding: 14px 18px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-num {
+    background: var(--accent); color: #fff;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem;
+  }
+  .post-pattern { font-weight: 600; font-size: 1rem; }
+  .post-topic { color: var(--text2); font-size: 0.85rem; margin-left: auto; }
+  
+  .post-body { padding: 18px; }
+  .post-prompt {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    font-family: monospace; font-size: 0.85rem;
+    white-space: pre-wrap; line-height: 1.6;
+    max-height: 200px; overflow-y: auto;
+  }
+  
+  .post-actions {
+    display: flex; gap: 10px; margin-top: 14px;
+  }
+  .btn {
+    flex: 1; background: var(--accent); color: #fff;
+    border: none; border-radius: 8px; padding: 10px;
+    font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn.secondary { background: var(--border); }
+  .btn.copied { background: var(--accent2); color: #000; }
+  
+  .loading {
+    text-align: center; padding: 60px 20px; color: var(--text2);
+  }
+  .loading .spinner {
+    width: 40px; height: 40px; border: 3px solid var(--border);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 1s linear infinite; margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  
+  .error {
+    background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444;
+    color: #ef4444; padding: 20px; border-radius: 8px;
+    text-align: center;
+  }
+  
+  .lang-switcher {
+    display: flex; justify-content: center; gap: 8px; margin-bottom: 24px;
+  }
+  .lang-btn {
+    background: var(--panel); border: 1px solid var(--border);
+    color: var(--text2); padding: 8px 16px; border-radius: 20px;
+    cursor: pointer; font-size: 0.85rem; transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+  
+  .copy-toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--accent2); color: #000;
+    padding: 12px 20px; border-radius: 8px;
+    font-weight: 600; opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .copy-toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🚀 Daily 15 Viral Posts</h1>
+  <div class="date" id="dateDisplay">Loading...</div>
+  <div class="subtitle">15 patterns × Latest topics = Your daily content</div>
+</div>
+
+<div class="container">
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="switchLang('ja')">🇯🇵 日本語</button>
+    <button class="lang-btn" onclick="switchLang('en')">🇺🇸 English</button>
+    <button class="lang-btn" onclick="switchLang('cn')">🇨🇳 中文</button>
+  </div>
+  
+  <div class="intro">
+    <h2>📋 使い方 / How to Use</h2>
+    <p>
+      1. 気になる<strong>パターン</strong>を選ぶ<br>
+      2. 「Copy Prompt」をクリック<br>
+      3. ChatGPT / Claude / Gemini に貼り付け<br>
+      4. 生成された投稿文をXに投稿！<br><br>
+      <em>15のバズ型を毎日網羅。最新トレンドを踏まえた投稿案を自動生成しています。</em>
+    </p>
+  </div>
+  
+  <div id="postsContainer">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Generating 15 viral posts...</p>
+    </div>
+  </div>
+</div>
+
+<div class="copy-toast" id="toast">✅ Copied to clipboard!</div>
+
+<script>
+let currentLang = 'ja';
+let currentData = null;
+
+// Get date from URL or use today
+const urlParams = new URLSearchParams(window.location.search);
+const dateParam = urlParams.get('date');
+const langParam = urlParams.get('lang');
+
+if (langParam) {
+  currentLang = langParam;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.includes(
+      currentLang === 'ja' ? '日本' : currentLang === 'cn' ? '中文' : 'English'
+    ));
+  });
+}
+
+async function loadData() {
+  const date = dateParam || new Date().toISOString().split('T')[0];
+  document.getElementById('dateDisplay').textContent = date;
+  
+  try {
+    // Try to load JSON
+    const filename = dateParam ? `daily/${dateParam}-${currentLang}.json` : `daily/latest-${currentLang}.json`;
+    const response = await fetch(filename);
+    
+    if (!response.ok) {
+      throw new Error('Data not found');
+    }
+    
+    currentData = await response.json();
+    renderPosts(currentData.posts);
+  } catch (err) {
+    // Fallback: generate demo data
+    console.log('No data found, showing demo');
+    renderDemoData();
+  }
+}
+
+function renderPosts(posts) {
+  const container = document.getElementById('postsContainer');
+  
+  container.innerHTML = posts.map((post, i) => `
+    <div class="post-card" style="animation: fadeIn 0.5s ${i * 0.05}s both">
+      <div class="post-header">
+        <div class="post-num">${post.number}</div>
+        <div class="post-pattern">${post.patternName}</div>
+        <div class="post-topic">${post.topic}</div>
+      </div>
+      <div class="post-body">
+        <div class="post-prompt">${escapeHtml(post.prompt)}</div>
+        <div class="post-actions">
+          <button class="btn" onclick="copyPrompt('${post.id}', this)">📋 Copy Prompt</button>
+          <button class="btn secondary" onclick="copyPrompt('${post.id}', this, true)">🤖 Copy + Open AI</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDemoData() {
+  const demoPosts = [
+    { number: 1, patternName: '速報型 / Breaking News', topic: 'Claude最新アップデート', prompt: '【速報】Claudeがついに新機能をリリース！
+
+・機能1
+・機能2
+・機能3
+
+これが業界を変える👇', id: 'demo1' },
+    { number: 2, patternName: '保存版型 / Save for Later', topic: 'AIツールまとめ', prompt: '【保存版】絶対使うべきAIツール5選📌
+
+① ツールA
+② ツールB
+③ ツールC
+④ ツールD
+⑤ ツールE
+
+保存して後で見てね👇', id: 'demo2' },
+    { number: 3, patternName: '海外バズ型 / Global Trend', topic: 'ChatGPT海外の反応', prompt: '【海外で話題】ChatGPT新機能の海外の反応🌎
+
+・「これは革命だ」
+・「仕事が変わる」
+・日本でも注目集まる
+
+詳細👇', id: 'demo3' },
+    // ... demo posts continue
+  ];
+  
+  // Fill remaining with placeholders
+  const patterns = ['結論型', '正直型', '比較型', '体験記型', '数字強調型', '洞察型', '配布型', '裏技型', '警告型', 'ストーリー型', '完全解説型', '予測型'];
+  for (let i = 4; i <= 15; i++) {
+    demoPosts.push({
+      number: i,
+      patternName: patterns[i-4] || 'カスタム型',
+      topic: 'デモトピック',
+      prompt: `【デモ】パターン${i}の投稿案です\n\n・ポイント1\n・ポイント2\n・ポイント3\n\nCTA👇`,
+      id: `demo${i}`
+    });
+  }
+  
+  renderPosts(demoPosts);
+  document.querySelector('.intro').innerHTML = `
+    <h2>⚠️ デモモード / Demo Mode</h2>
+    <p>
+      まだデータが生成されていません。<br>
+      <code>node scheduler/daily-15.js --lang ${currentLang}</code>
+      を実行してデータを生成してください。
+    </p>
+  `;
+}
+
+function copyPrompt(id, btn, openAI = false) {
+  const post = currentData?.posts?.find(p => p.id === id);
+  if (!post) return;
+  
+  navigator.clipboard.writeText(post.prompt).then(() => {
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    showToast();
+    
+    setTimeout(() => {
+      btn.textContent = openAI ? '🤖 Copy + Open AI' : '📋 Copy Prompt';
+      btn.classList.remove('copied');
+    }, 2000);
+    
+    if (openAI) {
+      window.open('https://chat.openai.com', '_blank');
+    }
+  });
+}
+
+function showToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function switchLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  event.target.classList.add('active');
+  
+  // Update URL
+  const url = new URL(window.location);
+  url.searchParams.set('lang', lang);
+  window.history.pushState({}, '', url);
+  
+  loadData();
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Load on page load
+loadData();
+</script>
+
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+</body>
+</html>
