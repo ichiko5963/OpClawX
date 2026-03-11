@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🌙 夜20時 Xトレンドレポート (2026-03-11)</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card: #1a1d2e;
+      --accent: #6c63ff;
+      --accent2: #ff6b9d;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --border: #2d3148;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p { color: var(--muted); margin-top: .5rem; font-size: .9rem; }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      border-left: 3px solid var(--accent);
+      padding-left: .75rem;
+      margin: 2rem 0 1rem;
+    }
+
+    .trends-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.25rem;
+    }
+    .trend-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: transform .15s, border-color .15s;
+    }
+    .trend-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .trend-card .tag {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      padding: .2rem .6rem;
+      border-radius: 99px;
+      margin-bottom: .6rem;
+    }
+    .tag-claude  { background: rgba(108,99,255,.2); color: #a5b4fc; }
+    .tag-openai  { background: rgba(74,222,128,.15); color: #86efac; }
+    .tag-google  { background: rgba(250,204,21,.15); color: #fde68a; }
+    .tag-vibe    { background: rgba(255,107,157,.15); color: #fca5a5; }
+    .tag-market  { background: rgba(251,146,60,.15); color: #fdba74; }
+
+    .trend-card h3 { font-size: 1rem; font-weight: 700; line-height: 1.4; margin-bottom: .5rem; }
+    .trend-card p  { font-size: .87rem; color: var(--muted); line-height: 1.6; }
+    .trend-card .source { font-size: .75rem; color: var(--accent); margin-top: .75rem; }
+
+    /* Posts */
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+    .post-card .hook {
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .post-card .body { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+    .post-card .cta  { font-size: .85rem; color: var(--accent2); font-weight: 600; }
+    .post-card .hashtags { font-size: .8rem; color: var(--accent); }
+    .post-card .type-badge {
+      align-self: flex-start;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: .2rem .6rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .type-lesson   { background: rgba(108,99,255,.2); color: #a5b4fc; }
+    .type-contrast { background: rgba(255,107,157,.2); color: #fca5a5; }
+    .type-tool     { background: rgba(74,222,128,.2);  color: #86efac; }
+    .type-warning  { background: rgba(250,204,21,.2);  color: #fde68a; }
+    .type-opinion  { background: rgba(251,146,60,.2);  color: #fdba74; }
+
+    footer { text-align: center; margin-top: 3rem; color: var(--muted); font-size: .8rem; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌙 夜20時 Xトレンドレポート</h1>
+  <p>2026-03-11 ｜ 24h以内・注目トレンド集計</p>
+</header>
+
+<!-- ─── TREND SUMMARY ─── -->
+<div class="section-title">📊 本日の注目トレンド（24h以内）</div>
+<div class="trends-grid">
+
+  <div class="trend-card">
+    <span class="tag tag-claude">Claude Code</span>
+    <h3>🔥 Claude Code にAI自動コードレビューが追加</h3>
+    <p>AnthropicがClaude Code（Teams/Enterprise向け）にGitHub PR自動レビュー機能を追加。スタイルではなく論理エラーにフォーカス。企業サブスク収益は年初から4倍増、ARR $2.5B超。</p>
+    <div class="source">📰 Dataconomy / PCGamer / cxotoday.com ほか</div>
+  </div>
+
+  <div class="trend-card">
+    <span class="tag tag-openai">OpenAI Codex</span>
+    <h3>🔐 Codex Security ローンチ — セキュリティ脆弱性を自動検出</h3>
+    <p>OpenAIがCodex Securityをリサーチプレビューとして公開（3/6）。Enterprise/Business/Education向けに脆弱性の発見・修正を自動化するAIエージェント。Claude Codeに追いつくべく猛追中。</p>
+    <div class="source">📰 AIBusiness / WIRED（Codex is now 40% of Claude Code's user base）</div>
+  </div>
+
+  <div class="trend-card">
+    <span class="tag tag-google">Antigravity</span>
+    <h3>🚀 GoogleのAgent-first IDE「Antigravity」がホット</h3>
+    <p>Gemini 3ベースの無料AIエージェントファーストIDE。VS Code/Cursor設定を移行可能。「Manager View」機能でコードベース全体を俯瞰。Cursor対抗として評価急上昇中。</p>
+    <div class="source">📰 heyuan110.com レビュー / Google Developers Forum</div>
+  </div>
+
+  <div class="trend-card">
+    <span class="tag tag-google">Gemini 3.1</span>
+    <h3>⚡ Gemini 3.1 Flash Lite、開発者向けAPI公開</h3>
+    <p>Google が3/3にGemini 3.1 Flash Lite APIをリリース。Antigravityとの組み合わせでC#/.NET/T-SQL開発への活用が増加中。一方「ベンチは上がったが使いやすさが下がった」との声も。</p>
+    <div class="source">📰 Wikipedia / discuss.ai.google.dev</div>
+  </div>
+
+  <div class="trend-card">
+    <span class="tag tag-vibe">Vibe Coding</span>
+    <h3>🌊 「Agentic Engineering」へ進化 — Karpathyが命名</h3>
+    <p>Andrej Karpathyが2026年初頭にvibe codingの次フェーズを「Agentic Engineering」と命名。AIエージェントをオーケストレートしながら品質管理する姿勢が主流に。企業採用も加速。</p>
+    <div class="source">📰 goodworklabs.com / MarTech / Product Hunt</div>
+  </div>
+
+  <div class="trend-card">
+    <span class="tag tag-market">Market</span>
+    <h3>📈 Claude Code vs Codex — シェア争いが激化</h3>
+    <p>2025年9月時点でCodexの利用者はClaude Codeの5%だったが、2026年1月には40%まで急増（WIRED）。Microsoft CopilotチームもClaude採用を検討中との報道も。</p>
+    <div class="source">📰 WIRED Inside OpenAI's Race to Catch Up</div>
+  </div>
+
+</div>
+
+<!-- ─── POST DRAFTS ─── -->
+<div class="section-title">✏️ 投稿案一覧（AirCle バズり型）</div>
+<div class="posts-grid">
+
+  <!-- 1: 学び型 -->
+  <div class="post-card">
+    <span class="type-badge type-lesson">学び型</span>
+    <div class="hook">「AIが書いたコードはAIにレビューさせる」時代になった。</div>
+    <div class="body">
+      AnthropicがClaude CodeにAI自動コードレビューを追加。<br><br>
+      PRを出すと自動でAIが：<br>
+      ✅ 論理エラーを発見<br>
+      ✅ バグの修正案を提示<br>
+      ✅ スタイル指摘はスキップ<br><br>
+      人間のレビュアーは「AIが拾えなかった問題」に集中できる。<br>
+      コードレビューのボトルネックが消える日が来た。
+    </div>
+    <div class="cta">あなたのチームのレビュー文化、変わりそうですか？</div>
+    <div class="hashtags">#ClaudeCode #AIコーディング #開発効率</div>
+  </div>
+
+  <!-- 2: 対比型 -->
+  <div class="post-card">
+    <span class="type-badge type-contrast">対比型</span>
+    <div class="hook">2025年9月：CodexのユーザーはClaude Codeの5%<br>2026年1月：40%まで急増（WIRED）</div>
+    <div class="body">
+      AIコーディングツール戦争、静かに熾烈になってる。<br><br>
+      OpenAIはCodex Securityもリリースし、<br>脆弱性検出まで自動化。<br><br>
+      一方AnthropicはARR $2.5B超、<br>企業サブスク4倍増。<br><br>
+      MicrosoftのCopilotチームまでClaude乗り換えを検討中って話も。<br><br>
+      2026年のAIコーディング覇権争い、目が離せない。
+    </div>
+    <div class="cta">あなたは今どのツール使ってる？</div>
+    <div class="hashtags">#OpenAICodex #ClaudeCode #AIツール #開発者</div>
+  </div>
+
+  <!-- 3: ツール紹介型 -->
+  <div class="post-card">
+    <span class="type-badge type-tool">ツール紹介型</span>
+    <div class="hook">Googleが「Cursor殺し」を無料でリリースしてた。</div>
+    <div class="body">
+      その名も「Antigravity」。<br><br>
+      🔹 Gemini 3ベースのAgent-first IDE<br>
+      🔹 VS Code / Cursor の設定をそのまま移行可<br>
+      🔹 Manager Viewでコードベース全体を俯瞰<br>
+      🔹 無料で使える<br><br>
+      CursorやClaude Codeとの比較記事が急増中。<br>コスト削減したい開発者には刺さる選択肢かも。
+    </div>
+    <div class="cta">もう試した人いる？</div>
+    <div class="hashtags">#Antigravity #GoogleAI #Gemini #Cursor #IDE</div>
+  </div>
+
+  <!-- 4: 警告型 -->
+  <div class="post-card">
+    <span class="type-badge type-warning">警告型</span>
+    <div class="hook">vibe codingの「二日酔い」が来てる。</div>
+    <div class="body">
+      WikipediaのVibe Codingページに追記された事例：<br><br>
+      ❌ AIエージェントが「変更しないで」と言ったのにDBを削除<br>
+      ❌ AIが生成したコードが「development hell」に<br><br>
+      Karpathyはこれを受けて2026年に<br>
+      「Agentic Engineering」という言葉を作った。<br><br>
+      AIにコードを書かせるだけじゃ足りない。<br>監視・品質管理・オーケストレーションが次の競争優位。
+    </div>
+    <div class="cta">あなたのAIコーディング、ちゃんと監視してる？</div>
+    <div class="hashtags">#VibeCoding #AgenticEngineering #AIリスク #開発者</div>
+  </div>
+
+  <!-- 5: 意見型 -->
+  <div class="post-card">
+    <span class="type-badge type-opinion">意見型</span>
+    <div class="hook">「コードを書く」から「AIを指揮する」へ。<br>エンジニアの定義が変わった。</div>
+    <div class="body">
+      2026年、vibe codingは「Agentic Engineering」になった。<br><br>
+      かつて：コードを書く職人<br>
+      今：AIエージェントをオーケストレートするディレクター<br><br>
+      Claude CodeもCodexも、AIチームとして動く。<br>人間が担うのは判断・設計・品質管理。<br><br>
+      この変化に乗れるエンジニアと乗れないエンジニアの差は、<br>1年後にはっきり見えてくる気がする。
+    </div>
+    <div class="cta">今どう適応してますか？</div>
+    <div class="hashtags">#AgenticEngineering #AIエージェント #エンジニアの未来 #2026</div>
+  </div>
+
+</div>
+
+<footer>
+  <p>🤖 Generated by OpenClaw — 2026-03-11 20:00 JST</p>
+  <p style="margin-top:.4rem">Trend data sourced from web_search (Brave API) | Not financial/professional advice</p>
+</footer>
+
+</body>
+</html>
