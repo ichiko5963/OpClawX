@@ -1,12 +1,37 @@
 /**
- * Core Analyzer — 15 Viral Pattern Detection Engine
- * Numbers/CSV → pattern analysis → engagement scoring
+ * Core Analyzer — 15 Viral Pattern Detection Engine + Custom Patterns + X Premium Support
+ * Numbers/CSV/JSON/X Premium → pattern analysis → engagement scoring
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const VIRAL_PATTERNS = {
+// ─── Load custom patterns if exist ────────────────────────────────────────────
+
+const CUSTOM_PATTERNS_PATH = path.join(__dirname, '../config/patterns.json');
+let CUSTOM_PATTERNS = {};
+
+function loadCustomPatterns() {
+  if (fs.existsSync(CUSTOM_PATTERNS_PATH)) {
+    try {
+      const raw = JSON.parse(fs.readFileSync(CUSTOM_PATTERNS_PATH, 'utf8'));
+      // Remove metadata fields
+      const cleaned = {};
+      Object.entries(raw).forEach(([k, v]) => {
+        if (!k.startsWith('_')) cleaned[k] = v;
+      });
+      console.log(`[analyzer] Loaded ${Object.keys(cleaned).length} custom patterns from config/patterns.json`);
+      return cleaned;
+    } catch(e) {
+      console.warn('[analyzer] Failed to load custom patterns:', e.message);
+    }
+  }
+  return {};
+}
+
+// ─── Built-in 15 Viral Patterns ──────────────────────────────────────────────
+
+const BUILTIN_PATTERNS = {
   '01-breaking-news': {
     id: '01-breaking-news',
     name: { en: 'Breaking News', ja: '速報型', cn: '突发新闻', ko: '속보형', es: 'Noticia Urgente' },
@@ -229,6 +254,38 @@ function loadFile(filePath) {
   throw new Error(`Unsupported format: ${ext}. Use .csv or .json`);
 }
 
+// ─── X Premium / Standard column name mapping ─────────────────────────────────
+
+const COLUMN_ALIASES = {
+  // X Premium standard names
+  'tweet_text': 'text',
+  'tweet_created_at': 'date',
+  'impressions': 'impressions',
+  'engagements': 'engagements',
+  'likes': 'likes',
+  'retweets': 'retweets',
+  'replies': 'replies',
+  'bookmarks': 'bookmarks',
+  'quotes': 'quotes',
+  // Alternative names
+  'content': 'text',
+  'post': 'text',
+  'created_at': 'date',
+  'posted_at': 'date',
+  'favorites': 'likes',
+  'favs': 'likes',
+  'rts': 'retweets',
+  'shares': 'retweets',
+  'comments': 'replies',
+  'saves': 'bookmarks',
+  'views': 'impressions'
+};
+
+function normalizeColumnName(h) {
+  const clean = h.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+  return COLUMN_ALIASES[clean] || clean;
+}
+
 function parseCSV(raw) {
   const lines = raw.trim().split('\n').filter(Boolean);
   if (lines.length < 2) throw new Error('CSV must have a header row + at least one data row');
@@ -247,14 +304,26 @@ function parseCSV(raw) {
     return fields;
   };
 
-  const headers = parseRow(lines[0]).map(h => h.toLowerCase().replace(/\s+/g,'_'));
+  const headers = parseRow(lines[0]).map(h => normalizeColumnName(h));
+  
+  // Detect if this is X Premium format
+  const isXPremium = headers.includes('impressions') && headers.includes('engagements');
+  if (isXPremium) {
+    console.log('[analyzer] Detected X Premium analytics format');
+  }
+
   return lines.slice(1).map(line => {
     const vals = parseRow(line);
     const obj = {};
     headers.forEach((h, i) => {
       const v = vals[i] || '';
-      obj[h] = ['likes','retweets','replies','shares','comments','impressions','bookmarks']
-        .includes(h) ? (parseInt(v) || 0) : v;
+      // Numeric fields
+      if (['likes','retweets','replies','shares','comments','impressions','bookmarks','engagements','quotes']
+        .includes(h)) {
+        obj[h] = parseInt(v.replace(/,/g, '')) || 0;
+      } else {
+        obj[h] = v;
+      }
     });
     return obj;
   }).filter(p => p.text && p.text.length > 0);
@@ -262,11 +331,17 @@ function parseCSV(raw) {
 
 // ─── Pattern detection ───────────────────────────────────────────────────────
 
+function getAllPatterns() {
+  // Merge built-in and custom patterns at runtime
+  return { ...BUILTIN_PATTERNS, ...CUSTOM_PATTERNS };
+}
+
 function detectPatterns(text, lang = 'en') {
   const detected = [];
   if (!text) return detected;
 
-  Object.values(VIRAL_PATTERNS).forEach(pattern => {
+  const allPatterns = getAllPatterns();
+  Object.values(allPatterns).forEach(pattern => {
     // Indicator match (strong signal)
     const indicatorHit = pattern.indicators.some(ind =>
       text.toLowerCase().includes(ind.toLowerCase())
@@ -283,12 +358,17 @@ function detectPatterns(text, lang = 'en') {
 }
 
 function calcEngagement(post) {
+  // X Premium analytics: use engagements if available, otherwise calculate
+  if (post.engagements) {
+    return post.engagements;
+  }
   // Weighted: reply > retweet > like > impression
   return (
     (post.likes      || 0) * 1   +
     (post.retweets   || post.shares || 0) * 2 +
     (post.replies    || post.comments || 0) * 3 +
     (post.bookmarks  || 0) * 2   +
+    (post.quotes     || 0) * 2   +
     (post.impressions|| 0) * 0.01
   );
 }
@@ -330,10 +410,11 @@ function analyzeData(filePath, lang = 'auto') {
   });
 
   // Build ranked result
+  const allPatterns = getAllPatterns();
   const ranked = Object.entries(patternStats)
     .map(([pid, s]) => ({
       id: pid,
-      name: VIRAL_PATTERNS[pid]?.name || {},
+      name: allPatterns[pid]?.name || {},
       count: s.count,
       avgEng: Math.round(s.totalEng / s.count),
       topPosts: s.posts.sort((a,b) => b.eng - a.eng).slice(0, 3)
@@ -350,4 +431,15 @@ function analyzeData(filePath, lang = 'auto') {
   };
 }
 
-module.exports = { analyzeData, detectPatterns, calcEngagement, VIRAL_PATTERNS };
+// ─── Export with custom pattern merge ────────────────────────────────────────
+
+// Load custom patterns and merge with built-in
+CUSTOM_PATTERNS = loadCustomPatterns();
+const ALL_PATTERNS = { ...BUILTIN_PATTERNS, ...CUSTOM_PATTERNS };
+
+// Ensure all patterns have ID field
+Object.keys(ALL_PATTERNS).forEach(k => {
+  ALL_PATTERNS[k].id = k;
+});
+
+module.exports = { analyzeData, detectPatterns, calcEngagement, VIRAL_PATTERNS: ALL_PATTERNS };

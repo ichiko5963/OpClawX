@@ -1,188 +1,325 @@
-# Viral Post Automation 🚀
+# OpClawX 🚀 — Viral Post Automation for OpenClaw
 
-> **X/Twitter投稿データ → 15型分析 → 毎朝URLで投稿案が届く** 全自動システム
-> 
-> **Upload your X/Twitter data → 15-pattern analysis → Get daily post suggestions via URL**
+> **X/Twitterデータ → AI分析 → 毎朝URLで届くバズ投稿案**  
+> **X/Twitter Data → AI Analysis → Daily Viral Post Suggestions via URL**  
+> **X/Twitter数据 → AI分析 → 每日病毒式帖子建议直达URL**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![OpenClaw](https://img.shields.io/badge/OpenClaw-Skill-blue)](https://openclaw.ai)
 [![Node](https://img.shields.io/badge/Node-%3E%3D14-brightgreen)](https://nodejs.org)
 [![Languages](https://img.shields.io/badge/Languages-EN%20%7C%20JP%20%7C%20CN%20%7C%20KR%20%7C%20ES-orange)](./i18n)
 
-**[English](#english)** | [日本語](#日本語) | [中文](#中文)
+**🇺🇸 English** | **🇯🇵 日本語** | **🇨🇳 中文** | **🇰🇷 한국어** | **🇪🇸 Español**
+
+---
+
+## 🎯 For OpenClaw Users
+
+```bash
+# Install as OpenClaw skill
+openclaw skills install https://github.com/ichiko5963/OpClawX.git
+
+# Analyze your X Premium export
+openclaw run OpClawX --analyze ./x-premium-analytics.csv --lang ja
+
+# Generate today's viral post
+openclaw run OpClawX --generate --topic "AI最新情報" --pattern auto
+
+# Set up daily morning delivery to Discord
+openclaw run OpClawX --schedule --time 07:00 --webhook https://discord.com/api/webhooks/...
+```
 
 ---
 
 <a id="english"></a>
 ## 🇺🇸 English
 
-### What does this do?
+### Why This Exists
 
-1. **📊 Analyze** — Feed it your past X/Twitter CSV data
-2. **🧠 Learn** — It identifies which of the 15 viral patterns worked best for *you*
-3. **✨ Generate** — Produces daily post suggestions tailored to your top patterns
-4. **🔗 Deliver** — Sends a URL every morning (Discord/Slack/email/webhook)
+Every viral post follows psychological patterns. This system **learns YOUR audience's response patterns** from your X Premium analytics (or any CSV export) and generates daily post suggestions that match what actually works for *your* followers.
 
-**No code required. Works with OpenClaw or as a standalone CLI.**
+### The Flow
+
+```
+┌─────────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────┐
+│  X Premium CSV  │────▶│ Pattern AI   │────▶│  Generator  │────▶│  Discord/    │
+│  or Past Posts  │     │  Analysis    │     │  (15 types) │     │  Slack URL   │
+└─────────────────┘     └──────────────┘     └─────────────┘     └──────────────┘
+       ↓
+   Custom patterns
+   (your knowledge)
+```
 
 ### Quick Start
 
 ```bash
-# 1. Clone
 git clone https://github.com/ichiko5963/OpClawX.git && cd OpClawX
-
-# 2. Install
 npm install
 
-# 3. Analyze your data
-node cli.js analyze ./your-posts.csv --lang en
+# 1. Analyze your data (supports X Premium analytics export)
+node cli.js analyze ./x-premium-data.csv --lang en
 
-# 4. Generate today's post
-node cli.js generate --pattern 04-conclusion-first --topic "AI tools" --lang en
+# 2. Generate post with best pattern auto-selected
+node cli.js generate --topic "AI tools changing everything" --lang en
 
-# 5. Set up daily automation
-node cli.js schedule --time "07:00" --webhook https://your-webhook-url --topic "AI News"
+# 3. Daily automation
+node cli.js schedule --time "07:00" --webhook https://hooks.slack.com/...
 ```
 
-#### Using OpenClaw
+### X Premium Analytics Support
+
+Export your X Premium analytics:
+1. X Premium → Analytics → Export Data
+2. Save as CSV (posts with impressions, engagements, etc.)
+3. Feed directly into OpClawX
+
+The system reads: `text`, `impressions`, `engagements`, `likes`, `retweets`, `replies`, `bookmarks`
+
+### Customizable Patterns (Your Knowledge Matters!)
+
+**The 15 built-in patterns are just a starting point.** Create your own:
+
 ```bash
-openclaw skills install .
-openclaw run viral-post-automation --analyze ./posts.csv
-openclaw run viral-post-automation --generate --topic "AI News"
+# Edit config/patterns.json
+cp config/patterns.example.json config/patterns.json
 ```
 
-### The 15 Viral Patterns
-
-| # | Pattern | Psychology | Avg. Boost |
-|---|---------|-----------|------------|
-| 01 | Breaking News | FOMO — "I must see this NOW" | +180% RT |
-| 02 | Save for Later | Utility — "I'll need this someday" | +250% 🔖 |
-| 03 | Global Trend | Social proof — "The world is watching" | +140% reach |
-| 04 | Conclusion First | Instant gratification | +200% ❤️ |
-| 05 | Honest Opinion | Trust — "Finally, the truth" | +160% comments |
-| 06 | VS Battle | Decision anxiety — "Just tell me which one" | +150% replies |
-| 07 | First Impression | Curiosity — "Does it really work?" | +130% clicks |
-| 08 | By The Numbers | Credibility — "Show me the data" | +170% saves |
-| 09 | Insight | Exclusivity — "I didn't know that" | +155% shares |
-| 10 | Free Resource | Loss aversion — "Don't miss out" | +300% follows |
-| 11 | Pro Tips | Superiority — "Be ahead of others" | +140% saves |
-| 12 | Warning | Fear of loss — "I need to act now" | +190% RT |
-| 13 | Storytelling | Empathy — "That's me" | +120% comments |
-| 14 | Complete Guide | Efficiency — "One and done" | +200% 🔖 |
-| 15 | Future Forecast | Uncertainty — "What should I prepare for?" | +145% saves |
-
-### Data Format (CSV)
-
-```csv
-text,likes,retweets,replies,date
-"Your post text here",150,45,12,"2026-03-01"
-"Another post",89,30,8,"2026-03-02"
+```json
+{
+  "my-pattern-id": {
+    "name": { "en": "My Custom Type", "ja": "自分の型" },
+    "indicators": ["🔥","独家"],
+    "keywords": { "en": ["exclusive","breaking"], "cn": ["独家","首发"] },
+    "structure": "Hook → Twist → CTA",
+    "weight": 2.0
+  }
+}
 ```
+
+Your custom patterns work alongside (or replace) the defaults.
 
 ---
 
 <a id="日本語"></a>
 ## 🇯🇵 日本語
 
-### これは何をするシステム？
+### なぜ作ったか
 
-1. **📊 分析** — 過去のX/TwitterデータCSVを渡す
-2. **🧠 学習** — 15のバズ型の中で自分のデータに最も効いた型を特定
-3. **✨ 生成** — 毎日、あなたに最適化されたバズ投稿案を生成
-4. **🔗 配信** — 毎朝URLをDiscord/Slack/メール/Webhookで送信
+バズる投稿には必ず心理パターンがある。このシステムは**あなたのXプレミアム分析データ（または過去投稿CSV）から、あなたのフォロワーが実際に反応するパターンを学習**し、毎日それに最適化された投稿案を生成する。
 
-**コード不要。OpenClawスキルとしても、スタンドアロンCLIとしても動作。**
-
-### クイックスタート
+### OpenClaw連携（推奨）
 
 ```bash
-# 1. クローン
-git clone https://github.com/ichiko5963/OpClawX.git && cd OpClawX
+# OpenClawスキルとしてインストール
+openclaw skills install https://github.com/ichiko5963/OpClawX.git
 
-# 2. インストール
-npm install
+# Xプレミアムの分析データを読み込み
+openclaw run OpClawX --analyze ~/Downloads/x-premium-analytics.csv --lang ja
 
-# 3. データを分析
-node cli.js analyze ./your-posts.csv --lang ja
-
-# 4. 今日の投稿を生成
-node cli.js generate --pattern 04-conclusion-first --topic "AI最新情報" --lang ja
-
-# 5. 毎日自動化を設定
-node cli.js schedule --time "07:00" --webhook https://your-webhook-url --topic "AIニュース" --lang ja
+# 毎朝7時にDiscordへ自動配信
+openclaw run OpClawX --schedule --time 07:00 --webhook https://discord.com/api/webhooks/...
 ```
 
-#### OpenClawで使う場合
+### Xプレミアム分析対応
+
+Xプレミアムの分析データを直接読み込み：
+1. X Premium → アナリティクス → データエクスポート
+2. CSVで保存（インプレッション、エンゲージメント含む）
+3. OpClawXにそのまま渡す
+
+読み込むカラム：`text`, `impressions`, `engagements`, `likes`, `retweets`, `replies`, `bookmarks`
+
+### カスタマイズ可能なパターン（あなたのナレッジが重要！）
+
+**15の組み込みパターンは出発点に過ぎない。** 自分だけの型を追加：
+
 ```bash
-openclaw skills install .
-openclaw run viral-post-automation --analyze ./posts.csv --lang ja
-openclaw run viral-post-automation --generate --topic "AIニュース" --lang ja
+# 設定ファイルをコピー
+cp config/patterns.example.json config/patterns.json
 ```
 
-### 15のバズ型
-
-| # | 型名 | 心理メカニズム | 平均効果 |
-|---|------|-------------|---------|
-| 01 | 速報型 | FOMO「今すぐ見なければ」 | RT +180% |
-| 02 | 保存版型 | 実用性「いつか使う」 | 🔖 +250% |
-| 03 | 海外バズ型 | 社会的証明「世界が注目」 | リーチ +140% |
-| 04 | 結論型 | 即時満足「結論が知りたい」 | ❤️ +200% |
-| 05 | 正直型 | 信頼「本音が聞きたい」 | コメント +160% |
-| 06 | 比較型 | 決断不安「どっちか教えて」 | リプライ +150% |
-| 07 | 体験記型 | 好奇心「本当に使えるの？」 | クリック +130% |
-| 08 | 数字強調型 | 信頼性「データで見せて」 | 保存 +170% |
-| 09 | 洞察型 | 優越感「知らなかった」 | シェア +155% |
-| 10 | 配布型 | 損失回避「逃したくない」 | フォロー +300% |
-| 11 | 裏技型 | 優越感「他より先に知る」 | 保存 +140% |
-| 12 | 警告型 | 損失恐怖「今すぐ対処を」 | RT +190% |
-| 13 | ストーリー型 | 共感「それ自分だ」 | コメント +120% |
-| 14 | 完全解説型 | 効率性「これ一本でOK」 | 🔖 +200% |
-| 15 | 予測型 | 不安「何を準備すべき？」 | 保存 +145% |
-
-### データ形式（CSV）
-
-```csv
-text,likes,retweets,replies,date
-"投稿テキスト",150,45,12,"2026-03-01"
-"別の投稿",89,30,8,"2026-03-02"
+```json
+{
+  "my-hype-pattern": {
+    "name": { "en": "Hype Drop", "ja": "ドロップ型" },
+    "indicators": ["🔥","先行","Exclusive"],
+    "keywords": { "ja": ["先行","限定","ゲリラ"], "en": ["exclusive","drop"] },
+    "structure": "【先行】Product\n・Point 1\n・Point 2\n入手方法👇",
+    "weight": 2.5
+  }
+}
 ```
 
-Numbersファイル（.numbers）をお持ちの場合は、
-「ファイル → 書き出す → CSV」でエクスポートしてください。
+自分の業界・知識に合わせたパターンを自由に追加可能。
 
 ---
 
 <a id="中文"></a>
-## 🇨🇳 中文
+## 🇨🇳 中文 — 专为中文社交媒体优化
 
-### 这个系统做什么？
+### 为什么要用这个？
 
-1. **📊 分析** — 上传过去的 X/Twitter CSV 数据
-2. **🧠 学习** — 识别15种病毒式模式中最适合您数据的模式
-3. **✨ 生成** — 每天生成针对您优化的病毒式帖子建议
-4. **🔗 交付** — 每天早上通过 Discord/Slack/邮件/Webhook 发送 URL
+每个爆款帖子都遵循心理学模式。这个系统**从你的X Premium分析数据（或任何CSV导出）中学习你的受众实际反应的模式**，然后生成每天适合你粉丝的内容建议。
+
+### 中国市场特别优化
+
+- ✅ **小红书/微博/抖音风格适配** — 支持中文爆款标题结构
+- ✅ **中文关键词识别** — "独家"、"首发"、"绝了"、"必看"
+- ✅ **简体/繁体支持** — 自动检测并适配
+- ✅ **中国时区默认** — 早上7点 = 北京时间
+
+### OpenClaw一键安装
+
+```bash
+# 安装为OpenClaw技能
+openclaw skills install https://github.com/ichiko5963/OpClawX.git
+
+# 分析你的X Premium数据
+openclaw run OpClawX --analyze ./x-premium-data.csv --lang cn
+
+# 生成今日爆款文案
+openclaw run OpClawX --generate --topic "AI最新进展" --pattern auto --lang cn
+```
+
+### X Premium分析支持
+
+导出你的X Premium分析数据：
+1. X Premium → Analytics → Export Data
+2. 保存为CSV（包含曝光量、互动等）
+3. 直接导入OpClawX
+
+系统读取：`text`, `impressions`, `engagements`, `likes`, `retweets`, `replies`, `bookmarks`
+
+### 可自定义模式（你的行业知识很重要！）
+
+**15个内置模式只是起点。** 创建你自己的：
+
+```bash
+# 复制配置模板
+cp config/patterns.example.json config/patterns.json
+```
+
+```json
+{
+  "xiaohongshu-style": {
+    "name": { "cn": "小红书种草型", "en": "Xiaohongshu Style" },
+    "indicators": ["绝了","必看","🔥"],
+    "keywords": { "cn": ["种草","必入","测评","真心推荐"] },
+    "structure": "【绝了】Topic\n・Point 1\n・Point 2\n・Point 3\n冲！👇",
+    "weight": 2.2
+  }
+}
+```
+
+根据你的行业、受众、知识自由添加自定义模式。
+
+### 中文社交媒体适配
+
+| 平台 | 适配说明 |
+|-----|---------|
+| 小红书 | 种草文案结构、表情使用 |
+| 微博 | 热搜标题模式 |
+| 抖音 | 钩子开头、悬念结尾 |
+| X/Twitter | 国际受众优化 |
+
+---
+
+<a id="한국어"></a>
+## 🇰🇷 한국어
 
 ```bash
 git clone https://github.com/ichiko5963/OpClawX.git && cd OpClawX
 npm install
-node cli.js analyze ./your-posts.csv --lang cn
-node cli.js generate --pattern 04-conclusion-first --topic "AI新闻" --lang cn
-node cli.js schedule --time "07:00" --webhook https://your-webhook --topic "AI新闻" --lang cn
+node cli.js analyze ./posts.csv --lang ko
+node cli.js generate --topic "AI 소식" --pattern auto --lang ko
 ```
 
 ---
 
-## 📚 Documentation
+<a id="español"></a>
+## 🇪🇸 Español
 
-- [Installation Guide](./docs/INSTALL.md)
-- [Usage Guide](./docs/USAGE.md)
-- [Pattern Details](./docs/PATTERNS.md)
-- [API Reference](./docs/API.md)
-- [Contributing](./CONTRIBUTING.md)
+```bash
+git clone https://github.com/ichiko5963/OpClawX.git && cd OpClawX
+npm install
+node cli.js analyze ./posts.csv --lang es
+node cli.js generate --topic "Noticias de IA" --pattern auto --lang es
+```
 
-## 🤝 Contributing
+---
 
-PRs welcome in any language! See [CONTRIBUTING.md](./CONTRIBUTING.md)
+## 📊 15 Built-in Viral Patterns / 15の組み込みバズ型 / 15个内置爆款模式
+
+| # | Pattern | EN Name | JP Name | CN Name | Psychology |
+|---|---------|---------|---------|---------|-----------|
+| 01 | Breaking News | 速報型 | 突发新闻 | FOMO |
+| 02 | Save for Later | 保存版型 | 收藏版 | Utility |
+| 03 | Global Trend | 海外バズ型 | 全球趋势 | Social Proof |
+| 04 | Conclusion First | 結論型 | 结论先行 | Instant Gratification |
+| 05 | Honest Opinion | 正直型 | 诚实观点 | Trust |
+| 06 | VS Battle | 比較型 | 对决 | Decision Support |
+| 07 | First Impression | 体験記型 | 第一印象 | Curiosity |
+| 08 | By The Numbers | 数字強調型 | 数字强调 | Credibility |
+| 09 | Insight | 洞察型 | 洞察 | Exclusivity |
+| 10 | Free Resource | 配布型 | 免费资源 | Loss Aversion |
+| 11 | Pro Tips | 裏技型 | 专业技巧 | Superiority |
+| 12 | Warning | 警告型 | 警告 | Fear |
+| 13 | Storytelling | ストーリー型 | 故事 | Empathy |
+| 14 | Complete Guide | 完全解説型 | 完整指南 | Efficiency |
+| 15 | Future Forecast | 予測型 | 未来预测 | Preparedness |
+
+**→ Add your own in `config/patterns.json`!**
+
+---
+
+## 🔧 Configuration / 設定 / 配置
+
+### Custom Patterns カスタムパターン 自定义模式
+
+```bash
+mkdir -p config
+cp config/patterns.example.json config/patterns.json
+# Edit config/patterns.json with your own patterns
+```
+
+### Environment Variables
+
+```bash
+export VPA_WEBHOOK_URL="https://discord.com/api/webhooks/..."
+export VPA_DEFAULT_LANG="ja"
+export VPA_TIMEZONE="Asia/Tokyo"
+```
+
+---
+
+## 📁 Repository Structure
+
+```
+OpClawX/
+├── cli.js                    # Main CLI entry
+├── core/
+│   ├── analyzer.js           # Pattern detection engine
+│   └── generator.js          # Post prompt generator
+├── scheduler/
+│   └── daily.js              # Daily delivery system
+├── i18n/
+│   └── index.js              # EN/JP/CN/KR/ES translations
+├── config/
+│   └── patterns.example.json # Custom pattern template
+├── web/
+│   └── index.html            # Web dashboard
+├── openclaw-integration/     # OpenClaw skill files
+├── .github/workflows/        # GitHub Actions automation
+└── tests/                    # Test suite
+```
+
+---
+
+## 🤝 Contributing / 貢献 / 贡献
+
+PRs welcome in any language!  
+どの言語でのPRも歓迎！  
+欢迎任何语言的PR！
 
 ## 📄 License
 
@@ -190,4 +327,5 @@ MIT — free for personal and commercial use.
 
 ## ✨ Made by
 
-[AirCle](https://x.com/AiAircle34052) — Japan's student AI community
+[AirCle](https://x.com/AiAircle34052) — Japan's student AI community  
+Powered by [OpenClaw](https://openclaw.ai)
