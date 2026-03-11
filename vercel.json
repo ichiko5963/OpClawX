@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "name": "opclawx",
+  "public": true,
+  "routes": [
+    { "src": "/", "dest": "/web/index.html" },
+    { "src": "/daily", "dest": "/web/daily.html" },
+    { "src": "/daily/(.*)", "dest": "/web/daily.html" }
+  ],
+  "headers": [
+    {
+      "source": "/web/daily/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    }
+  ]
+}

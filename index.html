@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpClawX - Daily 15 Viral Posts</title>
+<style>
+  :root {
+    --bg: #0f1117; --panel: #1a1d27; --border: #2d3148;
+    --accent: #5865f2; --accent2: #57f287; --text: #e2e8f0;
+    --text2: #94a3b8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { 
+    background: var(--bg); 
+    color: var(--text); 
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+    min-height: 100vh; 
+  }
+  .header {
+    background: var(--panel); 
+    border-bottom: 1px solid var(--border);
+    padding: 24px; 
+    text-align: center;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
+  .header .date { color: var(--accent2); font-size: 1.1rem; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  .loading {
+    text-align: center; padding: 60px 20px; color: var(--text2);
+  }
+  .loading .spinner {
+    width: 40px; height: 40px; border: 3px solid var(--border);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 1s linear infinite; margin: 0 auto 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .post-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 16px; overflow: hidden;
+  }
+  .post-header {
+    background: var(--bg); padding: 14px 18px;
+    display: flex; align-items: center; gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .post-num {
+    background: var(--accent); color: #fff;
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.9rem;
+  }
+  .post-pattern { font-weight: 600; font-size: 1rem; }
+  .post-topic { color: var(--text2); font-size: 0.85rem; margin-left: auto; }
+  .post-body { padding: 18px; }
+  .post-prompt {
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px;
+    font-family: monospace; font-size: 0.85rem;
+    white-space: pre-wrap; line-height: 1.6;
+    max-height: 200px; overflow-y: auto;
+  }
+  .post-actions {
+    display: flex; gap: 10px; margin-top: 14px;
+  }
+  .btn {
+    flex: 1; background: var(--accent); color: #fff;
+    border: none; border-radius: 8px; padding: 10px;
+    font-size: 0.85rem; font-weight: 600; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn.secondary { background: var(--border); }
+  .btn.copied { background: var(--accent2); color: #000; }
+  .lang-switcher {
+    display: flex; justify-content: center; gap: 8px; margin-bottom: 24px;
+  }
+  .lang-btn {
+    background: var(--panel); border: 1px solid var(--border);
+    color: var(--text2); padding: 8px 16px; border-radius: 20px;
+    cursor: pointer; font-size: 0.85rem; transition: all 0.2s;
+  }
+  .lang-btn:hover, .lang-btn.active {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+  .copy-toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--accent2); color: #000;
+    padding: 12px 20px; border-radius: 8px;
+    font-weight: 600; opacity: 0; transition: opacity 0.3s;
+    pointer-events: none;
+  }
+  .copy-toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🚀 OpClawX - Daily 15 Viral Posts</h1>
+  <div class="date" id="dateDisplay">Loading...</div>
+  <div style="color: var(--text2); font-size: 0.85rem; margin-top: 4px;">15 patterns × Latest trends = Your daily content</div>
+</div>
+
+<div class="container">
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="switchLang('ja')">🇯🇵 日本語</button>
+    <button class="lang-btn" onclick="switchLang('en')">🇺🇸 English</button>
+    <button class="lang-btn" onclick="switchLang('cn')">🇨🇳 中文</button>
+  </div>
+  
+  <div id="postsContainer">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Generating 15 viral posts...</p>
+    </div>
+  </div>
+</div>
+
+<div class="copy-toast" id="toast">✅ Copied!</div>
+
+<script>
+let currentLang = 'ja';
+let currentData = null;
+
+// Get date from URL or use today
+const urlParams = new URLSearchParams(window.location.search);
+const dateParam = urlParams.get('date') || new Date().toISOString().split('T')[0];
+const langParam = urlParams.get('lang') || 'ja';
+currentLang = langParam;
+
+// Update active language button
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.classList.remove('active');
+  if (btn.textContent.includes(currentLang === 'ja' ? '日本' : currentLang === 'cn' ? '中文' : 'English')) {
+    btn.classList.add('active');
+  }
+});
+
+async function loadData() {
+  document.getElementById('dateDisplay').textContent = dateParam;
+  
+  try {
+    // Try to load from API first, then fallback to static JSON
+    const endpoints = [
+      `https://opclawx.vercel.app/api/daily?date=${dateParam}&lang=${currentLang}`,
+      `./web/daily/${dateParam}-${currentLang}.json`,
+      `./daily/${dateParam}-${currentLang}.json`,
+      `./web/daily/latest-${currentLang}.json`
+    ];
+    
+    let data = null;
+    for (const endpoint of endpoints) {
+      try {
+        const response = await fetch(endpoint);
+        if (response.ok) {
+          data = await response.json();
+          break;
+        }
+      } catch (e) { /* continue to next endpoint */ }
+    }
+    
+    if (!data) {
+      // Use demo data if no backend
+      data = generateDemoData();
+    }
+    
+    currentData = data;
+    renderPosts(data.posts || data);
+  } catch (err) {
+    console.error('Error:', err);
+    renderPosts(generateDemoData().posts);
+  }
+}
+
+function generateDemoData() {
+  const patterns = [
+    { id: '01-breaking-news', name: '速報型 / Breaking News', topic: 'Claude最新アップデート' },
+    { id: '02-save-for-later', name: '保存版型 / Save for Later', topic: 'AIツール完全まとめ' },
+    { id: '03-global-trend', name: '海外バズ型 / Global Trend', topic: 'ChatGPT海外の反応' },
+    { id: '04-conclusion-first', name: '結論型 / Conclusion First', topic: 'AI効果的活用法' },
+    { id: '05-honest-opinion', name: '正直型 / Honest Opinion', topic: '本音で語るAIの現状' },
+    { id: '06-vs-battle', name: '比較型 / VS Battle', topic: 'GPT-4 vs Claude' },
+    { id: '07-first-impression', name: '体験記型 / First Impression', topic: '新機能レビュー' },
+    { id: '08-by-numbers', name: '数字強調型 / By Numbers', topic: 'データで見るAI市場' },
+    { id: '09-insight', name: '洞察型 / Insight', topic: 'AI業界の裏話' },
+    { id: '10-freebie', name: '配布型 / Free Resource', topic: '無料テンプレート配布' },
+    { id: '11-pro-tips', name: '裏技型 / Pro Tips', topic: '知ってると差がつくコツ' },
+    { id: '12-warning', name: '警告型 / Warning', topic: '注意すべきAIリスク' },
+    { id: '13-storytelling', name: 'ストーリー型 / Storytelling', topic: '導入企業の成功談' },
+    { id: '14-complete-guide', name: '完全解説型 / Complete Guide', topic: 'AI初心者ガイド' },
+    { id: '15-future-forecast', name: '予測型 / Future Forecast', topic: '3年後のAI予測' }
+  ];
+  
+  return {
+    date: dateParam,
+    posts: patterns.map((p, i) => ({
+      number: i + 1,
+      patternName: p.name,
+      patternId: p.id,
+      topic: p.topic,
+      prompt: `【${p.name.split(' ')[0]}】${p.topic}\n\n・ポイント1\n・ポイント2\n・ポイント3\n\nCTA👇`,
+      url: `https://opclawx.vercel.app/p/${p.id}-${dateParam}`
+    }))
+  };
+}
+
+function renderPosts(posts) {
+  const container = document.getElementById('postsContainer');
+  
+  if (!posts || posts.length === 0) {
+    container.innerHTML = '<div style="text-align: center; color: var(--text2); padding: 40px;">No posts found</div>';
+    return;
+  }
+  
+  container.innerHTML = posts.map((post, i) => `
+    <div class="post-card" style="animation: fadeIn 0.5s ${i * 0.05}s both">
+      <div class="post-header">
+        <div class="post-num">${post.number || i + 1}</div>
+        <div class="post-pattern">${post.patternName}</div>
+        <div class="post-topic">${post.topic}</div>
+      </div>
+      <div class="post-body">
+        <div class="post-prompt">${escapeHtml(post.prompt)}</div>
+        <div class="post-actions">
+          <button class="btn" onclick="copyPrompt(${i}, this)">📋 Copy Prompt</button>
+          <button class="btn secondary" onclick="window.open('https://chat.openai.com', '_blank')">🤖 Open ChatGPT</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function copyPrompt(index, btn) {
+  const post = currentData?.posts?.[index];
+  if (!post) return;
+  
+  navigator.clipboard.writeText(post.prompt).then(() => {
+    btn.textContent = '✅ Copied!';
+    btn.classList.add('copied');
+    showToast();
+    
+    setTimeout(() => {
+      btn.textContent = '📋 Copy Prompt';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function showToast() {
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function switchLang(lang) {
+  currentLang = lang;
+  window.location.href = `?date=${dateParam}&lang=${lang}`;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+// Load on page load
+loadData();
+</script>
+
+<style>
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+</body>
+</html>

@@ -298,4 +298,4 @@ function generatePost(patternId, topic, lang = 'en', options = {}) {
   };
 }
 
-module.exports = { generatePost, suggestPattern, buildPrompt, PROMPT_TEMPLATES };
+module.exports = { generatePost, suggestPattern, buildPrompt, PROMPT_TEMPLATES, VIRAL_PATTERNS };

@@ -7,8 +7,8 @@
 const fs   = require('fs');
 const path = require('path');
 const https = require('https');
-const { generatePost, VIRAL_PATTERNS } = require('./core/generator');
-const { t } = require('./i18n');
+const { generatePost, VIRAL_PATTERNS } = require('../core/generator');
+const { t } = require('../i18n');
 
 const OUTPUT_DIR = path.join(__dirname, '../web/daily');
 const LOG_PATH   = path.join(__dirname, '../logs/daily-15.jsonl');
