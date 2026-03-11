@@ -1,64 +1,77 @@
-# 10 リソース配布型 - Free Resource
+# 10 Free Resource / リソース配布型
 
-## 🎯 定義
+## 🇺🇸 English
 
-無料リソース・テンプレート・チェックリストを配布。
-読者の「もらえるものはもらう」欲求を刺激。
+### Definition
+Distribute free resources, templates, or checklists. Stimulates the "get it while it's free" instinct.
 
-## 🧠 心理メカニズム
+### Psychology
+- **Loss Aversion**: Don't want to miss free stuff
+- **Reciprocity**: Feel need to give back
+- **FOMO**: Limited availability drives action
 
-1. **損失回避**: 無料のものを逃したくない
-2. **リカイプロシティ**: もらったら何か返したくなる
-3. **FOMO**: 限定感による行動促進
-
-## 📝 構文の骨格
-
+### Structure
 ```
-【配布】+ リソース名 + 欲しい人いますか？🎁
+【Free】+ Resource name + want it? 🎁
 ↓
-そのリソースの内容・使い方
+What's included (3 points)
 ↓
-価値の説明（元の価格や手間を強調）
+Original value/effort required
 ↓
-入手方法（フォロー・RT・DMなど）👇
+How to get it (Follow/RT/DM)
 ```
 
-## 🎨 生成プロンプト
-
+### Prompt Template
 ```
-以下のリソースで、SNSでバズる【配布型】の投稿を作成してください：
+Create a "Free Resource" style post for {theme}:
+- Start with 【配布】
+- Include "欲しい人いますか？"
+- 3 bullet points of contents
+- Clear acquisition method
+- Use 🎁 and 👇 only
+```
 
-【条件】
-- リソース名: {theme}
+### Example
+> 【配布】30 ChatGPT Prompts - want them? 🎁 Normally sold for $29. Includes: 10 writing prompts, 10 coding prompts, 10 analysis prompts. Follow + RT for DM. First 100 only 👇
+
+---
+
+## 🇯🇵 日本語
+
+### 定義
+無料リソース・テンプレート・チェックリストを配布。「もらえるものはもらう」欲求を刺激。
+
+### 心理メカニズム
+- **損失回避**: 無料のものを逃したくない
+- **返報性**: もらったら何か返したくなる
+- **FOMO**: 限定感による行動促進
+
+### 構造
+```
+【配布】+ リソース名 + 欲しい人いますか？ 🎁
+↓
+含まれるもの（3点）
+↓
+元の価値・手間
+↓
+入手方法（フォロー/RT/DM）
+```
+
+### プロンプトテンプレート
+```
+{theme}について配布型の投稿を作成:
+- 【配布】から始める
 - 「欲しい人いますか？」を含める
-- リソースの中身を3点で説明
+- 中身を3点で説明
 - 入手方法を明確に
-- 絵文字は🎁👇のみ使用
-- 文字数: 200-280文字
+- 🎁と👇のみ使用
 ```
 
-## 💡 コツ
-
-- 「普通なら有料」「◯◯円相当」など価値を強調
-- 「限定」「先着」などの希少性を演出
-- 具体的な使い方・成果を提示
-- 入手方法は簡単に（ハードルが高いと離脱する）
-
-## ✅ 代表投稿例
-
+### 例文
 > 【配布】ChatGPTプロンプト集30選、欲しい人いますか？🎁 普段有料で販売しているものを限定公開。・文章作成用10選 ・コード生成用10選 ・分析用10選。フォロー+RTでDMします。先着100名様限定👇
 
-## 📊 効果データ
-
-- 平均エンゲージメント率: 最高
-- フォロー率: ★★★★★
-- RT率: ★★★★★
-- 最適投稿時間: 朝7-9時、夜21-23時
-
-## 🎭 向いているテーマ
-
-- テンプレート配布
-- チェックリスト
-- プロンプト集
-- 学習資料
-- ツール紹介
+### 💡 コツ
+- 「普通なら有料」「◯◯円相当」で価値を強調
+- 「限定」「先着」などの希少性を演出
+- 入手方法は簡単に（ハードルが高いと離脱する）
+- 実際の使い方・成果を提示
