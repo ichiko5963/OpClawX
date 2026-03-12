@@ -1,278 +1,586 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OpClawX - Daily 15 Viral Posts</title>
+<title>Viral Post Automation</title>
 <style>
   :root {
     --bg: #0f1117; --panel: #1a1d27; --border: #2d3148;
     --accent: #5865f2; --accent2: #57f287; --text: #e2e8f0;
-    --text2: #94a3b8;
+    --text2: #94a3b8; --warn: #fbbf24;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { 
-    background: var(--bg); 
-    color: var(--text); 
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
-    min-height: 100vh; 
-  }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+  
   .header {
-    background: var(--panel); 
-    border-bottom: 1px solid var(--border);
-    padding: 24px; 
-    text-align: center;
+    background: var(--panel); border-bottom: 1px solid var(--border);
+    padding: 16px 24px; display: flex; align-items: center; gap: 12px;
   }
-  .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
-  .header .date { color: var(--accent2); font-size: 1.1rem; }
-  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
-  .loading {
-    text-align: center; padding: 60px 20px; color: var(--text2);
+  .header h1 { font-size: 1.1rem; font-weight: 700; }
+  .badge {
+    background: var(--accent); color: #fff; font-size: 0.6rem;
+    padding: 2px 6px; border-radius: 4px; font-weight: 600; letter-spacing: .5px;
   }
-  .loading .spinner {
-    width: 40px; height: 40px; border: 3px solid var(--border);
-    border-top-color: var(--accent); border-radius: 50%;
-    animation: spin 1s linear infinite; margin: 0 auto 16px;
+  .lang-select {
+    margin-left: auto; background: var(--border); color: var(--text);
+    border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 0.85rem;
   }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .post-card {
+
+  .main { max-width: 960px; margin: 0 auto; padding: 24px 16px; display: grid; gap: 20px; }
+
+  .card {
     background: var(--panel); border: 1px solid var(--border);
-    border-radius: 12px; margin-bottom: 16px; overflow: hidden;
+    border-radius: 12px; padding: 20px;
   }
-  .post-header {
-    background: var(--bg); padding: 14px 18px;
-    display: flex; align-items: center; gap: 12px;
+  .card h2 { font-size: 0.95rem; font-weight: 600; margin-bottom: 14px; color: var(--text2); }
+  
+  /* Upload zone */
+  .upload-zone {
+    border: 2px dashed var(--border); border-radius: 8px; padding: 32px;
+    text-align: center; cursor: pointer; transition: all .2s;
+  }
+  .upload-zone:hover, .upload-zone.drag { border-color: var(--accent); background: rgba(88,101,242,.08); }
+  .upload-zone .icon { font-size: 2rem; margin-bottom: 8px; }
+  .upload-zone p { color: var(--text2); font-size: 0.85rem; }
+  #fileInput { display: none; }
+
+  /* Pattern grid */
+  .pattern-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px;
+  }
+  .pattern-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 12px; cursor: pointer; transition: all .15s;
+  }
+  .pattern-card:hover { border-color: var(--accent); }
+  .pattern-card.selected { border-color: var(--accent); background: rgba(88,101,242,.12); }
+  .pattern-card .num { font-size: 0.65rem; color: var(--text2); }
+  .pattern-card .name { font-size: 0.85rem; font-weight: 600; margin-top: 2px; }
+  .pattern-card .mult { font-size: 0.7rem; color: var(--accent2); margin-top: 4px; }
+
+  /* Form controls */
+  input, select, textarea {
+    width: 100%; background: var(--bg); border: 1px solid var(--border);
+    color: var(--text); border-radius: 8px; padding: 10px 12px; font-size: 0.9rem;
+    outline: none; transition: border-color .2s;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  label { font-size: 0.8rem; color: var(--text2); margin-bottom: 6px; display: block; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  
+  button {
+    background: var(--accent); color: #fff; border: none; border-radius: 8px;
+    padding: 10px 20px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    transition: opacity .2s; width: 100%; margin-top: 12px;
+  }
+  button:hover { opacity: .85; }
+  button.secondary { background: var(--border); }
+
+  /* Result box */
+  .result-box {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; font-family: monospace; font-size: 0.85rem; white-space: pre-wrap;
+    max-height: 300px; overflow-y: auto; display: none;
+  }
+  .result-box.visible { display: block; }
+  .result-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .chip {
+    background: var(--border); border-radius: 20px; padding: 4px 10px;
+    font-size: 0.75rem; color: var(--text2);
+  }
+  .chip.green { background: rgba(87,242,135,.15); color: var(--accent2); }
+  .chip.blue  { background: rgba(88,101,242,.15); color: var(--accent); }
+
+  /* Analysis results */
+  .pattern-rank { margin-top: 8px; }
+  .rank-item {
+    display: flex; align-items: center; gap: 10px; padding: 8px 0;
     border-bottom: 1px solid var(--border);
   }
-  .post-num {
-    background: var(--accent); color: #fff;
-    width: 32px; height: 32px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 0.9rem;
+  .rank-item:last-child { border-bottom: none; }
+  .rank-num { font-size: 0.7rem; color: var(--text2); width: 20px; text-align: right; }
+  .rank-bar-wrap { flex: 1; }
+  .rank-name { font-size: 0.85rem; font-weight: 600; }
+  .rank-bar {
+    height: 4px; border-radius: 2px; background: var(--accent);
+    margin-top: 4px; transition: width .5s;
   }
-  .post-pattern { font-weight: 600; font-size: 1rem; }
-  .post-topic { color: var(--text2); font-size: 0.85rem; margin-left: auto; }
-  .post-body { padding: 18px; }
-  .post-prompt {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 16px;
-    font-family: monospace; font-size: 0.85rem;
-    white-space: pre-wrap; line-height: 1.6;
-    max-height: 200px; overflow-y: auto;
+  .rank-eng { font-size: 0.75rem; color: var(--accent2); width: 60px; text-align: right; }
+
+  /* Schedule */
+  .schedule-row { display: flex; gap: 8px; margin-bottom: 8px; }
+  .schedule-row input, .schedule-row select { margin: 0; }
+  .schedule-item {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 10px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
   }
-  .post-actions {
-    display: flex; gap: 10px; margin-top: 14px;
+  .schedule-item .del { background: none; color: #ef4444; width: auto; margin: 0; padding: 4px 8px; }
+
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 24px; right: 24px; background: var(--accent2);
+    color: #000; padding: 10px 18px; border-radius: 8px; font-weight: 600;
+    font-size: 0.85rem; opacity: 0; transition: opacity .3s; pointer-events: none;
   }
-  .btn {
-    flex: 1; background: var(--accent); color: #fff;
-    border: none; border-radius: 8px; padding: 10px;
-    font-size: 0.85rem; font-weight: 600; cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  .btn:hover { opacity: 0.85; }
-  .btn.secondary { background: var(--border); }
-  .btn.copied { background: var(--accent2); color: #000; }
-  .lang-switcher {
-    display: flex; justify-content: center; gap: 8px; margin-bottom: 24px;
-  }
-  .lang-btn {
-    background: var(--panel); border: 1px solid var(--border);
-    color: var(--text2); padding: 8px 16px; border-radius: 20px;
-    cursor: pointer; font-size: 0.85rem; transition: all 0.2s;
-  }
-  .lang-btn:hover, .lang-btn.active {
-    background: var(--accent); color: #fff; border-color: var(--accent);
-  }
-  .copy-toast {
-    position: fixed; bottom: 24px; right: 24px;
-    background: var(--accent2); color: #000;
-    padding: 12px 20px; border-radius: 8px;
-    font-weight: 600; opacity: 0; transition: opacity 0.3s;
-    pointer-events: none;
-  }
-  .copy-toast.show { opacity: 1; }
+  #toast.show { opacity: 1; }
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>🚀 OpClawX - Daily 15 Viral Posts</h1>
-  <div class="date" id="dateDisplay">Loading...</div>
-  <div style="color: var(--text2); font-size: 0.85rem; margin-top: 4px;">15 patterns × Latest trends = Your daily content</div>
+  <span style="font-size:1.4rem">🚀</span>
+  <h1>Viral Post Automation</h1>
+  <span class="badge">v2.0</span>
+  <select class="lang-select" id="langSwitch" onchange="switchLang(this.value)">
+    <option value="en">🇺🇸 EN</option>
+    <option value="ja">🇯🇵 JP</option>
+    <option value="cn">🇨🇳 CN</option>
+    <option value="ko">🇰🇷 KR</option>
+    <option value="es">🇪🇸 ES</option>
+  </select>
 </div>
 
-<div class="container">
-  <div class="lang-switcher">
-    <button class="lang-btn active" onclick="switchLang('ja')">🇯🇵 日本語</button>
-    <button class="lang-btn" onclick="switchLang('en')">🇺🇸 English</button>
-    <button class="lang-btn" onclick="switchLang('cn')">🇨🇳 中文</button>
-  </div>
-  
-  <div id="postsContainer">
-    <div class="loading">
-      <div class="spinner"></div>
-      <p>Generating 15 viral posts...</p>
+<div class="main">
+
+  <!-- Step 1: Upload -->
+  <div class="card">
+    <h2 id="step1Title">① Analyze Your Data</h2>
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+      <div class="icon">📊</div>
+      <p id="uploadText">Drag &amp; drop your CSV here, or click to browse</p>
+      <p style="font-size:.75rem;margin-top:6px;color:#475569">Format: text, likes, retweets, replies, date</p>
+      <input type="file" id="fileInput" accept=".csv,.json" onchange="handleFile(this)">
     </div>
+    <div id="analysisResults" class="pattern-rank" style="display:none;margin-top:14px"></div>
   </div>
+
+  <!-- Step 2: Generate -->
+  <div class="card">
+    <h2 id="step2Title">② Generate Post</h2>
+    <div style="margin-bottom:12px">
+      <label id="selectPatternLabel">Select Pattern</label>
+      <div class="pattern-grid" id="patternGrid"></div>
+    </div>
+    <div class="row">
+      <div>
+        <label id="topicLabel">Topic</label>
+        <input type="text" id="topicInput" placeholder="e.g. AI new feature, ChatGPT update…">
+      </div>
+      <div>
+        <label id="langLabel">Language</label>
+        <select id="langSelect">
+          <option value="en">🇺🇸 English</option>
+          <option value="ja">🇯🇵 日本語</option>
+          <option value="cn">🇨🇳 中文</option>
+          <option value="ko">🇰🇷 한국어</option>
+          <option value="es">🇪🇸 Español</option>
+        </select>
+      </div>
+    </div>
+    <button id="generateBtn" onclick="generatePost()">✨ Generate Post</button>
+
+    <div id="resultBox" class="result-box" style="margin-top:14px"></div>
+    <div id="resultMeta" class="result-meta" style="display:none"></div>
+    <button id="copyBtn" class="secondary" onclick="copyPrompt()" style="display:none">📋 Copy Prompt</button>
+  </div>
+
+  <!-- Step 3: Schedule -->
+  <div class="card">
+    <h2 id="step3Title">③ Daily Delivery</h2>
+    <div class="row">
+      <div>
+        <label>Delivery Time</label>
+        <input type="time" id="schedTime" value="07:00">
+      </div>
+      <div>
+        <label>Webhook URL (Discord/Slack)</label>
+        <input type="url" id="schedWebhook" placeholder="https://discord.com/api/webhooks/…">
+      </div>
+    </div>
+    <div class="row" style="margin-top:10px">
+      <div>
+        <label>Topic</label>
+        <input type="text" id="schedTopic" placeholder="Daily AI News">
+      </div>
+      <div>
+        <label>Language</label>
+        <select id="schedLang">
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="cn">中文</option>
+          <option value="ko">한국어</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+    </div>
+    <button onclick="saveSchedule()">💾 Save Schedule</button>
+    <div id="schedList" style="margin-top:14px"></div>
+  </div>
+
 </div>
 
-<div class="copy-toast" id="toast">✅ Copied!</div>
+<div id="toast">Copied!</div>
 
 <script>
-let currentLang = 'ja';
-let currentData = null;
+// ─── Translations ─────────────────────────────────────────────────────────
 
-// Get date from URL or use today
-const urlParams = new URLSearchParams(window.location.search);
-const dateParam = urlParams.get('date') || new Date().toISOString().split('T')[0];
-const langParam = urlParams.get('lang') || 'ja';
-currentLang = langParam;
-
-// Update active language button
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.classList.remove('active');
-  if (btn.textContent.includes(currentLang === 'ja' ? '日本' : currentLang === 'cn' ? '中文' : 'English')) {
-    btn.classList.add('active');
-  }
-});
-
-async function loadData() {
-  document.getElementById('dateDisplay').textContent = dateParam;
-  
-  try {
-    // Try to load from API first, then fallback to static JSON
-    const endpoints = [
-      `https://opclawx.vercel.app/api/daily?date=${dateParam}&lang=${currentLang}`,
-      `./web/daily/${dateParam}-${currentLang}.json`,
-      `./daily/${dateParam}-${currentLang}.json`,
-      `./web/daily/latest-${currentLang}.json`
-    ];
-    
-    let data = null;
-    for (const endpoint of endpoints) {
-      try {
-        const response = await fetch(endpoint);
-        if (response.ok) {
-          data = await response.json();
-          break;
-        }
-      } catch (e) { /* continue to next endpoint */ }
+const I18N = {
+  en: {
+    step1:'① Analyze Your Data', step2:'② Generate Post', step3:'③ Daily Delivery',
+    upload:'Drag & drop your CSV here, or click to browse',
+    selectPattern:'Select Pattern', topic:'Topic', lang:'Language',
+    generateBtn:'✨ Generate Post', copyBtn:'📋 Copy Prompt', copied:'Copied!',
+    topPatterns:'Top Patterns', avgEng:'avg eng',
+    patterns: {
+      '01-breaking-news':'Breaking News','02-save-for-later':'Save for Later',
+      '03-global-trend':'Global Trend','04-conclusion-first':'Conclusion First',
+      '05-honest-opinion':'Honest Opinion','06-vs-battle':'VS Battle',
+      '07-first-impression':'First Impression','08-by-numbers':'By Numbers',
+      '09-insight':'Insight','10-freebie':'Free Resource',
+      '11-pro-tips':'Pro Tips','12-warning':'Warning',
+      '13-storytelling':'Storytelling','14-complete-guide':'Complete Guide',
+      '15-future-forecast':'Future Forecast'
     }
-    
-    if (!data) {
-      // Use demo data if no backend
-      data = generateDemoData();
+  },
+  ja: {
+    step1:'① データを分析', step2:'② 投稿を生成', step3:'③ 毎日配信',
+    upload:'CSVをここにドロップ、またはクリックして選択',
+    selectPattern:'パターンを選ぶ', topic:'トピック', lang:'言語',
+    generateBtn:'✨ 投稿を生成', copyBtn:'📋 プロンプトをコピー', copied:'コピーしました！',
+    topPatterns:'効果的なパターン', avgEng:'平均EG',
+    patterns: {
+      '01-breaking-news':'速報型','02-save-for-later':'保存版型',
+      '03-global-trend':'海外バズ型','04-conclusion-first':'結論型',
+      '05-honest-opinion':'正直型','06-vs-battle':'比較型',
+      '07-first-impression':'体験記型','08-by-numbers':'数字強調型',
+      '09-insight':'洞察型','10-freebie':'配布型',
+      '11-pro-tips':'裏技型','12-warning':'警告型',
+      '13-storytelling':'ストーリー型','14-complete-guide':'完全解説型',
+      '15-future-forecast':'予測型'
     }
-    
-    currentData = data;
-    renderPosts(data.posts || data);
-  } catch (err) {
-    console.error('Error:', err);
-    renderPosts(generateDemoData().posts);
+  },
+  cn: {
+    step1:'① 分析数据', step2:'② 生成帖子', step3:'③ 每日推送',
+    upload:'将CSV拖放到此处，或点击浏览',
+    selectPattern:'选择模式', topic:'主题', lang:'语言',
+    generateBtn:'✨ 生成帖子', copyBtn:'📋 复制提示词', copied:'已复制！',
+    topPatterns:'热门模式', avgEng:'平均参与',
+    patterns: {
+      '01-breaking-news':'突发新闻','02-save-for-later':'收藏版',
+      '03-global-trend':'全球趋势','04-conclusion-first':'结论先行',
+      '05-honest-opinion':'诚实观点','06-vs-battle':'对决',
+      '07-first-impression':'第一印象','08-by-numbers':'数字强调',
+      '09-insight':'洞察','10-freebie':'免费资源',
+      '11-pro-tips':'专业技巧','12-warning':'警告',
+      '13-storytelling':'故事','14-complete-guide':'完整指南',
+      '15-future-forecast':'未来预测'
+    }
+  },
+  ko: {
+    step1:'① 데이터 분석', step2:'② 게시물 생성', step3:'③ 매일 배달',
+    upload:'CSV를 여기에 드롭하거나 클릭하여 찾아보기',
+    selectPattern:'패턴 선택', topic:'주제', lang:'언어',
+    generateBtn:'✨ 게시물 생성', copyBtn:'📋 프롬프트 복사', copied:'복사됨!',
+    topPatterns:'인기 패턴', avgEng:'평균 참여',
+    patterns: {
+      '01-breaking-news':'속보형','02-save-for-later':'저장형',
+      '03-global-trend':'글로벌트렌드','04-conclusion-first':'결론형',
+      '05-honest-opinion':'솔직한의견','06-vs-battle':'비교형',
+      '07-first-impression':'첫인상형','08-by-numbers':'숫자강조형',
+      '09-insight':'통찰형','10-freebie':'무료배포형',
+      '11-pro-tips':'프로팁형','12-warning':'경고형',
+      '13-storytelling':'스토리텔링형','14-complete-guide':'완전가이드형',
+      '15-future-forecast':'미래예측형'
+    }
+  },
+  es: {
+    step1:'① Analizar Datos', step2:'② Generar Post', step3:'③ Entrega Diaria',
+    upload:'Arrastra tu CSV aquí, o haz clic para buscar',
+    selectPattern:'Seleccionar Patrón', topic:'Tema', lang:'Idioma',
+    generateBtn:'✨ Generar Post', copyBtn:'📋 Copiar Prompt', copied:'¡Copiado!',
+    topPatterns:'Mejores Patrones', avgEng:'EG promedio',
+    patterns: {
+      '01-breaking-news':'Noticia Urgente','02-save-for-later':'Guardar Después',
+      '03-global-trend':'Tendencia Global','04-conclusion-first':'Conclusión Primero',
+      '05-honest-opinion':'Opinión Honesta','06-vs-battle':'VS Batalla',
+      '07-first-impression':'Primera Impresión','08-by-numbers':'En Números',
+      '09-insight':'Perspectiva','10-freebie':'Recurso Gratuito',
+      '11-pro-tips':'Consejos Pro','12-warning':'Advertencia',
+      '13-storytelling':'Narrativa','14-complete-guide':'Guía Completa',
+      '15-future-forecast':'Pronóstico Futuro'
+    }
   }
-}
+};
 
-function generateDemoData() {
-  const patterns = [
-    { id: '01-breaking-news', name: '速報型 / Breaking News', topic: 'Claude最新アップデート' },
-    { id: '02-save-for-later', name: '保存版型 / Save for Later', topic: 'AIツール完全まとめ' },
-    { id: '03-global-trend', name: '海外バズ型 / Global Trend', topic: 'ChatGPT海外の反応' },
-    { id: '04-conclusion-first', name: '結論型 / Conclusion First', topic: 'AI効果的活用法' },
-    { id: '05-honest-opinion', name: '正直型 / Honest Opinion', topic: '本音で語るAIの現状' },
-    { id: '06-vs-battle', name: '比較型 / VS Battle', topic: 'GPT-4 vs Claude' },
-    { id: '07-first-impression', name: '体験記型 / First Impression', topic: '新機能レビュー' },
-    { id: '08-by-numbers', name: '数字強調型 / By Numbers', topic: 'データで見るAI市場' },
-    { id: '09-insight', name: '洞察型 / Insight', topic: 'AI業界の裏話' },
-    { id: '10-freebie', name: '配布型 / Free Resource', topic: '無料テンプレート配布' },
-    { id: '11-pro-tips', name: '裏技型 / Pro Tips', topic: '知ってると差がつくコツ' },
-    { id: '12-warning', name: '警告型 / Warning', topic: '注意すべきAIリスク' },
-    { id: '13-storytelling', name: 'ストーリー型 / Storytelling', topic: '導入企業の成功談' },
-    { id: '14-complete-guide', name: '完全解説型 / Complete Guide', topic: 'AI初心者ガイド' },
-    { id: '15-future-forecast', name: '予測型 / Future Forecast', topic: '3年後のAI予測' }
-  ];
-  
-  return {
-    date: dateParam,
-    posts: patterns.map((p, i) => ({
-      number: i + 1,
-      patternName: p.name,
-      patternId: p.id,
-      topic: p.topic,
-      prompt: `【${p.name.split(' ')[0]}】${p.topic}\n\n・ポイント1\n・ポイント2\n・ポイント3\n\nCTA👇`,
-      url: `https://opclawx.vercel.app/p/${p.id}-${dateParam}`
-    }))
-  };
-}
+const PATTERNS_META = [
+  {id:'01-breaking-news',   w:1.8},
+  {id:'02-save-for-later',  w:2.5},
+  {id:'03-global-trend',    w:1.5},
+  {id:'04-conclusion-first',w:2.0},
+  {id:'05-honest-opinion',  w:1.4},
+  {id:'06-vs-battle',       w:1.5},
+  {id:'07-first-impression',w:1.3},
+  {id:'08-by-numbers',      w:1.6},
+  {id:'09-insight',         w:1.5},
+  {id:'10-freebie',         w:3.0},
+  {id:'11-pro-tips',        w:1.4},
+  {id:'12-warning',         w:1.7},
+  {id:'13-storytelling',    w:1.2},
+  {id:'14-complete-guide',  w:1.8},
+  {id:'15-future-forecast', w:1.4}
+];
 
-function renderPosts(posts) {
-  const container = document.getElementById('postsContainer');
-  
-  if (!posts || posts.length === 0) {
-    container.innerHTML = '<div style="text-align: center; color: var(--text2); padding: 40px;">No posts found</div>';
-    return;
-  }
-  
-  container.innerHTML = posts.map((post, i) => `
-    <div class="post-card" style="animation: fadeIn 0.5s ${i * 0.05}s both">
-      <div class="post-header">
-        <div class="post-num">${post.number || i + 1}</div>
-        <div class="post-pattern">${post.patternName}</div>
-        <div class="post-topic">${post.topic}</div>
-      </div>
-      <div class="post-body">
-        <div class="post-prompt">${escapeHtml(post.prompt)}</div>
-        <div class="post-actions">
-          <button class="btn" onclick="copyPrompt(${i}, this)">📋 Copy Prompt</button>
-          <button class="btn secondary" onclick="window.open('https://chat.openai.com', '_blank')">🤖 Open ChatGPT</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
+// ─── State ────────────────────────────────────────────────────────────────
 
-function copyPrompt(index, btn) {
-  const post = currentData?.posts?.[index];
-  if (!post) return;
-  
-  navigator.clipboard.writeText(post.prompt).then(() => {
-    btn.textContent = '✅ Copied!';
-    btn.classList.add('copied');
-    showToast();
-    
-    setTimeout(() => {
-      btn.textContent = '📋 Copy Prompt';
-      btn.classList.remove('copied');
-    }, 2000);
-  });
-}
+let currentLang    = 'en';
+let selectedPattern= '04-conclusion-first';
+let lastPrompt     = '';
+let schedules      = JSON.parse(localStorage.getItem('vpa_schedules') || '[]');
 
-function showToast() {
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
-}
+// ─── Init ─────────────────────────────────────────────────────────────────
+
+window.onload = () => {
+  buildPatternGrid();
+  renderSchedules();
+};
 
 function switchLang(lang) {
   currentLang = lang;
-  window.location.href = `?date=${dateParam}&lang=${lang}`;
+  document.getElementById('langSwitch').value = lang;
+  document.getElementById('langSelect').value  = lang;
+  document.getElementById('schedLang').value   = lang;
+  const s = I18N[lang] || I18N.en;
+  document.getElementById('step1Title').textContent       = s.step1;
+  document.getElementById('step2Title').textContent       = s.step2;
+  document.getElementById('step3Title').textContent       = s.step3;
+  document.getElementById('uploadText').textContent       = s.upload;
+  document.getElementById('selectPatternLabel').textContent= s.selectPattern;
+  document.getElementById('topicLabel').textContent       = s.topic;
+  document.getElementById('langLabel').textContent        = s.lang;
+  document.getElementById('generateBtn').textContent      = s.generateBtn;
+  document.getElementById('copyBtn').textContent          = s.copyBtn;
+  buildPatternGrid();
 }
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+function buildPatternGrid() {
+  const s   = I18N[currentLang] || I18N.en;
+  const grid = document.getElementById('patternGrid');
+  grid.innerHTML = PATTERNS_META.map(p => `
+    <div class="pattern-card ${p.id === selectedPattern ? 'selected' : ''}"
+         onclick="selectPattern('${p.id}')" id="pc_${p.id}">
+      <div class="num">${p.id}</div>
+      <div class="name">${s.patterns[p.id]}</div>
+      <div class="mult">${p.w}x</div>
+    </div>`).join('');
 }
 
-// Load on page load
-loadData();
+function selectPattern(id) {
+  selectedPattern = id;
+  document.querySelectorAll('.pattern-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('pc_' + id)?.classList.add('selected');
+}
+
+// ─── File upload ──────────────────────────────────────────────────────────
+
+function handleFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  document.getElementById('uploadText').textContent = `📄 ${file.name} — analyzing…`;
+  const reader = new FileReader();
+  reader.onload = (e) => analyzeCSV(e.target.result);
+  reader.readAsText(file);
+}
+
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+zone.addEventListener('drop', e => {
+  e.preventDefault(); zone.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) { const r = new FileReader(); r.onload = ev => analyzeCSV(ev.target.result); r.readAsText(file); }
+});
+
+function analyzeCSV(raw) {
+  try {
+    const lines   = raw.trim().split('\n').filter(Boolean);
+    const headers = lines[0].toLowerCase().split(',').map(h => h.trim().replace(/"/g,''));
+    const posts   = lines.slice(1).map(line => {
+      const vals = line.split(',').map(v => v.trim().replace(/^"|"$/g,''));
+      const obj  = {};
+      headers.forEach((h, i) => {
+        obj[h] = ['likes','retweets','replies','shares','bookmarks'].includes(h)
+          ? (parseInt(vals[i]) || 0) : (vals[i] || '');
+      });
+      return obj;
+    }).filter(p => p.text);
+
+    const patternCounts = {};
+    posts.forEach(p => {
+      PATTERNS_META.forEach(pm => {
+        const indicators = getIndicators(pm.id);
+        if (indicators.some(ind => (p.text||'').toLowerCase().includes(ind.toLowerCase()))) {
+          const eng = (p.likes||0) + (p.retweets||0)*2 + (p.replies||0)*3;
+          if (!patternCounts[pm.id]) patternCounts[pm.id] = { count:0, totalEng:0 };
+          patternCounts[pm.id].count++;
+          patternCounts[pm.id].totalEng += eng;
+        }
+      });
+    });
+
+    const ranked = Object.entries(patternCounts)
+      .map(([id, s]) => ({ id, avgEng: Math.round(s.totalEng / s.count), count: s.count }))
+      .sort((a,b) => b.avgEng - a.avgEng);
+
+    showAnalysis(ranked, posts.length);
+    document.getElementById('uploadText').textContent = `✅ ${posts.length} posts analyzed`;
+  } catch(err) {
+    document.getElementById('uploadText').textContent = '❌ Parse error — check CSV format';
+  }
+}
+
+function getIndicators(id) {
+  const map = {
+    '01-breaking-news':   ['速報','ついに','Breaking','Finally'],
+    '02-save-for-later':  ['保存版','📌','Save','Bookmark'],
+    '03-global-trend':    ['海外で話題','Trending','🌎'],
+    '04-conclusion-first':['結論','Conclusion','TL;DR'],
+    '05-honest-opinion':  ['正直','Honestly'],
+    '06-vs-battle':       [' vs ',' VS ','⚔️'],
+    '07-first-impression':['使ってみた','Tried'],
+    '08-by-numbers':      ['📊','倍','%'],
+    '09-insight':         ['実は','Actually'],
+    '10-freebie':         ['配布','🎁','Free'],
+    '11-pro-tips':        ['裏技','💎','Tips'],
+    '12-warning':         ['注意','⚠️','Warning'],
+    '13-storytelling':    ['だった','Journey'],
+    '14-complete-guide':  ['完全','Complete'],
+    '15-future-forecast': ['年後','Future','予測']
+  };
+  return map[id] || [];
+}
+
+function showAnalysis(ranked, total) {
+  if (!ranked.length) return;
+  const s   = I18N[currentLang] || I18N.en;
+  const top = ranked[0];
+  const max = top.avgEng || 1;
+  const el  = document.getElementById('analysisResults');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div style="font-size:.8rem;color:var(--text2);margin-bottom:10px">${s.topPatterns} (${total} posts)</div>
+    ${ranked.slice(0,6).map((p,i) => `
+      <div class="rank-item">
+        <div class="rank-num">${i+1}</div>
+        <div class="rank-bar-wrap">
+          <div class="rank-name">${s.patterns[p.id]}</div>
+          <div class="rank-bar" style="width:${Math.round(p.avgEng/max*100)}%"></div>
+        </div>
+        <div class="rank-eng">${s.avgEng}: ${p.avgEng}</div>
+      </div>`).join('')}`;
+  selectPattern(top.id);
+}
+
+// ─── Generate ─────────────────────────────────────────────────────────────
+
+function generatePost() {
+  const topic = document.getElementById('topicInput').value.trim();
+  const lang  = document.getElementById('langSelect').value;
+  if (!topic) { document.getElementById('topicInput').focus(); return; }
+
+  const uid    = btoa(`${selectedPattern}:${topic}:${Date.now()}`).slice(0,10);
+  const prompt = buildPrompt(selectedPattern, topic, lang);
+  lastPrompt   = prompt;
+
+  const box  = document.getElementById('resultBox');
+  box.textContent = prompt;
+  box.classList.add('visible');
+
+  const meta = document.getElementById('resultMeta');
+  const s    = I18N[lang] || I18N.en;
+  meta.style.display = 'flex';
+  meta.innerHTML = `
+    <span class="chip blue">${s.patterns[selectedPattern]}</span>
+    <span class="chip">${prompt.length} chars</span>
+    <span class="chip green">URL: vpa.opclaw.app/p/${uid}</span>`;
+
+  document.getElementById('copyBtn').style.display = 'block';
+}
+
+function buildPrompt(patternId, topic, lang) {
+  const templates = {
+    '01-breaking-news': {
+      en: `Generate a Breaking News style X/Twitter post about: "${topic}"\n- Start with 【Breaking】or 🔥\n- Use "finally" / "just launched"\n- 3 bullet points (key features)\n- End with 👇 CTA\n- Max 280 chars, only 🔥 and 👇 emojis\nOutput ONLY the post text.`,
+      ja: `以下のトピックで【速報型】のX投稿を作成: "${topic}"\n- 【速報】から始める\n- 「ついに」「登場」を使う\n- 核心ポイントを3つ（・で箇条書き）\n- 👇と🔥のみ使用\n- 280文字以内\n投稿テキストのみ出力。`
+    },
+    '02-save-for-later': {
+      en: `Generate a Save for Later style X post about: "${topic}"\n- Start with 【Save This】\n- 3-5 actionable steps (・ bullets)\n- Use 📌 and 👇 only\n- Max 280 chars\nOutput ONLY the post text.`,
+      ja: `以下のトピックで【保存版型】のX投稿を作成: "${topic}"\n- 【保存版】から始める\n- 実践的なステップを3〜5個（・で）\n- 📌と👇のみ使用\n- 280文字以内\n投稿テキストのみ出力。`
+    },
+    '04-conclusion-first': {
+      en: `Generate a Conclusion First style X post about: "${topic}"\n- State the CONCLUSION first\n- Give 3 short reasons (・ bullets)\n- 💡 and 👇 only\n- Max 280 chars\nOutput ONLY the post text.`,
+      ja: `以下のトピックで【結論型】のX投稿を作成: "${topic}"\n- 【結論】から始める\n- 理由を3つ箇条書き（・で）\n- 💡と👇のみ使用\n- 280文字以内\n投稿テキストのみ出力。`
+    },
+    '10-freebie': {
+      en: `Generate a Free Resource giveaway X post about: "${topic}"\n- Start with 【Free】\n- Include "want it?"\n- 3 content items (・ bullets)\n- Clear CTA (follow+RT/DM)\n- 🎁 and 👇 only\n- Max 280 chars\nOutput ONLY the post text.`,
+      ja: `以下のリソースで【配布型】のX投稿を作成: "${topic}"\n- 【配布】から始める\n- 「欲しい人いますか？」を入れる\n- 中身を3つ（・で）\n- 入手方法を明確に\n- 🎁と👇のみ使用\n- 280文字以内\n投稿テキストのみ出力。`
+    }
+  };
+
+  const generic = {
+    en: `Generate a viral X/Twitter post about: "${topic}"\nPattern: ${patternId}\nMax 280 chars. Only 1-2 relevant emojis.\nOutput ONLY the post text.`,
+    ja: `"${topic}"についてX投稿を作成。パターン:${patternId}\n280文字以内。絵文字は1〜2個のみ。\n投稿テキストのみ出力。`
+  };
+
+  const tmpl = templates[patternId] || generic;
+  return (tmpl[lang] || tmpl.en || generic.en);
+}
+
+function copyPrompt() {
+  navigator.clipboard.writeText(lastPrompt).then(() => {
+    const s = I18N[currentLang] || I18N.en;
+    const t = document.getElementById('toast');
+    t.textContent = s.copied;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2000);
+  });
+}
+
+// ─── Schedule ─────────────────────────────────────────────────────────────
+
+function saveSchedule() {
+  const time    = document.getElementById('schedTime').value;
+  const webhook = document.getElementById('schedWebhook').value.trim();
+  const topic   = document.getElementById('schedTopic').value.trim() || 'Daily AI News';
+  const lang    = document.getElementById('schedLang').value;
+  schedules.push({ id: `s_${Date.now()}`, time, webhook, topic, lang, enabled: true });
+  localStorage.setItem('vpa_schedules', JSON.stringify(schedules));
+  renderSchedules();
+  const t = document.getElementById('toast');
+  t.textContent = '✅ Schedule saved!';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function deleteSchedule(id) {
+  schedules = schedules.filter(s => s.id !== id);
+  localStorage.setItem('vpa_schedules', JSON.stringify(schedules));
+  renderSchedules();
+}
+
+function renderSchedules() {
+  const el = document.getElementById('schedList');
+  if (!schedules.length) { el.innerHTML = ''; return; }
+  el.innerHTML = schedules.map(s => `
+    <div class="schedule-item">
+      <span style="font-size:1.2rem">⏰</span>
+      <span style="flex:1;font-size:.85rem">
+        <strong>${s.time}</strong> · ${s.lang} · "${s.topic}"
+        ${s.webhook ? `<br><span style="font-size:.7rem;color:var(--text2)">${s.webhook.slice(0,50)}…</span>` : ''}
+      </span>
+      <button class="del secondary" onclick="deleteSchedule('${s.id}')">✕</button>
+    </div>`).join('');
+}
 </script>
-
-<style>
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
 </body>
 </html>
