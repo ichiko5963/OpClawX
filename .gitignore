@@ -4,12 +4,9 @@ package-lock.json
 
 # Environment variables
 .env
-.env.local
-.env*.local
 
 # Generated files
 web/daily/*.json
-logs/
 
 # OS files
 .DS_Store
@@ -25,16 +22,33 @@ Thumbs.db
 *.tmp
 *.temp
 *.log
+logs/
 
-# Next.js build output
-.next/
-out/
-*.tsbuildinfo
-next-env.d.ts
+# NEVER COMMIT PERSONAL DATA
+# User config files
+AGENTS.md
+HEARTBEAT.md
+IDENTITY.md
+MEMORY.md
+SOUL.md
+TOOLS.md
+USER.md
+BOOTSTRAP.md
 
-# Vercel
-.vercel/
+# Personal directories
+aircle*/
+.openclaw/
+bin/
+memory/
+obsidian/
+projects/
+reports/
+scripts/
+tools/
+x-posts/
+logs/
 
-# Embedded git repos (track as submodules or ignore)
-mission-control/
-viral-post-automation/
+# Workspace files
+*.obsidian
+*Ichioka*
+*ichiko*
