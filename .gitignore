@@ -38,7 +38,7 @@ BOOTSTRAP.md
 # Personal directories
 aircle*/
 .openclaw/
-bin/
+# bin/ - removed to allow git-auto-sync.sh to be tracked
 memory/
 obsidian/
 projects/
