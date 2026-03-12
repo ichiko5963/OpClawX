@@ -52,3 +52,7 @@ logs/
 *.obsidian
 *Ichioka*
 *ichiko*
+
+# Embedded git repos (manage separately)
+mission-control/
+viral-post-automation/
