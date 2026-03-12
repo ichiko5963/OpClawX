@@ -20,12 +20,59 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/ichiko5963/OpClawX/fork">
+    <img src="https://img.shields.io/badge/Fork-Deploy%20Now-purple?style=for-the-badge&logo=github" alt="Fork and Deploy">
+  </a>
+</p>
+
+<p align="center">
+  <b>🚀 Zero-config deployment:</b> Fork → Enable GitHub Pages → Done!<br>
+  <b>🌐 Live Demo:</b> <a href="https://ichiko5963.github.io/OpClawX/">https://ichiko5963.github.io/OpClawX/</a>
+</p>
+
+<p align="center">
   <a href="#english">🇺🇸 English</a> •
   <a href="#japanese">🇯🇵 日本語</a> •
   <a href="#chinese">🇨🇳 中文</a> •
   <a href="#korean">🇰🇷 한국어</a> •
   <a href="#spanish">🇪🇸 Español</a>
 </p>
+
+---
+
+## 🚀 Quick Deploy (1 Minute Setup)
+
+**No coding required. Anyone can deploy their own instance in 1 minute.**
+
+### Option 1: GitHub Pages (Free, Recommended)
+
+```
+1. Click the "Fork" button above ☝️
+2. Go to your forked repo → Settings → Pages
+3. Source: "GitHub Actions"
+4. Done! Your URL: https://YOURNAME.github.io/OpClawX/
+```
+
+[![Deploy to GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-2088FF?style=for-the-badge&logo=github)](https://github.com/ichiko5963/OpClawX/fork)
+
+### Option 2: OpenClaw Integration (For OpenClaw Users)
+
+```bash
+# One-command install
+openclaw skills install https://github.com/ichiko5963/OpClawX.git
+
+# Auto-generate posts 3x daily
+openclaw run OpClawX --schedule-cron
+```
+
+### Option 3: Local Setup
+
+```bash
+git clone https://github.com/ichiko5963/OpClawX.git
+cd OpClawX
+npm install
+node scheduler/daily-15.js --lang en
+```
 
 ---
 
