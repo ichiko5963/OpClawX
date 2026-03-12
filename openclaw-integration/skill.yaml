@@ -1,0 +1,96 @@
+name: OpClawX
+version: 2.0.0
+description: |
+  AI-powered viral post generator that learns from your OpenClaw memory.
+  Generates 15 viral posts 3x daily using OpenClaw's built-in AI.
+  
+  Key Features:
+  - Reads your OpenClaw memory to learn your style
+  - Uses OpenClaw's AI for authentic post generation
+  - Works without external API keys
+  - Optional: Add OpenAI/Claude for enhanced generation
+  - Optional: Add X Premium data for audience insights
+
+author: ichiko5963
+license: MIT
+
+# OpenClaw Integration Settings
+openclaw:
+  # This skill uses OpenClaw's built-in AI
+  ai_provider: openclaw  # Uses OpenClaw's configured AI
+  
+  # Memory integration
+  memory:
+    enabled: true
+    sources:
+      - type: openclaw_memory  # Read from OpenClaw's memory system
+        path: ~/memory
+      - type: openclaw_context  # Use session context
+  
+  # Scheduling (uses OpenClaw's scheduler)
+  schedule:
+    enabled: true
+    jobs:
+      - name: morning-posts
+        cron: "0 7 * * *"  # 7:00 AM
+        command: generate --slot morning --lang en
+      - name: lunch-posts
+        cron: "0 12 * * *"  # 12:00 PM
+        command: generate --slot lunch --lang en
+      - name: evening-posts
+        cron: "0 18 * * *"  # 6:00 PM
+        command: generate --slot evening --lang en
+
+# Commands exposed to OpenClaw
+commands:
+  generate:
+    description: Generate 15 viral posts
+    usage: "opclawx generate [--slot morning|lunch|evening] [--lang en|ja|cn|ko|es]"
+    examples:
+      - "opclawx generate --slot morning --lang ja"
+      - "opclawx generate --slot evening --lang en"
+  
+  analyze:
+    description: Analyze your X/Twitter data
+    usage: "opclawx analyze <file.csv>"
+    
+  feedback:
+    description: Provide feedback on posts
+    usage: "opclawx feedback --date 2026-03-12"
+    
+  learn:
+    description: Update from memory (manual sync)
+    usage: "opclawx learn"
+
+# Configuration
+config:
+  - name: default_lang
+    description: Default language for posts
+    default: en
+    options: [en, ja, cn, ko, es]
+  
+  - name: webhook_url
+    description: Discord/Slack webhook for notifications
+    required: false
+  
+  - name: use_external_ai
+    description: Use external AI (OpenAI/Claude) if available
+    default: false
+    help: "If true and API keys are set, uses external AI. Otherwise uses OpenClaw's AI."
+
+# Web UI
+web:
+  enabled: true
+  entry: web/index.html
+  daily_url: /daily.html
+
+# Hooks - integrate with OpenClaw events
+hooks:
+  # After each OpenClaw session, sync new memories
+  session_end:
+    action: sync_memories
+    
+  # Daily check for new trends
+  heartbeat:
+    cron: "0 */6 * * *"
+    action: refresh_trends
