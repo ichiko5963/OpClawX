@@ -5,9 +5,9 @@
 </p>
 
 <p align="center">
-  <strong>毎朝7時、15のバズ型 × 最新トレンド = あなたの投稿案15個がURLで届く</strong><br>
-  <strong>Every morning: 15 viral patterns × latest trends = 15 post ideas delivered via URL</strong><br>
-  <strong>每天早上：15种爆款模式 × 最新趋势 = 15个帖子创意URL送达</strong>
+  <strong>毎日3回、15のバズ型 × 最新トレンド = あなたの投稿案15個がURLで届く</strong><br>
+  <strong>3x daily: 15 viral patterns × latest trends = 15 post ideas via URL</strong><br>
+  <strong>每日3次：15种爆款模式 × 最新趋势 = 15个帖子创意URL送达</strong>
 </p>
 
 <p align="center">
@@ -15,14 +15,18 @@
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/Node-%3E%3D16-brightgreen.svg" alt="Node.js"></a>
   <img src="https://img.shields.io/badge/Languages-5-orange.svg" alt="5 Languages">
   <img src="https://img.shields.io/badge/Patterns-15%2B-blue.svg" alt="15+ Patterns">
+  <img src="https://img.shields.io/badge/Schedule-3x%20Daily-success.svg" alt="3x Daily">
 </p>
 
 ---
 
-## 📱 What You Get Every Morning
+## 📱 What You Get (3x Daily)
 
 ```
-🌅 7:00 AM — Your Daily 15 Viral Posts
+🌅 7:00 AM  — Morning Posts
+🌞 12:00 PM — Lunch Posts
+🌆 6:00 PM  — Evening Posts
+
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ① 【速報型】Breaking News     → Claude最新アップデート
@@ -45,7 +49,29 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
-**One URL. 15 viral post ideas. Ready to copy-paste into ChatGPT/Claude.**
+**One URL. 15 viral post ideas. 3 times a day. Ready to copy-paste into ChatGPT/Claude.**
+
+---
+
+## ⏰ Daily Automation (1日3回自動配信)
+
+**朝7時・昼12時・夕方18時** — 自動的に15個の投稿案が生成され、URLで受け取れます
+
+```bash
+# crontabで設定
+crontab -e
+
+# 朝7時（モーニング投稿）
+0 7 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
+
+# 昼12時（ランチタイム投稿）
+0 12 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
+
+# 夕方18時（イブニング投稿）
+0 18 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
+```
+
+詳細は [📁 docs/CRON.md](./docs/CRON.md) を参照
 
 ---
 
@@ -53,7 +79,7 @@
 
 ### これは何？
 
-**OpClawX**は、毎朝15個のバズる投稿案を自動生成し、URLで届けるシステムです。
+**OpClawX**は、1日3回（朝7時・昼12時・夕方18時）に15個のバズる投稿案を自動生成し、URLで届けるシステムです。
 
 X Premiumの分析データや過去の投稿データを学習し、**あなたのフォロワーが実際に反応するパターン**を特定。最新のAIニュースを踏まえて、15のバズ型で投稿案を生成します。
 
@@ -75,9 +101,12 @@ node cli.js analyze ./x-premium-export.csv
 # 4. テスト実行（15投稿生成）
 node scheduler/daily-15.js --lang ja
 
-# 5. Cron設定（毎日自動実行）
+# 5. Cron設定（1日3回自動実行）
 crontab -e
-# 追加: 0 7 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
+# 以下を追加:
+# 0 7 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
+# 0 12 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
+# 0 18 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang ja
 ```
 
 ### 📁 対応データ形式
@@ -94,7 +123,7 @@ crontab -e
 
 ### What is OpClawX?
 
-**OpClawX** automatically generates 15 viral post ideas every morning and delivers them via URL.
+**OpClawX** automatically generates 15 viral post ideas **3 times a day** (7AM, 12PM, 6PM) and delivers them via URL.
 
 It learns from your X Premium analytics and past posts to identify **which patterns actually work for YOUR audience**.
 
@@ -112,9 +141,12 @@ node cli.js analyze ./x-premium-export.csv
 # Generate daily 15 posts
 node scheduler/daily-15.js --lang en
 
-# Setup daily cron
+# Setup 3x daily cron
 crontab -e
-# Add: 0 7 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang en
+# Add:
+# 0 7 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang en
+# 0 12 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang en
+# 0 18 * * * cd /path/to/OpClawX && node scheduler/daily-15.js --lang en
 ```
 
 ---
