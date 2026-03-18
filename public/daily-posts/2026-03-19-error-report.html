@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X検索結果 - 2026-03-19 - 検索エラー</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #0f0f0f;
+            color: #e7e9ea;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .header {
+            border-bottom: 1px solid #2f3336;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .date {
+            color: #71767b;
+            font-size: 14px;
+        }
+        h1 {
+            margin: 10px 0;
+            font-size: 24px;
+        }
+        .error-box {
+            background: #ff453a20;
+            border: 1px solid #ff453a;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .error-title {
+            color: #ff453a;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .keyword-list {
+            background: #16181c;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .keyword-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #2f3336;
+        }
+        .keyword-item:last-child {
+            border-bottom: none;
+        }
+        .status {
+            color: #ff453a;
+            font-size: 12px;
+        }
+        code {
+            background: #202327;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="date">2026年3月19日（木）朝6:00</div>
+        <h1>🔍 Xブラウザ検索システム - エラーレポート</h1>
+    </div>
+
+    <div class="error-box">
+        <div class="error-title">⚠️ 検索実行エラー</div>
+        <p>以下の理由により、X検索を実行できませんでした：</p>
+        <ul>
+            <li><strong>ブラウザツール:</strong> 利用不可（Gatewayタイムアウト）</li>
+            <li><strong>Brave Search API:</strong> レート制限（429エラー）</li>
+            <li><strong>Nitter:</strong> 接続エラー</li>
+        </ul>
+        <p style="margin-top: 15px;">
+            <strong>対処法:</strong> OpenClaw Gatewayを再起動してブラウザ機能を復旧させ、再試行してください。
+        </p>
+    </div>
+
+    <div class="keyword-list">
+        <h3>📝 予定していた検索キーワード（7個）</h3>
+        
+        <div class="keyword-item">
+            <strong>1. ClaudeCode</strong><br>
+            <code>min_faves:500 (ClaudeCode OR "Claude Code")</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+        
+        <div class="keyword-item">
+            <strong>2. Cursor</strong><br>
+            <code>min_faves:500 Cursor</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+        
+        <div class="keyword-item">
+            <strong>3. Antigravity</strong><br>
+            <code>min_faves:500 Antigravity</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+        
+        <div class="keyword-item">
+            <strong>4. OpenClaw</strong><br>
+            <code>min_faves:500 OpenClaw</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+        
+        <div class="keyword-item">
+            <strong>5. OpenAI</strong><br>
+            <code>min_faves:500 OpenAI</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+        
+        <div class="keyword-item">
+            <strong>6. Vercel</strong><br>
+            <code>min_faves:500 Vercel</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+        
+        <div class="keyword-item">
+            <strong>7. Claude</strong><br>
+            <code>min_faves:500 Claude</code><br>
+            <span class="status">❌ 未実行</span>
+        </div>
+    </div>
+
+    <div style="background: #16181c; border-radius: 12px; padding: 20px; margin: 20px 0;">
+        <h3>💡 再試行手順</h3>
+        <ol>
+            <li>ターミナルで <code>openclaw gateway restart</code> を実行</li>
+            <li>ブラウザ機能が復旧することを確認</li>
+            <li>このcronジョブを再実行</li>
+        </ol>
+    </div>
+
+    <div style="text-align: center; color: #71767b; font-size: 12px; margin-top: 40px;">
+        生成時刻: 2026-03-19 06:01 JST<br>
+        システム: Xブラウザ検索システム
+    </div>
+</body>
+</html>
