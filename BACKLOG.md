@@ -9,15 +9,15 @@
   - 対応: `gog auth add your-email@gmail.com --services gmail,calendar,drive,contacts,docs,sheets`
   - 状態: 18日間継続中
 
-- [ ] **Cronジョブ用スクリプト作成**
-  - 説明: 以下のスクリプトがないためcronジョブが機能していない
-    - `scripts/analyze_emails.py`
-    - `scripts/email_manager.py`
-    - `scripts/email_classifier.py`
-    - `scripts/task_reminder.py`
-    - `scripts/overdue_tasks.py`
-    - `scripts/daily_digest.py`
-    - `scripts/n8n_sync_to_vault.py`
+- [x] **Cronジョブ用スクリプト作成** ✅ 完了（2026-03-19）
+  - 説明: 以下のスクリプトを作成完了
+    - ✅ `scripts/analyze_emails.py` - メール分析
+    - ✅ `scripts/email_manager.py` - メール管理
+    - ✅ `scripts/email_classifier.py` - メール分類
+    - ✅ `scripts/task_reminder.py` - タスクリマインダー
+    - ✅ `scripts/overdue_tasks.py` - 期限切れチェック
+    - ✅ `scripts/daily_digest.py` - 日次ダイジェスト
+    - ✅ `scripts/n8n_sync_to_vault.py` - n8n同期
 
 ### 中優先度
 
