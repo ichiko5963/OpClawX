@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X検索レポート - 2026-03-31</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eaeaea;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .date {
+            color: #8892b0;
+            font-size: 1.1rem;
+        }
+        .status-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .status-card h2 {
+            color: #e53e3e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .status-card.success h2 { color: #48bb78; }
+        .status-card.info h2 { color: #4299e1; }
+        .keyword-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .keyword-item {
+            background: rgba(255,255,255,0.05);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .keyword-item span {
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+        .error-box {
+            background: rgba(229, 62, 62, 0.1);
+            border: 1px solid rgba(229, 62, 62, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .error-box h3 {
+            color: #fc8181;
+            margin-bottom: 15px;
+        }
+        .solution-box {
+            background: rgba(72, 187, 120, 0.1);
+            border: 1px solid rgba(72, 187, 120, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .solution-box h3 {
+            color: #68d391;
+            margin-bottom: 15px;
+        }
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        pre {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #8892b0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 Xブラウザ検索システム</h1>
+            <p class="date">2026年3月31日（火）朝6:00 実行</p>
+        </div>
+
+        <div class="status-card">
+            <h2>⚠️ 実行結果：認証エラー</h2>
+            <p>X（旧Twitter）の検索にはログインが必要です。現在の設定では検索を実行できませんでした。</p>
+            
+            <div class="error-box">
+                <h3>🔒 ブロックされた理由</h3>
+                <ul style="margin-left: 20px; color: #cbd5e0;">
+                    <li>Xの検索機能は<strong>認証済みセッション</strong>が必要</li>
+                    <li><code>min_faves:500</code>などの高度な検索演算子は内部API専用</li>
+                    <li>ログインダイアログが表示され、検索結果にアクセス不可</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="status-card info">
+            <h2>📝 検索予定キーワード（7個）</h2>
+            <div class="keyword-list">
+                <div class="keyword-item">
+                    <strong>ClaudeCode</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+                <div class="keyword-item">
+                    <strong>Cursor</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+                <div class="keyword-item">
+                    <strong>Antigravity</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+                <div class="keyword-item">
+                    <strong>OpenClaw</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+                <div class="keyword-item">
+                    <strong>OpenAI</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+                <div class="keyword-item">
+                    <strong>Vercel</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+                <div class="keyword-item">
+                    <strong>Claude</strong><br>
+                    <span>min_faves:500</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-card success">
+            <h2>💡 推奨ソリューション</h2>
+            
+            <div class="solution-box">
+                <h3>オプション1: X API v2 を使用（推奨）</h3>
+                <p style="margin-bottom: 15px;">X Developer PortalでAPIキーを取得し、プログラムから検索を実行します。</p>
+                <pre><code>// 検索パラメータ例
+const params = {
+  'query': 'ClaudeCode OR "Claude Code"',
+  'max_results': 100,
+  'tweet.fields': 'public_metrics,created_at,author_id'
+};
+
+// レスポンス後にいいね数でフィルタリング
+const filtered = tweets.filter(t => t.public_metrics.like_count >= 500);</code></pre>
+            </div>
+
+            <div class="solution-box">
+                <h3>オプション2: ログイン済みブラウザプロファイル</h3>
+                <p>ブラウザプロファイルを保存し、Xにログインした状態を維持します。</p>
+                <pre><code># ブラウザ起動時にプロファイルを指定
+openclaw browser start --profile chrome
+# Xにログイン後、プロファイルが保存される</code></pre>
+            </div>
+
+            <div class="solution-box">
+                <h3>オプション3: 代替データソース</h3>
+                <ul style="margin-left: 20px; color: #cbd5e0;">
+                    <li><strong>Reddit</strong> - 技術系サブレディットの検索</li>
+                    <li><strong>Hacker News</strong> - API経由で人気投稿を取得</li>
+                    <li><strong>GitHub Trending</strong> - 関連リポジトリの監視</li>
+                    <li><strong>Dev.to / Qiita</strong> - 技術記事の検索</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h2>🔧 次回の実行に向けて</h2>
+            <p>以下のいずれかの方法で、次回から正常に検索が実行できるようになります：</p>
+            <ol style="margin: 20px 0 20px 30px; color: #cbd5e0;">
+                <li><code>x-api-credentials.json</code> を作成し、Bearer Tokenを設定</li>
+                <li>ブラウザでXにログインし、プロファイルを保存</li>
+                <li>検索対象をX以外のプラットフォームに変更</li>
+            </ol>
+        </div>
+
+        <div class="footer">
+            <p>🤖 OpenClaw X検索システム - 自動生成レポート</p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">次回実行: 明日朝6:00</p>
+        </div>
+    </div>
+</body>
+</html>
