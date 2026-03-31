@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideBox - AI Slide Editor</title>
+    <style>
+        /* 
+         * SlideBox Design System 
+         * Theme: Jet Black x Inorganic x Minimal
+         * Colors: Pure Black (#000), Pure White (#FFF), Neutral Gray (#A9A9A9 - #D0D0D0)
+         */
+
+        :root {
+            --bg-color: #000000;
+            --text-color: #FFFFFF;
+            --accent-color: #FFFFFF;
+            --gray-color: #B0B0B0;
+            --border-color: #333333;
+            --line-width: 1px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        .text-gray {
+            color: var(--gray-color);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section {
+            padding: 120px 0;
+            position: relative;
+            border-bottom: 1px solid #111;
+        }
+
+        .grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        /* Abstract Background Elements */
+        .bg-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .line {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .line-v {
+            width: 1px;
+            height: 100%;
+            top: 0;
+        }
+
+        .line-h {
+            height: 1px;
+            width: 100%;
+            left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-logo {
+            font-size: 4rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            margin-bottom: 20px;
+            border: 1px solid #fff;
+            padding: 20px 40px;
+            display: inline-block;
+            position: relative;
+        }
+
+        .hero-logo::before,
+        .hero-logo::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            transition: all 0.5s ease;
+        }
+
+        .hero-logo::before {
+            top: -5px;
+            left: -5px;
+        }
+
+        .hero-logo::after {
+            bottom: -5px;
+            right: -5px;
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .hero-sub {
+            font-size: 1rem;
+            color: var(--gray-color);
+            margin-top: 20px;
+        }
+
+        /* Abstract Hero Graphic */
+        .hero-graphic {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw;
+            height: 80vh;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1;
+        }
+
+        .hero-graphic::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            right: 10%;
+            bottom: 10%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Problem Section */
+        .problem-card {
+            border: 1px solid #333;
+            padding: 40px;
+            background: #050505;
+            transition: border-color 0.3s;
+        }
+
+        .problem-card:hover {
+            border-color: #666;
+        }
+
+        .problem-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Solution Section */
+        .solution-box {
+            border: 1px solid #fff;
+            padding: 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .solution-box::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: -10px;
+            bottom: -10px;
+            border: 1px solid #333;
+            z-index: -1;
+        }
+
+        /* Features Section */
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #222;
+            padding: 30px;
+            height: 100%;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #fff;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .feature-num {
+            font-family: monospace;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* Use Cases */
+        .use-case-list {
+            list-style: none;
+            border-left: 1px solid #333;
+        }
+
+        .use-case-item {
+            padding: 20px 0 20px 40px;
+            position: relative;
+        }
+
+        .use-case-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background: #333;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            border: 1px solid #fff;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            transition: all 0.3s;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid #111;
+            font-size: 0.8rem;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Background Grid -->
+    <div class="bg-lines">
+        <div class="line line-v" style="left: 20%;"></div>
+        <div class="line line-v" style="left: 50%;"></div>
+        <div class="line line-v" style="left: 80%;"></div>
+        <div class="line line-h" style="top: 33%;"></div>
+        <div class="line line-h" style="top: 66%;"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-graphic"></div>
+        <div class="hero-content">
+            <div class="hero-logo">SlideBox</div>
+            <h1 class="hero-tagline">AI生成 × 人間の編集自由度</h1>
+            <p class="hero-sub">AI生成スライドを“編集可能”にする、世界初の編集インフラ</p>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 60px;">
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">PAIN</h2>
+                <p class="text-gray">AI生成スライドは「あと1ミリ」が動かせない</p>
+            </div>
+            <div class="grid grid-3">
+                <div class="problem-card">
+                    <div class="problem-title">01. ズレる</div>
+                    <p class="text-gray">「ここだけ少し左に…」と思うと全体が崩れる。微調整が効かないもどかしさ。</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-title">02. 勝手に変形</div>
+                    <p class="text-gray">図形や矢印が意図しない形に変わってしまう。構造の維持が困難。</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-title">03. 文字化け</div>
+                    <p class="text-gray">日本語フォントの崩れや、意味不明な文字列の生成。修正の手間。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="section">
+        <div class="container">
+            <div class="solution-box">
+                <h2 style="font-size: 2.5rem; margin-bottom: 30px;">SOLUTION</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">SlideBoxはこの全てを一撃で解決する</p>
+                <div style="width: 100px; height: 1px; background: #fff; margin: 30px auto;"></div>
+                <p class="text-gray">AI生成物をレゴブロック化して<br>再編集できる世界へ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center" style="margin-bottom: 60px;">CORE FEATURES</h2>
+            <div class="grid grid-3">
+                <div class="feature-item">
+                    <div class="feature-num">01</div>
+                    <div class="feature-icon">↑</div>
+                    <h3>Upload</h3>
+                    <p class="text-gray" style="margin-top: 15px; font-size: 0.9rem;">スライド画像をアップロードするだけ。複雑な構造も解析。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-num">02</div>
+                    <div class="feature-icon">⚡</div>
+                    <h3>AI Analysis</h3>
+                    <p class="text-gray" style="margin-top: 15px; font-size: 0.9rem;">レイアウト、文字、図形をAIが精密に解析・分離。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-num">03</div>
+                    <div class="feature-icon">□</div>
+                    <h3>Block-ization</h3>
+                    <p class="text-gray" style="margin-top: 15px; font-size: 0.9rem;">全ての要素を個別に動かせる「ブロック」へ変換。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-num">04</div>
+                    <div class="feature-icon">✎</div>
+                    <h3>Editor</h3>
+                    <p class="text-gray" style="margin-top: 15px; font-size: 0.9rem;">直感的なエディタで、配置もサイズも自由自在。</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-num">05</div>
+                    <div class="feature-icon">→</div>
+                    <h3>Export</h3>
+                    <p class="text-gray" style="margin-top: 15px; font-size: 0.9rem;">修正したスライドをPNG/PDFとして即座に書き出し。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-2">
+                <div>
+                    <h2 style="margin-bottom: 40px;">USE CASES</h2>
+                    <p class="text-gray" style="margin-bottom: 40px;">
+                        営業資料からSNS投稿まで、<br>あらゆるシーンで「完璧な資料」を。
+                    </p>
+                </div>
+                <ul class="use-case-list">
+                    <li class="use-case-item">
+                        <h3>Sales Materials</h3>
+                        <p class="text-gray" style="font-size: 0.9rem;">顧客ごとに内容を微調整する営業資料に</p>
+                    </li>
+                    <li class="use-case-item">
+                        <h3>SNS Content</h3>
+                        <p class="text-gray" style="font-size: 0.9rem;">発信活動のための高品質なスライド作成に</p>
+                    </li>
+                    <li class="use-case-item">
+                        <h3>Business Overview</h3>
+                        <p class="text-gray" style="font-size: 0.9rem;">頻繁に更新が必要な事業会社説明資料に</p>
+                    </li>
+                    <li class="use-case-item">
+                        <h3>Manuals</h3>
+                        <p class="text-gray" style="font-size: 0.9rem;">わかりやすい業務マニュアルの作成に</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section">
+        <div class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">JOIN THE REVOLUTION</h2>
+            <p class="text-gray">AI生成の“最後の1ミリ”を人間に取り戻す</p>
+            <a href="#" class="btn">Reaction for Launch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 AirCle. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

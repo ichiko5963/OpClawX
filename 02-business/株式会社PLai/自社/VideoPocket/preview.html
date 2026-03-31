@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VideoPocket Design Preview</title>
+    <style>
+        :root {
+            --violet: #A06AFB;
+            --sunrise-yellow: #FFDE6B;
+            --midnight-black: #1F1F2C;
+            --pure-white: #FFFFFF;
+        }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+        }
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .preview-card {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        /* 1. First View */
+        .first-view {
+            background-color: var(--midnight-black);
+            position: relative;
+            overflow: hidden;
+        }
+        .first-view::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 140%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(160, 106, 251, 0.2) 0%, transparent 70%);
+        }
+        .first-view .arc {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(32deg, transparent 40%, rgba(160, 106, 251, 0.1) 45%, rgba(255, 222, 107, 0.2) 50%, rgba(160, 106, 251, 0.1) 55%, transparent 60%);
+            filter: blur(20px);
+        }
+        .first-view .arc-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(32deg, transparent 49.5%, var(--violet) 50%, var(--sunrise-yellow) 50.5%, transparent 51%);
+            opacity: 0.6;
+            filter: blur(2px);
+        }
+        .logo-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255,255,255,0.3);
+            border: 1px dashed rgba(255,255,255,0.2);
+            padding: 20px 40px;
+            border-radius: 4px;
+        }
+
+        /* 2. Feature Intro */
+        .feature-intro {
+            background-color: var(--pure-white);
+            position: relative;
+        }
+        .feature-lines {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 80%;
+            height: 60%;
+            border: 1px solid #eee;
+            border-radius: 4px;
+        }
+        .feature-lines::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #eee;
+        }
+        .feature-lines::after {
+            content: '';
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: #eee;
+        }
+        .highlight-line {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+            width: 60%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--violet), var(--sunrise-yellow));
+            box-shadow: 0 0 10px rgba(160, 106, 251, 0.3);
+        }
+
+        /* 3. Before / After */
+        .before-after {
+            display: flex;
+        }
+        .before {
+            width: 50%;
+            background-color: var(--midnight-black);
+            position: relative;
+            opacity: 0.9;
+        }
+        .before .chaos-line {
+            position: absolute;
+            background: rgba(160, 106, 251, 0.1);
+            height: 1px;
+            width: 50%;
+            transform: rotate(10deg);
+        }
+        .after {
+            width: 50%;
+            background-color: var(--pure-white);
+            position: relative;
+        }
+        .after .clean-line {
+            position: absolute;
+            top: 30%;
+            left: 10%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--violet), var(--sunrise-yellow));
+        }
+        .after .clean-line:nth-child(2) { top: 50%; opacity: 0.7; }
+        .after .clean-line:nth-child(3) { top: 70%; opacity: 0.4; }
+
+        /* 4. Usage Scenes */
+        .usage-scene {
+            background-color: var(--pure-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .usage-icon {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 0 20px;
+        }
+        .usage-arrow {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--violet), var(--sunrise-yellow));
+        }
+
+        /* 5. CTA */
+        .cta {
+            background-color: var(--midnight-black);
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-beam {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 45%, rgba(160, 106, 251, 0.2) 50%, transparent 55%);
+            animation: shine 3s infinite;
+        }
+        .cta-glow {
+            position: absolute;
+            bottom: -20%;
+            right: -20%;
+            width: 60%;
+            height: 60%;
+            background: radial-gradient(circle, rgba(255, 222, 107, 0.1), transparent 70%);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>1. First View (Hero)</h2>
+        <div class="preview-card first-view">
+            <div class="arc"></div>
+            <div class="arc-line"></div>
+            <div class="logo-placeholder">LOGO SPACE</div>
+        </div>
+
+        <h2>2. Feature Intro</h2>
+        <div class="preview-card feature-intro">
+            <div class="feature-lines">
+                <div class="highlight-line"></div>
+            </div>
+        </div>
+
+        <h2>3. Before / After</h2>
+        <div class="preview-card before-after">
+            <div class="before">
+                <div class="chaos-line" style="top:20%; left:10%"></div>
+                <div class="chaos-line" style="top:60%; left:30%; transform: rotate(-5deg)"></div>
+            </div>
+            <div class="after">
+                <div class="clean-line"></div>
+                <div class="clean-line"></div>
+                <div class="clean-line"></div>
+            </div>
+        </div>
+
+        <h2>4. Usage Scene (Concept)</h2>
+        <div class="preview-card usage-scene">
+            <div class="usage-icon"></div>
+            <div class="usage-arrow"></div>
+            <div class="usage-icon" style="border-color: var(--violet)"></div>
+        </div>
+
+        <h2>5. CTA</h2>
+        <div class="preview-card cta">
+            <div class="cta-beam"></div>
+            <div class="cta-glow"></div>
+        </div>
+    </div>
+
+</body>
+</html>
