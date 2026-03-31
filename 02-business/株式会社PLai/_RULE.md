@@ -10,7 +10,7 @@ AI全般をやる会社。AirCleや現在進行中の業務は基本的にこち
 | Peatix無料イベント運営 | 無料セミナー・ワークショップ | CMO + CSO |
 | SlideBox | AIスライド作成ツール | CTO + CMO |
 | VideoPocket | 動画管理ツール | CTO + CMO |
-| AI×X運用ブートキャンプ | 教育・コンサル事業 | CMO |
+| OpenClawローンチ | 無料セミナー→有料スクールの教育事業（5DAYS講座・8週間WS） | CMO + CSO |
 
 ## 他社クライアント
 
